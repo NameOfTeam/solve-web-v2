@@ -5,7 +5,11 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "ui/*": ["../../packages/ui/*"]
+    }
   },
   "include": [
     "**/*.ts",

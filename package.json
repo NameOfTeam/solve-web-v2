@@ -15,5 +15,18 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "dev": {
+      "cache": false
+    }
   }
 }
