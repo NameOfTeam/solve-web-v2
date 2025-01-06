@@ -5,7 +5,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Header />
-      <div className="w-full calc-header">{children}</div>
+      <div className="w-full h-exceptHeader">{children}</div>
     </>
   );
 };
