@@ -9,9 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        bg: "var(--bg)",
+        bgBorder: "var(--bg-border)",
+        container: "var(--container)",
+        containerBorder: "var(--container-border)",
+        mainContainer: "var(--main-container)",
       },
+      height: {
+        execptHeader
+      }
     },
   },
   plugins: [],
