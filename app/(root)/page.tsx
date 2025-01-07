@@ -1,4 +1,5 @@
-import ContestCard from '@/components/ContestCard';
+import CardWrapper from '@/components/CardWrapper';
+import ItemWrapper from '@/components/ItemWrapper';
 import MainMenu from '@/components/MainMenu'
 import StatCard from '@/components/StatCard';
 import WorkbookItem from '@/components/WorkbookItem';
@@ -6,7 +7,7 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div className="w-full h-full overflow-y-scroll">
+    <div className="w-full">
       <div className="w-full h-[520px] bg-[#2b2b2b]"></div>
       <div className="w-full py-20 flex justify-center">
         <div className="w-80 flex flex-col items-center gap-y-3">
@@ -44,24 +45,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-full grid grid-cols-3 gap-6">
-          <ContestCard />
-          <ContestCard />
-          <ContestCard />
-          <ContestCard />
-          <ContestCard />
-          <ContestCard />
-        </div>
+        <CardWrapper data={[]}/>
       </div>
       <div className="px-52 py-9 flex flex-col gap-y-5">
         <p className="text-[26px] font-[600] text-main-container">
           문제집으로 실력 상승
         </p>
-        <div className="w-full flex flex-col gap-y-3">
-          <WorkbookItem />
-          <WorkbookItem />
-          <WorkbookItem />
-        </div>
+        <ItemWrapper data={[]} />
       </div>
       <div className="px-52 py-9 flex items-center justify-center gap-x-3">
         <StatCard
