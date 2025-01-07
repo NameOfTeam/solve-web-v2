@@ -1,11 +1,15 @@
-import CardWrapper from '@/components/CardWrapper';
-import ItemWrapper from '@/components/ItemWrapper';
-import MainMenu from '@/components/MainMenu'
-import StatCard from '@/components/StatCard';
-import WorkbookItem from '@/components/WorkbookItem';
-import React from 'react'
+import { getContests } from "@/api/contest/getContests";
+import { getWorkbooks } from "@/api/workbook/getWorkbooks";
+import CardWrapper from "@/components/CardWrapper";
+import ItemWrapper from "@/components/ItemWrapper";
+import MainMenu from "@/components/MainMenu";
+import StatCard from "@/components/StatCard";
+import React from "react";
 
-const Home = () => {
+const Home = async () => {
+  const contestsData = await getContests(0, 6);
+  const workbooksData = await getWorkbooks(0, 6);
+
   return (
     <div className="w-full">
       <div className="w-full h-[520px] bg-[#2b2b2b]"></div>
@@ -45,13 +49,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <CardWrapper data={[]}/>
+        <CardWrapper data={contestsData || []} />
       </div>
       <div className="px-52 py-9 flex flex-col gap-y-5">
         <p className="text-[26px] font-[600] text-main-container">
           문제집으로 실력 상승
         </p>
-        <ItemWrapper data={[]} />
+        <ItemWrapper data={workbooksData || []} />
       </div>
       <div className="px-52 py-9 flex items-center justify-center gap-x-3">
         <StatCard
@@ -81,6 +85,6 @@ const Home = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
