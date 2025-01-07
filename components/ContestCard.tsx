@@ -5,7 +5,7 @@ import React from 'react'
 
 const ContestCard = () => {
   return (
-    <div className='w-full h-64 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container rounded-[8px]'>
+    <div className='w-full h-64 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container rounded-lg'>
       <div className='flex flex-col gap-y-2'>
         {/* <p className='text-[20px] font-[600]'>{data.title}</p>
         <p>{formatDate(data.startAt)}<br />~ {formatDate(data.endAt)}</p> */}
