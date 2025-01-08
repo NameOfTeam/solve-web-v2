@@ -96,6 +96,10 @@ const Signup = () => {
                     id="email"
                     {...register("email", {
                       required: "이메일울 입력해주세요",
+                      // pattern: {
+                      // value: "정규식",
+                      // message: ""
+                      // }
                     })}
                     className=" border rounded-lg h-14 px-3 focus:outline-none"
                     placeholder="이메일을 입력해주세요"
@@ -153,7 +157,8 @@ const Signup = () => {
                 }}
                 disabled={
                   isSubmitting ||
-                  email.trim().length < 1 ||
+                  password.trim().length < 1 ||
+                  passwordConfirm.trim().length < 1 ||
                   password !== passwordConfirm
                 }
               >

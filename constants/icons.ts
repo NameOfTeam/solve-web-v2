@@ -6,8 +6,11 @@ import Problem from "@/assets/problem.svg";
 import Bookmark from "@/assets/bookmark.svg";
 import Like from "@/assets/like.svg";
 import Logo from "@/assets/logo.svg";
-import Search from "@/assets/search.svg";
-import DropDown from "@/assets/drop_down.svg";
+import Google from "@/assets/google.svg";
+import Facebook from "@/assets/facebook.svg";
+import Github from "@/assets/github.svg";
+import Naver from "@/assets/naver.svg";
+import Kakao from "@/assets/kakao.svg";
 import { IconType } from "@/components/ThemedIcon";
 
 export const ICONS = {
@@ -19,8 +22,12 @@ export const ICONS = {
   bookmark: Bookmark,
   like: Like,
   logo: Logo,
-  search: Search,
-  "drop-down": DropDown
+  google: Google,
+  facebook: Facebook,
+  github: Github,
+  naver: Naver,
+  kakao: Kakao
 } satisfies Record<string, IconType>;
 
 export type IconName = keyof typeof ICONS;
+
