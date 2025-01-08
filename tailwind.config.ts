@@ -8,9 +8,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        "bg": "var(--bg)",
+        bg: "var(--bg)",
         "bg-border": "var(--bg-border)",
-        "container": "var(--container)",
+        container: "var(--container)",
         "container-border": "var(--container-border)",
         "main-container": "var(--main-container)",
         "primary-0": "#f7f7fd",
@@ -75,8 +75,48 @@ export default {
         "success-900": "#56870e",
       },
       height: {
-        exceptHeader: "calc(100% - 72px)"
-      }
+        exceptHeader: "calc(100% - 72px)",
+      },
+      animation: {
+        "scale-down": "scaledown 0.35s ease-in-out forwards",
+        "scale-up": "scaleup 0.35s ease-in-out forwards",
+        "fade-in": "fadein 0.25s forwards",
+        "fade-out": "fadeout 0.25s forwards",
+      },
+      keyframes: {
+        scaledown: {
+          "0%": {
+            width: "100%",
+          },
+          "100%": {
+            width: "612px",
+          },
+        },
+        scaleup: {
+          "0%": {
+            width: "612px",
+          },
+          "100%": {
+            width: "100%",
+          },
+        },
+        fadein: {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
+        fadeout: {
+          "0%": {
+            opacity: 1,
+          },
+          "100%": {
+            opacity: 0,
+          },
+        },
+      },
     },
-  }
-}
+  },
+};
