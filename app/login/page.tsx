@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import GIF from "@/assets/login_bg.gif";
 import { setCookie } from "@/utils/cookie";
+import SocialLogin from "@/components/SocialLogin";
 
 const Login = () => {
   const router = useRouter();
@@ -51,46 +52,58 @@ const Login = () => {
           fadeIn ? "animate-scale-up" : "animate-scale-down"
         }`}
       >
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col w-[420px] gap-9 mx-24"
-        >
-          <div className="flex flex-col gap-2">
-            <p className=" font-bold text-4xl">로그인</p>
-            <p className=" font-normal text-xl">
-              로그인하고 Solve에서 고수되기
+        <div className=" flex flex-col items-center gap-8">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col w-[420px] gap-9 mx-24"
+          >
+            <div className="flex flex-col gap-2">
+              <p className=" font-bold text-4xl">로그인</p>
+              <p className=" font-normal text-xl">
+                로그인하고 Solve에서 고수되기
+              </p>
+            </div>
+            <div className=" flex-col flex w-full gap-4">
+              <label htmlFor="email" className=" flex flex-col gap-2">
+                아이디
+                <input
+                  type="text"
+                  id="email"
+                  {...register("email", { required: "아이디를 입력해주세요" })}
+                  className=" border h-14 px-3 focus:outline-none rounded-lg"
+                  placeholder="이메일을 입력해주세요"
+                />
+              </label>
+              <label htmlFor="password" className=" flex flex-col gap-2">
+                비밀번호
+                <input
+                  type="password"
+                  id="password"
+                  {...register("password", {
+                    required: "비밀번호를 입력해주세요",
+                  })}
+                  className=" border rounded-lg h-14 px-3 focus:outline-none"
+                  placeholder="비밀번호를 입력해주세요"
+                />
+              </label>
+            </div>
+            <button
+              type="submit"
+              className=" bg-primary-700 h-12 rounded-lg text-white"
+            >
+              로그인
+            </button>
+          </form>
+
+          <div
+            className=" h-0 overflow-visible border w-[420px] flex justify-center items-center
+          "
+          >
+            <p className=" bg-white w-12 text-center text-container-border text-sm">
+              또는
             </p>
           </div>
-          <div className=" flex-col flex w-full gap-4">
-            <label htmlFor="email" className=" flex flex-col gap-2">
-              아이디
-              <input
-                type="text"
-                id="email"
-                {...register("email", { required: "아이디를 입력해주세요" })}
-                className=" border h-14 px-3 focus:outline-none rounded-lg"
-                placeholder="이메일을 입력해주세요"
-              />
-            </label>
-            <label htmlFor="password" className=" flex flex-col gap-2">
-              비밀번호
-              <input
-                type="password"
-                id="password"
-                {...register("password", {
-                  required: "비밀번호를 입력해주세요",
-                })}
-                className=" border rounded-lg h-14 px-3 focus:outline-none"
-                placeholder="비밀번호를 입력해주세요"
-              />
-            </label>
-          </div>
-          <button
-            type="submit"
-            className=" bg-primary-700 h-12 rounded-lg text-white"
-          >
-            로그인
-          </button>
+          <SocialLogin />
           <div className="flex gap-2 justify-center items-center">
             <p className=" text-sm">계정이 없다면?</p>
             <p
@@ -100,7 +113,7 @@ const Login = () => {
               회원가입
             </p>
           </div>
-        </form>
+        </div>
         <div className="flex-1 h-[780px]">
           <Image
             src={GIF}
