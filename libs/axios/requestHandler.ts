@@ -6,8 +6,8 @@ export const requestHandler = async (
   config: InternalAxiosRequestConfig<any>
 ) => {
   if (typeof window === "undefined") {
-    const cookieStore = cookies();
-    const token = (await cookieStore).get(ACCESS_TOKEN_KEY)?.value;
+    const cookieStore = await cookies();
+    const token = cookieStore.get(ACCESS_TOKEN_KEY)?.value;
     if (token) {
       config.headers[REQUEST_TOKEN_KEY] = `Bearer ${token}`;
     }

@@ -35,10 +35,11 @@ interface ThemedIconProps {
   height: number;
   variant?: ColorVariant;
   shade?: ColorShade;
-  color?: string
+  color?: string;
+  className?: string;
 }
 
-const ThemedIcon = ({ icon, width, height, variant, shade, color }: ThemedIconProps) => {
+const ThemedIcon = ({ icon, width, height, variant, shade, color, className }: ThemedIconProps) => {
   const colorKey = shade ? `${variant}-${shade}` : variant;
   const Icon = ICONS[icon];
 
@@ -47,7 +48,7 @@ const ThemedIcon = ({ icon, width, height, variant, shade, color }: ThemedIconPr
       width={width}
       height={height}
       fill={color || `var(--${colorKey})`}
-      className={`text-${colorKey}`}
+      className={`text-${colorKey} ${className}`}
     />
   );
 };

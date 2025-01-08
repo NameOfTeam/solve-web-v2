@@ -6,6 +6,8 @@ import Problem from "@/assets/problem.svg";
 import Bookmark from "@/assets/bookmark.svg";
 import Like from "@/assets/like.svg";
 import Logo from "@/assets/logo.svg";
+import Search from "@/assets/search.svg";
+import DropDown from "@/assets/drop_down.svg";
 import { IconType } from "@/components/ThemedIcon";
 
 export const ICONS = {
@@ -17,6 +19,8 @@ export const ICONS = {
   bookmark: Bookmark,
   like: Like,
   logo: Logo,
+  search: Search,
+  "drop-down": DropDown
 } satisfies Record<string, IconType>;
 
 export type IconName = keyof typeof ICONS;
