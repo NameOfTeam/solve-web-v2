@@ -1,7 +1,12 @@
 import { API_URL } from "@/constants/api";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
-import watodoAxios from "./solveAxios";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, REQUEST_TOKEN_KEY } from "@/constants/token";
+import solveAxios from "./solveAxios";
+import {
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+  REQUEST_TOKEN_KEY,
+} from "@/constants/token";
+import { deleteCookie, setCookie } from "@/utils/cookie";
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
@@ -19,17 +24,15 @@ const addRefreshSubscriber = (callback: (token: string) => void) => {
   refreshSubscribers.push(callback);
 };
 
-export const responseHandler = async (error: AxiosError) => {
+export const responseErrorHandler = async (error: AxiosError) => {
   const originalRequest = error.config as CustomAxiosRequestConfig;
 
-  if (originalRequest.data instanceof FormData) {
-    originalRequest.headers["Content-Type"] = "multipart/form-data";
-  } else {
-    originalRequest.headers["Content-Type"] = "application/json";
-  }
   if (originalRequest && !originalRequest._retry) {
     originalRequest._retry = true;
-    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+    const refreshToken = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${REFRESH_TOKEN_KEY}=`))
+      ?.split("=")[1];
 
     if (refreshToken) {
       if (!isRefreshing) {
@@ -43,16 +46,18 @@ export const responseHandler = async (error: AxiosError) => {
           const newAccessToken = data.data.accessToken;
           const newRefreshToken = data.data.refreshToken;
 
-          localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
-          localStorage.setItem(REFRESH_TOKEN_KEY, newRefreshToken);
+          setCookie(ACCESS_TOKEN_KEY, newAccessToken);
+          setCookie(REFRESH_TOKEN_KEY, newRefreshToken);
 
           onRefreshed(newAccessToken);
 
-          originalRequest.headers[REQUEST_TOKEN_KEY] = `Bearer ${newAccessToken}`;
-          return watodoAxios(originalRequest);
+          originalRequest.headers[
+            REQUEST_TOKEN_KEY
+          ] = `Bearer ${newAccessToken}`;
+          return solveAxios(originalRequest);
         } catch (refreshError) {
-          localStorage.removeItem(ACCESS_TOKEN_KEY);
-          localStorage.removeItem(REFRESH_TOKEN_KEY);
+          deleteCookie(ACCESS_TOKEN_KEY);
+          deleteCookie(REFRESH_TOKEN_KEY);
           return Promise.reject(refreshError);
         } finally {
           isRefreshing = false;
@@ -62,7 +67,7 @@ export const responseHandler = async (error: AxiosError) => {
       return new Promise((resolve) => {
         addRefreshSubscriber((newToken: string) => {
           originalRequest.headers[REQUEST_TOKEN_KEY] = `Bearer ${newToken}`;
-          resolve(watodoAxios(originalRequest));
+          resolve(solveAxios(originalRequest));
         });
       });
     } else {

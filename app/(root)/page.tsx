@@ -1,4 +1,5 @@
 import { getContests } from "@/api/contest/getContests";
+import { getStatistics } from "@/api/statistics/getStatistics";
 import { getWorkbooks } from "@/api/workbook/getWorkbooks";
 import CardWrapper from "@/components/CardWrapper";
 import ItemWrapper from "@/components/ItemWrapper";
@@ -8,7 +9,12 @@ import React from "react";
 
 const Home = async () => {
   const contestsData = await getContests(0, 6);
-  const workbooksData = await getWorkbooks(0, 6);
+  const workbooksData = await getWorkbooks(0, 3);
+  const statisticsData = await getStatistics();
+
+  console.log(contestsData);
+  console.log(workbooksData);
+  console.log(statisticsData);
 
   return (
     <div className="w-full">
@@ -40,7 +46,7 @@ const Home = async () => {
               <p className="text-main-container">시작 예정</p>
             </div>
             <div className="flex gap-x-2 items-center">
-              <span className="w-4 h-4 bg-secondary-300 rounded-full"></span>
+              <span className="w-4 h-4 bg-secondary-500 rounded-full"></span>
               <p className="text-main-container">진행 중</p>
             </div>
             <div className="flex gap-x-2 items-center">
@@ -61,25 +67,25 @@ const Home = async () => {
         <StatCard
           title="등록된 문제"
           description="난이도가 매겨진 문제 기준"
-          quantity={11234}
+          quantity={statisticsData?.problemCount || 0}
           unit="문제"
         />
         <StatCard
           title="만들어진 문제집"
           description="나의 문제집 포함"
-          quantity={23}
+          quantity={statisticsData?.workbookCount || 0}
           unit="문제집"
         />
         <StatCard
           title="기록된 대회 수"
           description="진행 / 미진행 모두 포함"
-          quantity={2230}
+          quantity={statisticsData?.contestCount || 0}
           unit="대회"
         />
         <StatCard
           title="해결사의 수"
-          description="루키 5 이상"
-          quantity={121234}
+          description="문 티어 이상"
+          quantity={statisticsData?.userCount || 0}
           unit="명"
         />
       </div>

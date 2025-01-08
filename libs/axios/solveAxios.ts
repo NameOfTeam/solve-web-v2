@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_URL } from "@/constants/api";
 import { requestHandler } from "./requestHandler";
-import { responseHandler } from "./responseHandler";
+import { responseErrorHandler } from "./responseErrorHandler";
 
 const solveAxios = axios.create({
   baseURL: API_URL,
@@ -15,6 +15,9 @@ solveAxios.interceptors.request.use(requestHandler, (error) =>
   Promise.reject(error)
 );
 
-solveAxios.interceptors.response.use((response) => response, responseHandler);
+solveAxios.interceptors.response.use(
+  (response) => response,
+  responseErrorHandler
+);
 
 export default solveAxios;

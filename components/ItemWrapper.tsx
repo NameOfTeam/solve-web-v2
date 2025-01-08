@@ -6,7 +6,7 @@ const ItemWrapper = ({ data }: { data: Workbook[] }) => {
   return (
     <>
       {data.length > 0 ? (
-        <div className="w-full flex flex-col gap-y-3">
+        <div className="w-full flex flex-col gap-y-3 cursor-pointer">
           {data.map((item) => (
             <WorkbookItem key={item.id} data={item} />
           ))}

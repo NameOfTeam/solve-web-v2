@@ -28,7 +28,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
       </div>
       <div className="w-full font-[400] text-sm flex items-center whitespace-nowrap">
         <p className="text-lg flex-[8] text-main-container">
-          No. {data.id} ・ {data.description}
+          No. {data.id}{data.description && ` ・ ${data.description}`}
         </p>
         <p className="flex-[1] text-info-500">{data.author.username}</p>
         <p className="flex-[1.3] text-main-container">{formatDate(data.updatedAt)}</p>

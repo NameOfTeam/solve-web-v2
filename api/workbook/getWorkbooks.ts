@@ -1,16 +1,14 @@
 "use server";
 
-import { API_URL } from "@/constants/api";
+import solveAxios from "@/libs/axios/solveAxios";
 import { BaseResponse } from "@/types/common/base";
 import { PageResponse } from "@/types/common/page";
-import { Contest } from "@/types/contest/contest";
 import { Workbook } from "@/types/workbook/workbook";
-import axios from "axios";
 
 export const getWorkbooks = async (page: number = 0, size: number = 20) => {
   try {
-    const { data } = await axios.get<BaseResponse<PageResponse<Workbook>>>(
-      `${API_URL}/workbooks`,
+    const { data } = await solveAxios.get<BaseResponse<PageResponse<Workbook>>>(
+      `/workbooks`,
       {
         params: {
           page,
