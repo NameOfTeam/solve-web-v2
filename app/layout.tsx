@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/themeContext";
+import { CookiesProvider } from "next-client-cookies/server";
 
 const pretendard = localFont({
   src: "./fonts/pretendard.woff2",
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.variable}>
-        <ThemeProvider>
-          <div className="w-full h-screen bg-bg">{children}</div>
-        </ThemeProvider>
+        <CookiesProvider>
+          <ThemeProvider>
+            <div className="w-full h-screen bg-bg">{children}</div>
+          </ThemeProvider>
+        </CookiesProvider>
       </body>
     </html>
   );

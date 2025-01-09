@@ -6,7 +6,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Header />
-      <div className="w-full h-exceptHeader overflow-y-scroll">
+      <div className="w-full h-except-header overflow-y-scroll">
         {children}
         <Footer />
       </div>

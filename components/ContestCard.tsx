@@ -1,9 +1,33 @@
-import { Contest } from '@/types/contest/contest'
-import { formatDateWithTime } from '@/utils/formatDateWithTime'
-import { formatLeftTime } from '@/utils/formatLeftTime'
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { Contest } from "@/types/contest/contest";
+import { formatDateWithTime } from "@/utils/formatDateWithTime";
 
 const ContestCard = ({ data }: { data: Contest }) => {
+  const [timeLeft, setTimeLeft] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (data.state === "UPCOMING") {
+      const updateLeftTime = () => {
+        const now = new Date();
+        const diff = new Date(data.startAt).getTime() - now.getTime();
+        if (diff <= 0) {
+          setTimeLeft(null);
+        } else {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((diff / (1000 * 60)) % 60);
+          const seconds = Math.floor((diff / 1000) % 60);
+          setTimeLeft(`${days}일 ${hours}시간 ${minutes}분 ${seconds}초`);
+        }
+      };
+
+      updateLeftTime(); // Set the initial time
+      const interval = setInterval(updateLeftTime, 1000); // Update every second
+
+      return () => clearInterval(interval); // Cleanup on unmount
+    }
+  }, [data.startAt, data.state]);
+
   return (
     <div className="w-full h-64 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container rounded-lg cursor-pointer">
       <div className="flex flex-col gap-y-2">
@@ -15,9 +39,10 @@ const ContestCard = ({ data }: { data: Contest }) => {
       </div>
       <p className="text-base font-[600]">
         {data.state === "UPCOMING" ? (
-          <p className='font-[400] text-sm'>
-            시작까지 <span className='font-[600]'>{formatLeftTime(data.startAt)}</span>
-          </p>
+          <span className="font-[400] text-sm">
+            시작까지{" "}
+            <span className="font-[600]">{timeLeft || "Loading..."}</span>
+          </span>
         ) : data.state === "ENDED" ? (
           "종료"
         ) : (
@@ -35,6 +60,6 @@ const ContestCard = ({ data }: { data: Contest }) => {
       ></div>
     </div>
   );
-}
+};
 
-export default ContestCard
+export default ContestCard;

@@ -11,13 +11,14 @@ const solveAxios = axios.create({
   withCredentials: true,
 });
 
-solveAxios.interceptors.request.use(requestHandler, (error) =>
-  Promise.reject(error)
-);
+solveAxios.interceptors.request.use(requestHandler, (error) => {
+  console.log(error);
+  Promise.reject(error);
+});
 
 solveAxios.interceptors.response.use(
   (response) => response,
   responseErrorHandler
-);
+); 
 
 export default solveAxios;

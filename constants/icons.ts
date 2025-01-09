@@ -1,3 +1,4 @@
+import { IconType } from "@/components/ThemedIcon";
 import Flag from "@/assets/flag.svg";
 import Workbook from "@/assets/workbook.svg";
 import Shop from "@/assets/shop.svg";
@@ -11,7 +12,8 @@ import Facebook from "@/assets/facebook.svg";
 import Github from "@/assets/github.svg";
 import Naver from "@/assets/naver.svg";
 import Kakao from "@/assets/kakao.svg";
-import { IconType } from "@/components/ThemedIcon";
+import Search from '@/assets/search.svg'
+import Dropdown from "@/assets/drop_down.svg";
 
 export const ICONS = {
   flag: Flag,
@@ -20,14 +22,15 @@ export const ICONS = {
   daily: Daily,
   problem: Problem,
   bookmark: Bookmark,
+  "drop-down": Dropdown,
+  search: Search,
   like: Like,
   logo: Logo,
   google: Google,
   facebook: Facebook,
   github: Github,
   naver: Naver,
-  kakao: Kakao
+  kakao: Kakao,
 } satisfies Record<string, IconType>;
 
 export type IconName = keyof typeof ICONS;
-

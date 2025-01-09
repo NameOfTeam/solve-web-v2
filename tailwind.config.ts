@@ -74,13 +74,17 @@ export default {
         "success-900": "#56870e",
       },
       height: {
-        exceptHeader: "calc(100% - 72px)",
+        "except-header": "calc(100% - 72px)",
+        "except-banner": "calc(100% - 144px)",
       },
       animation: {
         "scale-down": "scaledown 0.35s ease-in-out forwards",
         "scale-up": "scaleup 0.35s ease-in-out forwards",
         "fade-in": "fadein 0.25s forwards",
         "fade-out": "fadeout 0.25s forwards",
+      },
+      transiton: {
+        spin: "all 2s",
       },
       keyframes: {
         scaledown: {
