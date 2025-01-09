@@ -68,15 +68,18 @@ const Signup = () => {
       >
         {phase !== "DONE" && (
           <div
-            className={`absolute top-8 right-[524px]`}
+            className={`absolute top-8 right-[524px] cursor-pointer `}
             onClick={() => {
               switch (phase) {
                 case "USERNAME":
-                  router.back;
+                  router.back();
+                  break;
                 case "PASSWORD":
                   setPhase("USERNAME");
+                  break;
                 case "EMAIL":
                   setPhase("PASSWORD");
+                  break;
               }
             }}
           >
@@ -89,7 +92,6 @@ const Signup = () => {
             />
           </div>
         )}
-
         <div className="flex-1 h-[780px]">
           <Image
             src={GIF}
