@@ -4,13 +4,14 @@ import { API_URL } from "@/constants/api";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/constants/token";
 import { SignupForm } from "@/types/auth/signupForm";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { Key, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TokenResponse } from "@/types/response/tokenResponse";
 import { BaseResponse } from "@/types/common/base";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import GIF from "@/assets/signup.gif";
+import ThemedIcon from "@/components/ThemedIcon";
 
 const Signup = () => {
   const [fadeIn, setFadeIn] = useState(true);
@@ -34,16 +35,14 @@ const Signup = () => {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<SignupForm> = async (loginData) => {
+  const signupSubmit: SubmitHandler<SignupForm> = async (signupData) => {
     try {
       const { data } = await axios.post<BaseResponse<TokenResponse>>(
-        `${API_URL}/auth/login`,
-        loginData
+        `${API_URL}/auth/signup`,
+        signupData
       );
       if (data) {
-        localStorage.setItem(ACCESS_TOKEN_KEY, data.data.accessToken);
-        localStorage.setItem(REFRESH_TOKEN_KEY, data.data.refreshToken);
-        router.push("/");
+        setPhase("DONE");
       }
     } catch (err: any) {}
   };
@@ -63,10 +62,34 @@ const Signup = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center bg-container-border px-40">
       <div
-        className={`w-full pl-4 py-4 flex bg-white items-center rounded-2xl shadow-lg ${
+        className={`w-full pl-4 py-4 flex bg-bg items-center rounded-2xl shadow-lg ${
           fadeIn ? "animate-scale-up" : "animate-scale-down"
-        }`}
+        } relative`}
       >
+        {phase !== "DONE" && (
+          <div
+            className={`absolute top-8 right-[524px]`}
+            onClick={() => {
+              switch (phase) {
+                case "USERNAME":
+                  router.back;
+                case "PASSWORD":
+                  setPhase("USERNAME");
+                case "EMAIL":
+                  setPhase("PASSWORD");
+              }
+            }}
+          >
+            <ThemedIcon
+              icon="arrow-left-back"
+              width={48}
+              height={48}
+              variant="main"
+              shade="container"
+            />
+          </div>
+        )}
+
         <div className="flex-1 h-[780px]">
           <Image
             src={GIF}
@@ -77,41 +100,39 @@ const Signup = () => {
           />
         </div>
         <form
-          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col w-[420px] gap-9 mx-24"
+          onSubmit={handleSubmit(signupSubmit)}
         >
           {phase === "EMAIL" ? (
             <>
               <div className="flex flex-col gap-2">
-                <p className=" font-bold text-4xl">회원가입</p>
-                <p className=" font-normal text-xl">
+                <p className=" font-bold text-4xl text-main-container">
+                  회원가입
+                </p>
+                <p className=" font-normal text-xl text-main-container">
                   인증을 위한 이메일을 입력해주세요.
                 </p>
               </div>
               <div className=" flex-col flex w-full gap-4">
-                <label htmlFor="email" className=" flex flex-col gap-2">
+                <label
+                  htmlFor="email"
+                  className=" flex flex-col gap-2 text-main-container"
+                >
                   이메일
                   <input
                     type="text"
                     id="email"
                     {...register("email", {
-                      required: "이메일울 입력해주세요",
-                      // pattern: {
-                      // value: "정규식",
-                      // message: ""
-                      // }
+                      minLength: 1,
                     })}
-                    className=" border rounded-lg h-14 px-3 focus:outline-none"
+                    className=" border border-bg-border rounded-lg h-14 px-3 focus:outline-none bg-bg"
                     placeholder="이메일을 입력해주세요"
                   />
                 </label>
               </div>
               <button
                 type="submit"
-                className=" bg-primary-700 h-12 rounded-lg text-white disabled:bg-container-border"
-                onClick={() => {
-                  setPhase("DONE");
-                }}
+                className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
                 disabled={isSubmitting || email.trim().length < 1}
               >
                 인증 발송하기
@@ -120,39 +141,48 @@ const Signup = () => {
           ) : phase === "PASSWORD" ? (
             <>
               <div className="flex flex-col gap-2">
-                <p className=" font-bold text-4xl">회원가입</p>
-                <p className=" font-normal text-xl">
+                <p className=" font-bold text-4xl text-main-container">
+                  회원가입
+                </p>
+                <p className=" font-normal text-xl text-main-container">
                   나만의 비밀번호를 정해주세요!
                 </p>
               </div>
               <div className=" flex-col flex w-full gap-4">
-                <label className=" flex flex-col gap-2">
+                <label className=" flex flex-col gap-2 text-main-container">
                   비밀번호
                   <input
-                    type="text"
+                    type="password"
                     {...register("password", {
-                      required: "비밀번호를 입력해주세요",
+                      minLength: 1,
                     })}
-                    className=" border rounded-lg h-14 px-3 focus:outline-none"
+                    className=" border border-bg-border rounded-lg h-14 px-3 focus:outline-none bg-bg"
                     placeholder="비밀번호를 입력해주세요"
                   />
                 </label>
-                <label className=" flex flex-col gap-2">
+                <label className=" flex flex-col gap-2 text-main-container">
                   비밀번호 확인
                   <input
-                    type="text"
+                    type="password"
                     {...register("passwordConfirm", {
                       required: "비밀번호를 다시 입력해주세요",
                     })}
-                    className=" border rounded-lg h-14 px-3 focus:outline-none"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+
+                        setPhase("EMAIL");
+                      }
+                    }}
+                    className=" border border-bg-border rounded-lg h-14 px-3 focus:outline-none text-main-container bg-bg"
                     placeholder="비밀번호를 다시 입력해주세요"
                   />
                 </label>
               </div>
               <button
-                type="submit"
-                className=" bg-primary-700 h-12 rounded-lg text-white  disabled:bg-container-border"
-                onClick={() => {
+                type="button"
+                className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
+                onClick={(e) => {
                   setPhase("EMAIL");
                 }}
                 disabled={
@@ -168,16 +198,16 @@ const Signup = () => {
           ) : phase === "DONE" ? (
             <>
               <div className="flex flex-col gap-2">
-                <p className=" font-bold text-4xl">
+                <p className=" font-bold text-3xl text-main-container">
                   인증용 메일이 전송되었습니다!
                 </p>
-                <p className=" font-normal text-xl">
+                <p className=" font-normal text-xl text-main-container">
                   인증 종료 후 로그인해주세요.
                 </p>
               </div>
               <button
-                type="submit"
-                className=" bg-primary-700 h-12 rounded-lg text-white"
+                type="button"
+                className=" bg-primary-700 h-12 rounded-lg text-container"
                 onClick={() => {
                   router.push("/login");
                 }}
@@ -188,29 +218,38 @@ const Signup = () => {
           ) : (
             <>
               <div className="flex flex-col gap-2">
-                <p className=" font-bold text-4xl">회원가입</p>
-                <p className=" font-normal text-xl">
+                <p className=" font-bold text-4xl text-main-container">
+                  회원가입
+                </p>
+                <p className=" font-normal text-xl text-main-container">
                   사용할 이름을 입력해주세요.
                 </p>
               </div>
               <div className=" flex-col flex w-full gap-4">
-                <label className=" flex flex-col gap-2">
+                <label className=" flex flex-col gap-2 text-main-container">
                   아이디
                   <input
                     type="text"
                     {...register("username", {
-                      required: "아이디를 입력해주세요",
+                      minLength: 1,
                     })}
-                    className=" border rounded-lg h-14 px-3 focus:outline-none"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+
+                        setPhase("PASSWORD");
+                      }
+                    }}
+                    className=" border border-bg-border rounded-lg h-14 px-3 focus:outline-none text-main-container bg-bg"
                     placeholder="아이디를 입력해주세요 (영문, 3~16자)"
                   />
                 </label>
               </div>
               <button
-                type="submit"
-                className=" bg-primary-700 h-12 rounded-lg text-white disabled:bg-container-border"
+                type="button"
+                className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
                 disabled={isSubmitting || username.trim().length < 1}
-                onClick={() => {
+                onClick={(e) => {
                   setPhase("PASSWORD");
                 }}
               >
@@ -219,10 +258,10 @@ const Signup = () => {
             </>
           )}
           <div className="flex gap-2 justify-center items-center">
-            <p className=" text-sm">계정이 있으면?</p>
+            <p className=" text-sm text-main-container">계정이 있으면?</p>
             <p
               onClick={move}
-              className=" font-semibold text-sm text-info-500 cursor-pointer"
+              className=" font-semibold text-sm text-info-500 cursor-pointer "
             >
               로그인
             </p>

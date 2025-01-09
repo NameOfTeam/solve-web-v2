@@ -12,8 +12,9 @@ import Facebook from "@/assets/facebook.svg";
 import Github from "@/assets/github.svg";
 import Naver from "@/assets/naver.svg";
 import Kakao from "@/assets/kakao.svg";
-import Search from '@/assets/search.svg'
+import Search from "@/assets/search.svg";
 import Dropdown from "@/assets/drop_down.svg";
+import ArrowLeftBack from "@/assets/arrow-left-back.svg";
 
 export const ICONS = {
   flag: Flag,
@@ -31,6 +32,7 @@ export const ICONS = {
   github: Github,
   naver: Naver,
   kakao: Kakao,
+  "arrow-left-back": ArrowLeftBack,
 } satisfies Record<string, IconType>;
 
 export type IconName = keyof typeof ICONS;
