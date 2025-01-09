@@ -4,13 +4,14 @@ import Link from "next/link";
 import React from "react";
 import ThemedIcon from "./ThemedIcon";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-const Search = () => {
+const Search = ({ route }: { route: string }) => {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const { register, watch, handleSubmit } = useForm<{ query: string }>({
     defaultValues: {
-      query: "",
+      query: searchParams.get('query') || "",
     },
   });
 
@@ -18,9 +19,9 @@ const Search = () => {
 
   const search = () => {
     if (query.length > 0) {
-      router.push(`/problems?query=${query}`);
+      router.push(`/${route}?query=${query}`);
     } else {
-      router.push("/problems");
+      router.push(`/${route}`);
     }
   };
 

@@ -14,4 +14,5 @@ export interface Contest {
   problems: Problem[];
   createdAt: string;
   updatedAt: string;
+  winner: User;
 }

@@ -4,10 +4,11 @@ import React from "react";
 import ThemedIcon from "./ThemedIcon";
 import { Workbook } from "@/types/workbook/workbook";
 import { formatDate } from "@/utils/formatDate";
+import Link from "next/link";
 
 const WorkbookItem = ({ data }: { data: Workbook }) => {
   return (
-    <div className="w-full h-24 bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7">
+    <Link href={`/workbooks/${data.id}`} className="w-full h-24 bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7">
       <div className="w-full font-[600] text-base flex items-end whitespace-nowrap">
         <p className="text-lg flex-[8] text-main-container">
           {data.title}
@@ -27,7 +28,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
         </div>
       </div>
       <div className="w-full font-[400] text-sm flex items-center whitespace-nowrap">
-        <p className="text-lg flex-[8] text-main-container">
+        <p className="text-sm flex-[8] text-main-container">
           No. {data.id}{data.description && ` ・ ${data.description}`}
         </p>
         <p className="flex-[1] text-info-500">{data.author.username}</p>
@@ -43,7 +44,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
           <p className="text-xs text-white">{data.likeCount}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
