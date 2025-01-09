@@ -1,6 +1,6 @@
 import Banner from "@/components/Banner";
 import Search from "@/components/Search";
-import React, { Suspense } from "react";
+import React from "react";
 import ReactQueryProviders from "@/components/ReactQueryProviders";
 import ProblemList from "@/components/ProblemList";
 import ProblemFilter from "@/components/ProblemFilter";

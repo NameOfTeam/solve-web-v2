@@ -12,6 +12,7 @@ export interface Problem {
   state?: ProblemSubmitState;
   solvedCount: number;
   tier: string;
+  solved: boolean
 }
 
 interface ProblemAuthorResponse {
