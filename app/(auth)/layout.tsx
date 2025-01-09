@@ -1,3 +1,5 @@
+"use client"
+
 import React, { PropsWithChildren, Suspense } from "react";
 
 const AUthLayout = ({ children }: PropsWithChildren) => {
