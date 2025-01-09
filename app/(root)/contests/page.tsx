@@ -2,12 +2,14 @@ import Banner from "@/components/Banner";
 import ContestFilter from "@/components/ContestFilter";
 import ContestList from "@/components/ContestList";
 import Search from "@/components/Search";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Contests = async ({
   searchParams,
 }: {
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }> | undefined;
+  searchParams?:
+    | Promise<{ [key: string]: string | string[] | undefined }>
+    | undefined;
 }) => {
   const query = (await searchParams)?.query;
 
@@ -25,7 +27,9 @@ const Contests = async ({
             </div>
             <ContestFilter />
           </div>
-          <ContestList query={query as string | undefined} />
+          <Suspense>
+            <ContestList query={query as string | undefined} />
+          </Suspense>
         </div>
       </div>
     </div>

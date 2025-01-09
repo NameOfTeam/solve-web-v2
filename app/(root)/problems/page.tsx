@@ -1,6 +1,6 @@
 import Banner from "@/components/Banner";
 import Search from "@/components/Search";
-import React from "react";
+import React, { Suspense } from "react";
 import ProblemList from "@/components/ProblemList";
 import ProblemFilter from "@/components/ProblemFilter";
 
@@ -24,7 +24,9 @@ const Problems = async ({
             </div>
             <ProblemFilter />
           </div>
-          <ProblemList query={query as string | undefined} />
+          <Suspense>
+            <ProblemList query={query as string | undefined} />
+          </Suspense>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/contexts/themeContext";
 import { CookiesProvider } from "next-client-cookies/server";
 import ChangeTheme from "@/components/ChangeTheme";
+import { Suspense } from "react";
 
 const pretendard = localFont({
   src: "./fonts/pretendard.woff2",
