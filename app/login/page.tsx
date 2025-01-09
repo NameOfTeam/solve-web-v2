@@ -63,7 +63,7 @@ const Login = () => {
         } relative`}
       >
         <div
-          className="absolute top-8 left-8"
+          className="absolute top-8 left-8 cursor-pointer "
           onClick={() => {
             router.back;
           }}
