@@ -18,16 +18,19 @@ const useGetContestList = ({
   query?: string;
   options?: UseQueryOptions<PageResponse<Contest>, Error>;
 }) => {
-  const { filter } = useContestFilterStore();
+  const { state } = useContestFilterStore();
   const cookies = useCookies();
   const accessToken = cookies.get(ACCESS_TOKEN_KEY);
 
   const fetchContestList = async () => {
     const params: Record<string, any> = {
-      filter,
       page,
       size,
     };
+
+    if(state) {
+      params.state = state;
+    }
 
     if (query) {
       params.query = query;
@@ -56,7 +59,7 @@ const useGetContestList = ({
   };
 
   const { data } = useQuery({
-    queryKey: ["contestList", { page, size, filter, query }],
+    queryKey: ["contestList", { page, size, state, query }],
     queryFn: fetchContestList,
     ...options,
   });

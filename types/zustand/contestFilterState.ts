@@ -1,4 +1,4 @@
 export interface ContestFilterState {
-  filter: null | "UPCOMING" | "ONGOING" | "ENDED";
-  setFilter: (filter: null | "UPCOMING" | "ONGOING" | "ENDED") => void;
+  state: null | "UPCOMING" | "ONGOING" | "ENDED";
+  setState: (state: null | "UPCOMING" | "ONGOING" | "ENDED") => void;
 }
