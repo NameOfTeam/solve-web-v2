@@ -10,6 +10,8 @@ export interface Problem {
   testCases: ProblemTestCase[];
   author: ProblemAuthorResponse;
   state?: ProblemSubmitState;
+  solvedCount: number;
+  tier: string;
 }
 
 interface ProblemAuthorResponse {

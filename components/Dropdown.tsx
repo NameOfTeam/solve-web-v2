@@ -1,8 +1,10 @@
 "use client";
 
-import React, {  useState } from "react";
+import React, { useEffect, useState, useId } from "react";
 import ThemedIcon from "./ThemedIcon";
 import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
+
+const DROPDOWN_TOGGLE_EVENT = "dropdownToggle";
 
 const Dropdown = ({
   defaultValue,
@@ -14,8 +16,43 @@ const Dropdown = ({
   data: { name: string; value: string }[];
 }) => {
   const [opened, setOpened] = useState(false);
+  const dropdownId = useId();
+
   const { states, tiers, order, setTiers, setOrder, setStates } =
     useProblemFilterStore();
+
+  useEffect(() => {
+    const handleDropdownToggle = (e: CustomEvent) => {
+      if (e.detail.id !== dropdownId && opened) {
+        setOpened(false);
+      }
+    };
+
+    window.addEventListener(
+      DROPDOWN_TOGGLE_EVENT,
+      handleDropdownToggle as EventListener
+    );
+
+    return () => {
+      window.removeEventListener(
+        DROPDOWN_TOGGLE_EVENT,
+        handleDropdownToggle as EventListener
+      );
+    };
+  }, [dropdownId, opened]);
+
+  const handleToggle = () => {
+    const newOpenState = !opened;
+    setOpened(newOpenState);
+
+    if (newOpenState) {
+      window.dispatchEvent(
+        new CustomEvent(DROPDOWN_TOGGLE_EVENT, {
+          detail: { id: dropdownId },
+        })
+      );
+    }
+  };
 
   const handleCheckboxChange = (value: string) => {
     if (type === "STATE") {
@@ -48,12 +85,31 @@ const Dropdown = ({
     }
     return false;
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (
+        !target.classList.contains("dropdown") &&
+        !target.classList.contains("wrapper") &&
+        opened
+      ) {
+        setOpened(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [opened]);
+
   return (
     <div
-      className="pr-3 pl-4 py-2 bg-container border border-bg-border rounded-lg flex justify-center items-center gap-x-2 relative overflow-visible cursor-pointer"
-      onClick={() => setOpened((prev) => !prev)}
+      onClick={handleToggle}
+      className="wrapper pr-3 pl-4 py-2 bg-container border border-bg-border rounded-lg flex justify-center items-center gap-x-2 relative overflow-visible cursor-pointer"
     >
-      <p className="text-sm font-[600] text-main-container">
+      <p className="wrapper text-sm font-[600] text-main-container">
         {getDisplayValue()}
       </p>
       <ThemedIcon
@@ -62,11 +118,13 @@ const Dropdown = ({
         width={16}
         variant="main"
         shade="container"
-        className={`${ opened ? 'rotate-180' : 'rotate-0' } transition-transform`}
+        className={`${
+          opened ? "rotate-180" : "rotate-0"
+        } transition-transform wrapper`}
       />
       {opened && (
         <div
-          className={`absolute top-10 left-[-1px] bg-container border border-bg-border rounded-lg px-3 py-3 flex flex-col gap-y-3 flex-wrap max-h-52 ${
+          className={`dropdown absolute top-10 left-[-1px] bg-container border border-bg-border rounded-lg px-3 py-3 flex flex-col gap-y-3 flex-wrap max-h-52 ${
             data.length > 10 ? "w-80" : type === "STATE" && "w-40"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -75,7 +133,7 @@ const Dropdown = ({
             ? data.map((item) => (
                 <p
                   key={item.value}
-                  className={`text-sm font-[400] whitespace-nowrap px-1 cursor-pointer ${
+                  className={`dropdown text-sm font-[400] whitespace-nowrap px-1 cursor-pointer ${
                     order === item.value
                       ? "text-secondary-500"
                       : "text-main-container"
@@ -88,19 +146,19 @@ const Dropdown = ({
             : data.map((item) => (
                 <label
                   key={item.value}
-                  className="flex items-center gap-x-2 text-sm font-[400] px-1 cursor-pointer"
+                  className="dropdown flex items-center gap-x-2 text-sm font-[400] px-1 cursor-pointer"
                 >
-                  <div className="relative flex items-center">
+                  <div className="dropdown relative flex items-center">
                     <input
                       type="checkbox"
                       checked={isItemChecked(item.value)}
                       onChange={() => handleCheckboxChange(item.value)}
-                      className="appearance-none w-4 h-4 border border-bg-border rounded-sm checked:bg-secondary-500 checked:border-secondary-500 cursor-pointer"
+                      className="dropdown appearance-none w-4 h-4 border border-bg-border rounded-sm checked:bg-secondary-500 checked:border-secondary-500 cursor-pointer"
                     />
                     {isItemChecked(item.value) && (
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="dropdown absolute inset-0 flex items-center justify-center pointer-events-none">
                         <svg
-                          className="w-3 h-3 text-white"
+                          className="dropdown w-3 h-3 text-white"
                           viewBox="0 0 12 12"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +174,7 @@ const Dropdown = ({
                       </div>
                     )}
                   </div>
-                  <span className="text-main-container min-w-10">
+                  <span className="dropdown text-main-container min-w-10">
                     {item.name}
                   </span>
                 </label>
