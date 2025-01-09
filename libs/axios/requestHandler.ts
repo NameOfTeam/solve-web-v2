@@ -6,12 +6,13 @@ export const requestHandler = async (
   config: InternalAxiosRequestConfig<any>
 ) => {
   console.log(config);
-  
-  
-  if (!config.headers[REQUEST_TOKEN_KEY] && typeof window === "undefined") {
+
+  if (typeof window === "undefined") {
     const cookies = await getCookies();
-    console.log(cookies);
-    config.headers[REQUEST_TOKEN_KEY] = `Bearer ${cookies.get(ACCESS_TOKEN_KEY)}`;
+    const accessToken = cookies.get(ACCESS_TOKEN_KEY);
+    if (accessToken) {
+      config.headers[REQUEST_TOKEN_KEY] = `Bearer ${accessToken}`;
+    }
   }
 
   if (config.data instanceof FormData) {

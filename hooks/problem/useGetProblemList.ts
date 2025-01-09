@@ -1,4 +1,3 @@
-import { API_URL } from "@/constants/api";
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import solveAxios from "@/libs/axios/solveAxios";
 import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
@@ -6,15 +5,19 @@ import { BaseResponse } from "@/types/common/base";
 import { PageResponse } from "@/types/common/page";
 import { Problem } from "@/types/problem/problem";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-import axios from "axios";
 import { useCookies } from "next-client-cookies";
 
-const useGetProblemList = (
-  page: number = 0,
-  size: number = 15,
-  query?: string,
-  options?: UseQueryOptions<PageResponse<Problem>, Error>
-) => {
+const useGetProblemList = ({
+  page = 0,
+  size = 15,
+  query,
+  options,
+}: {
+  page?: number;
+  size?: number;
+  query?: string;
+  options?: UseQueryOptions<PageResponse<Problem>, Error>;
+}) => {
   const { states, order, tiers } = useProblemFilterStore();
   const cookies = useCookies();
   const accessToken = cookies.get(ACCESS_TOKEN_KEY);

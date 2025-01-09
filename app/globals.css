@@ -20,9 +20,9 @@
 
 @layer base {
   :root {
-    --bg: #fcfcfc;
+    --bg: #fafafa;
     --bg-border: #cccccc;
-    --container: #fafafa;
+    --container: #ffffff;
     --container-border: #dddddd;
     --main-container: #1b1b1b;
   }
