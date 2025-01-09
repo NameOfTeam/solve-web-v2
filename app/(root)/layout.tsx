@@ -4,6 +4,7 @@ import ReactQueryProviders from "@/components/ReactQueryProviders";
 import React, { PropsWithChildren } from "react";
 
 const RootLayout = ({ children }: PropsWithChildren) => {
+
   return (
     <ReactQueryProviders>
       <Header />

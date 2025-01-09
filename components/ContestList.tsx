@@ -4,10 +4,18 @@ import React, { useState } from "react";
 import ThemedIcon from "./ThemedIcon";
 import useGetContestList from "@/hooks/contest/useGetContestList";
 import ContestItem from "./ContestItem";
+import { PageResponse } from "@/types/common/page";
+import { Contest } from "@/types/contest/contest";
 
-const ContestList = ({ query }: { query?: string }) => {
+const ContestList = ({
+  initialData,
+  query,
+}: {
+  initialData?: PageResponse<Contest>;
+  query?: string;
+}) => {
   const [page, setPage] = useState(0);
-  const contests = useGetContestList({ page, query });
+  const contests = useGetContestList({ page, query }, initialData);
 
   const totalPages = contests?.totalPages || 0;
   const startPage = Math.max(0, page - 4);

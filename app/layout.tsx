@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/contexts/themeContext";
 import { CookiesProvider } from "next-client-cookies/server";
 import ChangeTheme from "@/components/ChangeTheme";
+import ProgressProvider from "@/components/ProgressProvider";
 
 const pretendard = localFont({
   src: "./fonts/pretendard.woff2",
@@ -26,7 +27,9 @@ export default function RootLayout({
       <body className={pretendard.variable}>
         <CookiesProvider>
           <ThemeProvider>
-            <div className="w-full h-screen bg-bg">{children}</div>
+            <ProgressProvider>
+              <div className="w-full h-screen bg-bg">{children}</div>
+            </ProgressProvider>
             <ChangeTheme />
           </ThemeProvider>
         </CookiesProvider>

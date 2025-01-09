@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <div className="w-full h-[72px] border-b border-bg-border px-40 flex items-center gap-x-10">
-      <Link href="/" className="cursor-pointer">
+      <Link href="/" className="cursor-pointer text-main-container">
         <Logo width={116} height={116} />
       </Link>
       <div className="gap-x-10 flex items-center flex-1 text-xl text-main-container">
@@ -44,7 +44,7 @@ const Header = () => {
           />
         </Link>
       ) : (
-        <Link href="/login" className="font-bold">
+        <Link href="/login" className="font-bold text-main-container">
           로그인
         </Link>
       )}

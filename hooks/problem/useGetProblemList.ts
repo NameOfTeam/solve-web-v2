@@ -1,3 +1,4 @@
+import { fetchProblemList } from "@/api/problem/getProblemSearch";
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import solveAxios from "@/libs/axios/solveAxios";
 import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
@@ -6,68 +7,55 @@ import { PageResponse } from "@/types/common/page";
 import { Problem } from "@/types/problem/problem";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { useCookies } from "next-client-cookies";
+import { useEffect, useState } from "react";
 
-const useGetProblemList = ({
-  page = 0,
-  size = 15,
-  query,
-  options,
-}: {
-  page?: number;
-  size?: number;
-  query?: string;
-  options?: UseQueryOptions<PageResponse<Problem>, Error>;
-}) => {
+const useGetProblemList = (
+  {
+    page = 0,
+    size = 15,
+    query,
+    options,
+  }: {
+    page?: number;
+    size?: number;
+    query?: string;
+    options?: UseQueryOptions<PageResponse<Problem>, Error>;
+  },
+  initialData?: PageResponse<Problem>
+) => {
   const { states, order, tiers } = useProblemFilterStore();
   const cookies = useCookies();
   const accessToken = cookies.get(ACCESS_TOKEN_KEY);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<PageResponse<Problem> | null>(
+    initialData || null
+  );
 
-  const fetchProblemList = async () => {
-    const params: Record<string, any> = {
-      order,
-      page,
-      size,
-    };
-
-    if (query) {
-      params.query = query;
+  const fetchData = async () => {
+    if (loading) {
+      return;
     }
-
-    if (states.length > 0) {
-      params.states = states;
+    setLoading(true);
+    try {
+      const response = await fetchProblemList(
+        page,
+        size,
+        states,
+        order,
+        tiers,
+        accessToken || undefined
+      );
+      setData(response);
+    } catch {
+      setData(null);
+    } finally {
+      setLoading(false);
     }
-
-    if (tiers.length > 0) {
-      params.tiers = tiers;
-    }
-
-    const { data } = await solveAxios.get<BaseResponse<PageResponse<Problem>>>(
-      "/problems/search",
-      {
-        params,
-        paramsSerializer: (params) => {
-          return new URLSearchParams(params).toString();
-        },
-        headers: accessToken
-          ? {
-              Authorization: `Bearer ${accessToken}`,
-            }
-          : {},
-      }
-    );
-
-    if (data && data.data) {
-      return data.data;
-    }
-
-    throw new Error("Failed to fetch problem list");
   };
 
-  const { data } = useQuery({
-    queryKey: ["problemList", { page, size, states, tiers, order, query }],
-    queryFn: fetchProblemList,
-    ...options,
-  });
+  useEffect(()=>{
+    fetchData();
+  },[page, size, states, order, tiers, accessToken]);
 
   return data;
 };

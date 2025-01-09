@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useId } from "react";
 import ThemedIcon from "./ThemedIcon";
 import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
+import { Tier } from "@/types/tier/tier";
 
 const DROPDOWN_TOGGLE_EVENT = "dropdownToggle";
 
@@ -61,9 +62,9 @@ const Dropdown = ({
         : [...states, value];
       setStates(newState);
     } else if (type === "TIER") {
-      const newTier = tiers.includes(value)
+      const newTier = tiers.includes(value as Tier)
         ? tiers.filter((item) => item !== value)
-        : [...tiers, value];
+        : [...tiers, value] as Tier[];
       setTiers(newTier);
     }
   };
@@ -81,7 +82,7 @@ const Dropdown = ({
     if (type === "STATE") {
       return states.includes(value);
     } else if (type === "TIER") {
-      return tiers.includes(value);
+      return tiers.includes(value as Tier);
     }
     return false;
   };

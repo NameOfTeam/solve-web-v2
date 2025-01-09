@@ -3,6 +3,7 @@ import Search from "@/components/Search";
 import React, { Suspense } from "react";
 import ProblemList from "@/components/ProblemList";
 import ProblemFilter from "@/components/ProblemFilter";
+import { fetchProblemList } from "@/api/problem/getProblemSearch";
 
 const Problems = async ({
   searchParams,
@@ -12,6 +13,7 @@ const Problems = async ({
     | undefined;
 }) => {
   const query = (await searchParams)?.query;
+  const initialData = await fetchProblemList(0, 15, [], "LATEST" , [], query as string)
 
   return (
     <div className="w-full overflow-visible">
@@ -25,7 +27,7 @@ const Problems = async ({
             <ProblemFilter />
           </div>
           <Suspense>
-            <ProblemList query={query as string | undefined} />
+            <ProblemList query={query as string | undefined} initialData={initialData} />
           </Suspense>
         </div>
       </div>

@@ -5,10 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import ThemedIcon from "./ThemedIcon";
+import { PageResponse } from "@/types/common/page";
+import { Problem } from "@/types/problem/problem";
 
-const ProblemList = ({ query }: { query?: string }) => {
+const ProblemList = ({ initialData, query }: { initialData:PageResponse<Problem>, query?: string }) => {
   const [page, setPage] = useState(0);
-  const problems = useGetProblemList({ page, query });
+  const problems = useGetProblemList({ page, query }, initialData);
 
   const totalPages = problems?.totalPages || 0;
   const startPage = Math.max(0, page - 4);
