@@ -1,10 +1,9 @@
 "use client";
 
 import { API_URL } from "@/constants/api";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/constants/token";
 import { SignupForm } from "@/types/auth/signupForm";
 import axios from "axios";
-import React, { Key, useState } from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TokenResponse } from "@/types/response/tokenResponse";
 import { BaseResponse } from "@/types/common/base";
@@ -19,7 +18,7 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
     watch,
   } = useForm<SignupForm>({
     defaultValues: {
@@ -44,7 +43,7 @@ const Signup = () => {
       if (data) {
         setPhase("DONE");
       }
-    } catch (err: any) {}
+    } catch {}
   };
 
   const email = watch("email");
@@ -184,7 +183,7 @@ const Signup = () => {
               <button
                 type="button"
                 className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
-                onClick={(e) => {
+                onClick={() => {
                   setPhase("EMAIL");
                 }}
                 disabled={
@@ -251,7 +250,7 @@ const Signup = () => {
                 type="button"
                 className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
                 disabled={isSubmitting || username.trim().length < 1}
-                onClick={(e) => {
+                onClick={() => {
                   setPhase("PASSWORD");
                 }}
               >

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import ThemedIcon from "./ThemedIcon";
 import useGetContestList from "@/hooks/contest/useGetContestList";
 import ContestItem from "./ContestItem";
 
-const ContestList = ({ query }: { query: string }) => {
+const ContestList = ({ query }: { query?: string }) => {
   const [page, setPage] = useState(0);
   const contests = useGetContestList({ page, query });
 
@@ -17,7 +17,9 @@ const ContestList = ({ query }: { query: string }) => {
     <>
       <div className="w-full py-6 flex flex-col gap-y-3">
         {contests && contests.content.length > 0 ? (
-          contests.content.map((item) => <ContestItem data={item} key={item.id} />)
+          contests.content.map((item) => (
+            <ContestItem data={item} key={item.id} />
+          ))
         ) : (
           <div className="w-full h-72 flex items-center justify-center">
             <p className="text-2xl text-bg-border">등록된 대회가 없습니다.</p>

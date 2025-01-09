@@ -3,7 +3,6 @@
 import React from "react";
 import { formatDate } from "@/utils/formatDate";
 import { Contest } from "@/types/contest/contest";
-import { formatLeftTime } from "@/utils/formatLeftTime";
 import { useCounter } from "@/hooks/counter/useCounter";
 import Link from "next/link";
 
@@ -12,7 +11,10 @@ const ContestItem = ({ data }: { data: Contest }) => {
   const endTimeLeft = useCounter(data.endAt);
 
   return (
-    <Link href={`/contests/${data.id}`} className="w-full h-24 bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7">
+    <Link
+      href={`/contests/${data.id}`}
+      className="w-full h-24 bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7"
+    >
       <div className="w-full font-[600] text-base flex items-end whitespace-nowrap">
         <p className="text-lg flex-[4.5] text-main-container">{data.title}</p>
         <p className="flex-[1.3] text-main-container">

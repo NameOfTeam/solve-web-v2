@@ -6,7 +6,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import ThemedIcon from "./ThemedIcon";
 
-const ProblemList = ({ query }: { query: string }) => {
+const ProblemList = ({ query }: { query?: string }) => {
   const [page, setPage] = useState(0);
   const problems = useGetProblemList({ page, query });
 

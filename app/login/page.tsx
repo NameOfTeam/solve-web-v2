@@ -23,7 +23,7 @@ const Login = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<LoginForm>({
     defaultValues: {
       email: "",
@@ -42,7 +42,7 @@ const Login = () => {
         setCookie(REFRESH_TOKEN_KEY, data.data.refreshToken);
         router.push("/");
       }
-    } catch (err: any) {}
+    } catch {}
   };
 
   const move = () => {

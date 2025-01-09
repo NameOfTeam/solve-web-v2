@@ -4,15 +4,19 @@ import ContestList from "@/components/ContestList";
 import Search from "@/components/Search";
 import React from "react";
 
-const Contests = ({ searchParams }: { searchParams: { query: string } }) => {
-  const { query } = searchParams;
+const Contests = async ({
+  searchParams,
+}: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }> | undefined;
+}) => {
+  const query = (await searchParams)?.query;
 
   return (
     <div className="w-full overflow-visible">
       <Banner
         title="대회"
         description="신선한 문제들을 풀어볼 수 있는 대회들이 열리는 곳이에요."
-      /> 
+      />
       <div className="h-except-banner px-52 overflow-visible">
         <div className="w-full h-full py-9 overflow-visible flex flex-col gap-y-6">
           <div className="flex flex-col gap-y-3 overflow-visible">
@@ -21,7 +25,7 @@ const Contests = ({ searchParams }: { searchParams: { query: string } }) => {
             </div>
             <ContestFilter />
           </div>
-            <ContestList query={query} />
+          <ContestList query={query as string | undefined} />
         </div>
       </div>
     </div>

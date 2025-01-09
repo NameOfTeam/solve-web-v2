@@ -18,7 +18,7 @@ const Header = () => {
     } else {
       setUser(null);
     }
-  }, [userData]);
+  }, [userData, setUser]);
 
   return (
     <div className="w-full h-[72px] border-b border-bg-border px-40 flex items-center gap-x-10">

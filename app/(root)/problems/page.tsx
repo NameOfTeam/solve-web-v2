@@ -4,8 +4,14 @@ import React from "react";
 import ProblemList from "@/components/ProblemList";
 import ProblemFilter from "@/components/ProblemFilter";
 
-const Problems = ({ searchParams }: { searchParams: { query: string } }) => {
-  const { query } = searchParams;
+const Problems = async ({
+  searchParams,
+}: {
+  searchParams?:
+    | Promise<{ [key: string]: string | string[] | undefined }>
+    | undefined;
+}) => {
+  const query = (await searchParams)?.query;
 
   return (
     <div className="w-full overflow-visible">
@@ -18,7 +24,7 @@ const Problems = ({ searchParams }: { searchParams: { query: string } }) => {
             </div>
             <ProblemFilter />
           </div>
-          <ProblemList query={query} />
+          <ProblemList query={query as string | undefined} />
         </div>
       </div>
     </div>

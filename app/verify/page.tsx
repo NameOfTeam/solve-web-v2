@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import GIF from "@/assets/signup.gif";
 import useVerify from "@/hooks/verify/useVerify";
 import PendingGIF from "@/assets/Loading.gif";
 import SuccessGIF from "@/assets/Check.gif";
 import FailGIf from "@/assets/Bad.gif";
 
-const verify = () => {
+const Verify = () => {
   const [isVerified, setIsVerified] = useState<"FAIL" | "SUCCESS" | "PENDING">(
     "FAIL"
   );
@@ -19,16 +19,16 @@ const verify = () => {
 
   const token = searchParams.get("token");
 
-  const letVerify = async () => {
+  const letVerify = useCallback(async () => {
     if (token) {
       const verifyStatus = await verify(token);
       setIsVerified(verifyStatus ? "SUCCESS" : "FAIL");
     }
-  };
+  }, [verify, token]);
 
   useEffect(() => {
     letVerify();
-  }, []);
+  }, [letVerify]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-container-border px-40">
@@ -113,4 +113,4 @@ const verify = () => {
   );
 };
 
-export default verify;
+export default Verify;
