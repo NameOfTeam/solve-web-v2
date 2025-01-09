@@ -17,7 +17,7 @@ const ProblemList = ({ query }: { query: string }) => {
   return (
     <>
       <div className="w-full h-full border border-bg-border bg-container rounded-lg">
-        <div className="w-full h-16 border-b border-bg-border flex items-center text-lg font-[600] px-6">
+        <div className="w-full h-16 border-b border-bg-border flex items-center text-lg font-[600] px-6 text-main-container">
           <p className="flex-[0.5] px-4 text-center">랭크</p>
           <p className="flex-[0.5] px-4 text-center">#</p>
           <p className="flex-[8] px-4">제목</p>
@@ -31,7 +31,7 @@ const ProblemList = ({ query }: { query: string }) => {
                 href={`/problems/${item.id}`}
                 className={`w-full h-14 ${
                   problems.content.length - 1 !== idx && "border-b"
-                } border-bg-border flex items-center text-base font-[400] px-6`}
+                } border-bg-border flex items-center text-base font-[400] px-6 text-main-container`}
                 key={item.id}
               >
                 <p className="flex-[0.5] px-4 flex justify-center items-center">
@@ -43,7 +43,15 @@ const ProblemList = ({ query }: { query: string }) => {
                   />
                 </p>
                 <p className="flex-[0.5] px-4 text-center">{item.id}</p>
-                <p className="flex-[8] px-4">{item.title}</p>
+                <p
+                  className={`flex-[8] px-4 ${
+                    item.state === "ACCEPTED"
+                      ? "text-secondary-500"
+                      : "text-main-container"
+                  }`}
+                >
+                  {item.title}
+                </p>
                 <p className="flex-[1] px-4 text-center">
                   {item.solvedCount || 0}
                 </p>

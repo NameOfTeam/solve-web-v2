@@ -14,12 +14,13 @@ const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window !== "undefined") {
-      return (localStorage.getItem("theme") as Theme) || "light";
-    }
-    return "light";
-  });
+  const [theme, setThemeState] = useState<Theme | undefined>(undefined);
+
+  useEffect(() => {
+    const savedTheme = (localStorage.getItem("theme") as Theme) || "light";
+    setThemeState(savedTheme);
+    document.documentElement.setAttribute("theme", savedTheme);
+  }, []);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
@@ -27,9 +28,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     document.documentElement.setAttribute("theme", newTheme);
   };
 
-  useEffect(() => {
-    document.documentElement.setAttribute("theme", theme);
-  }, [theme]);
+  if (theme === undefined) {
+    return null;
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

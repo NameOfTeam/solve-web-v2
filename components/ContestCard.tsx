@@ -21,15 +21,15 @@ const ContestCard = ({ data }: { data: Contest }) => {
         }
       };
 
-      updateLeftTime(); // Set the initial time
-      const interval = setInterval(updateLeftTime, 1000); // Update every second
+      updateLeftTime();
+      const interval = setInterval(updateLeftTime, 1000);
 
-      return () => clearInterval(interval); // Cleanup on unmount
+      return () => clearInterval(interval);
     }
   }, [data.startAt, data.state]);
 
   return (
-    <div className="w-full h-64 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container rounded-lg cursor-pointer">
+    <div className="w-full h-64 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container rounded-lg cursor-pointer text-main-container">
       <div className="flex flex-col gap-y-2">
         <p className="text-[20px] font-[600]">{data.title}</p>
         <p>
