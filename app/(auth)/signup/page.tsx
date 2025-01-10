@@ -199,19 +199,17 @@ const Signup = () => {
           ) : phase === "DONE" ? (
             <>
               <div className="flex flex-col gap-2">
-                <p className=" font-bold text-3xl text-main-container">
+                <p className=" font-bold text-3xl text-main-container w-full text-center">
                   인증용 메일이 전송되었습니다!
                 </p>
-                <p className=" font-normal text-xl text-main-container">
+                <p className=" font-normal text-xl text-main-container w-full text-center">
                   인증 종료 후 로그인해주세요.
                 </p>
               </div>
               <button
                 type="button"
                 className=" bg-primary-700 h-12 rounded-lg text-container"
-                onClick={() => {
-                  router.push("/login");
-                }}
+                onClick={move}
               >
                 로그인 페이지로 이동
               </button>

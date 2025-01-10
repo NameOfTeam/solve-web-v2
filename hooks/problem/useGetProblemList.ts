@@ -43,6 +43,7 @@ const useGetProblemList = (
         states,
         order,
         tiers,
+        query,
         accessToken || undefined
       );
       setData(response);
