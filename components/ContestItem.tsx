@@ -17,15 +17,15 @@ const ContestItem = ({ data }: { data: Contest }) => {
     >
       <div className="w-full font-[600] text-base flex items-end whitespace-nowrap">
         <p className="text-lg flex-[4.5] text-main-container">{data.title}</p>
-        <p className="flex-[1.3] text-main-container">
+        <p className="flex-[1.4] text-main-container">
           {data.state === "UPCOMING"
             ? "시작까지"
             : data.state === "ONGOING"
             ? "남은시간"
             : "우승자"}
         </p>
-        <p className="flex-[1] text-main-container">시작</p>
-        <p className="flex-[1] text-main-container">종료</p>
+        <p className="flex-[1.1] text-main-container">시작</p>
+        <p className="flex-[1.1] text-main-container">종료</p>
       </div>
       <div className="w-full font-[400] text-sm flex items-center whitespace-nowrap">
         <p className="text-sm flex-[4.5] text-main-container">
@@ -47,17 +47,17 @@ const ContestItem = ({ data }: { data: Contest }) => {
 
           {data.description && ` ・ ${data.description}`}
         </p>
-        <p className="flex-[1.3] text-main-container">
+        <p className="flex-[1.4] text-main-container">
           {data.state === "UPCOMING"
             ? startTimeLeft
             : data.state === "ONGOING"
             ? endTimeLeft
             : data.winner?.username || ""}
         </p>
-        <p className="flex-[1] text-main-container">
+        <p className="flex-[1.1] text-main-container">
           {formatDate(data.startAt)}
         </p>
-        <p className="flex-[1] text-main-container">{formatDate(data.endAt)}</p>
+        <p className="flex-[1.1] text-main-container">{formatDate(data.endAt)}</p>
       </div>
     </Link>
   );

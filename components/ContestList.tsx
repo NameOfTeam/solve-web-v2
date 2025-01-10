@@ -37,7 +37,7 @@ const ContestList = ({
       <div className="w-full flex justify-center gap-x-3">
         <div
           onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
-          className={`w-10 h-10 bg-container border border-bg-border rounded-lg flex justify-center items-center text-xl cursor-pointer ${
+          className={`w-10 h-10 flex justify-center items-center text-xl cursor-pointer ${
             page === 0 && "opacity-0"
           }`}
         >
@@ -55,10 +55,10 @@ const ContestList = ({
             <div
               key={pageNumber}
               onClick={() => setPage(pageNumber)}
-              className={`w-10 h-10 bg-container border border-bg-border rounded-lg flex justify-center items-center text-xl cursor-pointer ${
+              className={`w-10 h-10 rounded-full flex justify-center items-center text-xl cursor-pointer font-[400] ${
                 page === pageNumber
-                  ? "font-[600] text-main-container"
-                  : "font-[400] text-bg-border"
+                  ? "text-white bg-primary-600"
+                  : "text-bg-border"
               }`}
             >
               {pageNumber + 1}
@@ -67,7 +67,7 @@ const ContestList = ({
         })}
         <div
           onClick={() => setPage((prev) => Math.min(prev + 1, totalPages - 1))}
-          className={`w-10 h-10 bg-container border border-bg-border rounded-lg flex justify-center items-center text-xl cursor-pointer ${
+          className={`w-10 h-10 flex justify-center items-center text-xl cursor-pointer ${
             contests && page === totalPages - 1 && "opacity-0"
           }`}
         >

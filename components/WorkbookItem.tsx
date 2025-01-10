@@ -14,7 +14,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
           {data.title}
         </p>
         <p className="flex-[1] text-main-container">만든이</p>
-        <p className="flex-[1.3] text-main-container">업데이트</p>
+        <p className="flex-[1.5] text-main-container">업데이트</p>
         <p className="flex-[1] text-main-container">진행도</p>
         <div className="w-14 h-6 border border-container-border rounded-[4px] pl-1 pr-[6px] flex justify-between items-center self-center">
           <ThemedIcon
@@ -32,7 +32,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
           No. {data.id}{data.description && ` ・ ${data.description}`}
         </p>
         <p className="flex-[1] text-info-500">{data.author.username}</p>
-        <p className="flex-[1.3] text-main-container">{formatDate(data.updatedAt)}</p>
+        <p className="flex-[1.5] text-main-container">{formatDate(data.updatedAt)}</p>
         <p className="flex-[1] text-main-container">{data.progress} / {data.problems.length}</p>
         <div className="w-14 h-6 border border-primary-700 bg-primary-700 rounded-[4px] pl-1 pr-[6px] flex justify-between items-center">
           <ThemedIcon

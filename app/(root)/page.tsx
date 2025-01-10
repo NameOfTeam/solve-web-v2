@@ -33,7 +33,7 @@ const Home = async () => {
         <MainMenu icon="workbook" title="문제집" href="/workbooks" />
         <MainMenu icon="flag" title="대회" href="/contests" />
         <MainMenu icon="shop" title="상점" href="/store" />
-        <MainMenu icon="daily" title="데일리" href="/daily" />
+        <MainMenu icon="boards" title="게시판" href="/boards" />
       </div>
       <div className="flex flex-col gap-y-5 px-52 py-9">
         <div className="w-full flex justify-between items-center">

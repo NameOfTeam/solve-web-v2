@@ -9,16 +9,12 @@ import { API_URL } from "@/constants/api";
 import { useUserStore } from "@/stores/user/useUserStore";
 
 const Header = () => {
-  const userData = useGetMe();
-  const { setUser } = useUserStore();
+  const fetchUser = useGetMe();
+  const { user } = useUserStore();
 
-  useEffect(() => {
-    if (userData) {
-      setUser(userData);
-    } else {
-      setUser(null);
-    }
-  }, [userData, setUser]);
+  useEffect(()=>{
+    fetchUser();
+  },[]);
 
   return (
     <div className="w-full h-[72px] border-b border-bg-border px-40 flex items-center gap-x-10">
@@ -30,13 +26,13 @@ const Header = () => {
         <Link href="/store">상점</Link>
         <Link href="/contests">대회</Link>
       </div>
-      {userData?.id ? (
+      {user?.id ? (
         <Link
           className="w-12 h-12 rounded-full cursor-pointer"
-          href={`/user/${userData.username}`}
+          href={`/user/${user.username}`}
         >
           <Image
-            src={`${API_URL}/avatars/${userData.id}.webp`}
+            src={`${API_URL}/avatars/${user.id}.webp`}
             alt=""
             className="rounded-full"
             width={48}
