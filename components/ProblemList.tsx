@@ -8,7 +8,7 @@ import ThemedIcon from "./ThemedIcon";
 import { PageResponse } from "@/types/common/page";
 import { Problem } from "@/types/problem/problem";
 
-const ProblemList = ({ initialData, query }: { initialData:PageResponse<Problem>, query?: string }) => {
+const ProblemList = ({ initialData, query }: { initialData: PageResponse<Problem>, query?: string }) => {
   const [page, setPage] = useState(0);
   const problems = useGetProblemList({ page, query }, initialData);
 

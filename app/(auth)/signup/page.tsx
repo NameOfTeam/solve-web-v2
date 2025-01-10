@@ -67,7 +67,7 @@ const Signup = () => {
       >
         {phase !== "DONE" && (
           <div
-            className={`absolute top-8 right-[524px] cursor-pointer `}
+            className={`absolute top-4 right-[512px] cursor-pointer `}
             onClick={() => {
               switch (phase) {
                 case "USERNAME":
@@ -91,7 +91,7 @@ const Signup = () => {
             />
           </div>
         )}
-        <div className="flex-1 h-[780px]">
+        <div className="flex-1 h-[700px]">
           <Image
             src={GIF}
             alt="로그인 페이지 gif"
@@ -101,7 +101,7 @@ const Signup = () => {
           />
         </div>
         <form
-          className="flex flex-col w-[420px] gap-9 mx-24"
+          className="flex flex-col w-96 gap-9 mx-24"
           onSubmit={handleSubmit(signupSubmit)}
         >
           {phase === "EMAIL" ? (

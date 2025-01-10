@@ -92,12 +92,12 @@ export default {
             width: "100%",
           },
           "100%": {
-            width: "612px",
+            width: "576px",
           },
         },
         scaleup: {
           "0%": {
-            width: "612px",
+            width: "576px",
           },
           "100%": {
             width: "100%",

@@ -63,7 +63,7 @@ const Login = () => {
         } relative`}
       >
         <div
-          className="absolute top-8 left-8 cursor-pointer "
+          className="absolute top-4 left-4 cursor-pointer "
           onClick={router.back}
         >
           <ThemedIcon
@@ -77,7 +77,7 @@ const Login = () => {
         <div className=" flex flex-col items-center gap-8">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col w-[420px] gap-9 mx-24"
+            className="flex flex-col w-96 gap-9 mx-24"
           >
             <div className="flex flex-col gap-2">
               <p className=" font-bold text-4xl text-main-container">로그인</p>
@@ -155,7 +155,7 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <div className="flex-1 h-[780px]">
+        <div className="flex-1 h-[700px]">
           <Image
             src={GIF}
             alt="로그인 페이지 gif"

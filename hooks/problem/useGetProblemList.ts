@@ -1,11 +1,9 @@
-import { fetchProblemList } from "@/api/problem/getProblemSearch";
+import { getProblemSerch } from "@/api/problem/getProblemSearch";
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
-import solveAxios from "@/libs/axios/solveAxios";
 import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
-import { BaseResponse } from "@/types/common/base";
 import { PageResponse } from "@/types/common/page";
 import { Problem } from "@/types/problem/problem";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { UseQueryOptions } from "@tanstack/react-query";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
 
@@ -37,7 +35,7 @@ const useGetProblemList = (
     }
     setLoading(true);
     try {
-      const response = await fetchProblemList(
+      const response = await getProblemSerch(
         page,
         size,
         states,

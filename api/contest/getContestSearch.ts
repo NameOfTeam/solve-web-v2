@@ -1,9 +1,11 @@
+"use server"
+
 import solveAxios from "@/libs/axios/solveAxios";
 import { BaseResponse } from "@/types/common/base";
 import { PageResponse } from "@/types/common/page";
 import { Contest } from "@/types/contest/contest";
 
-export const fetchContestList = async (
+export const getContestSearch = async (
   page: number = 0,
   size: number = 15,
   state: null | "UPCOMING" | "ONGOING" | "ENDED",

@@ -1,4 +1,4 @@
-import { fetchContestList } from "@/api/contest/getContestSearch";
+import { getContestSearch } from "@/api/contest/getContestSearch";
 import Banner from "@/components/Banner";
 import ContestFilter from "@/components/ContestFilter";
 import ContestList from "@/components/ContestList";
@@ -13,7 +13,7 @@ const Contests = async ({
     | undefined;
 }) => {
   const query = (await searchParams)?.query;
-  const initialData = await fetchContestList(0, 15, null, query as string);
+  const initialData = await getContestSearch(0, 15, null, query as string);
 
   return (
     <div className="w-full overflow-visible">

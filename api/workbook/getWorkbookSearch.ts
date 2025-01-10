@@ -3,38 +3,30 @@
 import solveAxios from "@/libs/axios/solveAxios";
 import { BaseResponse } from "@/types/common/base";
 import { PageResponse } from "@/types/common/page";
-import { Problem } from "@/types/problem/problem";
-import { Tier } from "@/types/tier/tier";
+import { Workbook } from "@/types/workbook/workbook";
 
-export const getProblemSerch = async (
+export const getWorkbookSearch = async (
   page: number = 0,
   size: number = 15,
-  states: string[],
-  order: string,
-  tiers: Tier[],
+  filter: null | "POPULAR" | "BOOKMARKED",
   query?: string,
   accessToken?: string
 ) => {
   const params: Record<string, any> = {
-    order,
     page,
     size,
   };
+
+  if (filter) {
+    params.filter = filter;
+  }
 
   if (query) {
     params.query = query;
   }
 
-  if (states.length > 0) {
-    params.states = states;
-  }
-
-  if (tiers.length > 0) {
-    params.tiers = tiers;
-  }
-
-  const { data } = await solveAxios.get<BaseResponse<PageResponse<Problem>>>(
-    "/problems/search",
+  const { data } = await solveAxios.get<BaseResponse<PageResponse<Workbook>>>(
+    "/workbooks/search",
     {
       params,
       paramsSerializer: (params) => {

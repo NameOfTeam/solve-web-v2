@@ -1,12 +1,12 @@
-import { getContestSearch } from "@/api/contest/getContestSearch";
+import { getWorkbookSearch } from "@/api/workbook/getWorkbookSearch";
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
-import { useContestFilterStore } from "@/stores/contest/useContestFilterStore";
+import { useWorkbookFilterStore } from "@/stores/workbook/useWorkbookFilterStore";
 import { PageResponse } from "@/types/common/page";
-import { Contest } from "@/types/contest/contest";
+import { Workbook } from "@/types/workbook/workbook";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
 
-const useGetContestList = (
+const useGetWorkbookList = (
   {
     page = 0,
     size = 15,
@@ -16,10 +16,12 @@ const useGetContestList = (
     size?: number;
     query?: string;
   },
-  initialData?: PageResponse<Contest>
+  initialData?: PageResponse<Workbook>
 ) => {
-  const { state } = useContestFilterStore();
-  const [data, setData] = useState<PageResponse<Contest> | null>(initialData || null);
+  const { filter } = useWorkbookFilterStore();
+  const [data, setData] = useState<PageResponse<Workbook> | null>(
+    initialData || null
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const tokenStore = useCookies();
   const accessToken = tokenStore.get(ACCESS_TOKEN_KEY);
@@ -30,10 +32,10 @@ const useGetContestList = (
     }
     setLoading(true);
     try {
-      const response = await getContestSearch(
+      const response = await getWorkbookSearch(
         page,
         size,
-        state,
+        filter,
         query,
         accessToken || undefined
       );
@@ -47,9 +49,9 @@ const useGetContestList = (
 
   useEffect(() => {
     fetchData();
-  }, [page, size, state, accessToken]);
+  }, [page, size, filter, accessToken]);
 
   return data;
 };
 
-export default useGetContestList;
+export default useGetWorkbookList;
