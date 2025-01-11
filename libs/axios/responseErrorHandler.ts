@@ -6,7 +6,7 @@ import {
   REFRESH_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
 } from "@/constants/token";
-import { deleteCookie, setCookie } from "@/utils/cookie";
+import { cookieManager } from "@/utils/cookie";
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
@@ -29,10 +29,8 @@ export const responseErrorHandler = async (error: AxiosError) => {
 
   if (originalRequest && !originalRequest._retry) {
     originalRequest._retry = true;
-    const refreshToken = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(`${REFRESH_TOKEN_KEY}=`))
-      ?.split("=")[1];
+
+    const refreshToken = await cookieManager.get(REFRESH_TOKEN_KEY);
 
     if (refreshToken) {
       if (!isRefreshing) {
@@ -46,8 +44,8 @@ export const responseErrorHandler = async (error: AxiosError) => {
           const newAccessToken = data.data.accessToken;
           const newRefreshToken = data.data.refreshToken;
 
-          setCookie(ACCESS_TOKEN_KEY, newAccessToken);
-          setCookie(REFRESH_TOKEN_KEY, newRefreshToken);
+          await cookieManager.set(ACCESS_TOKEN_KEY, newAccessToken);
+          await cookieManager.set(REFRESH_TOKEN_KEY, newRefreshToken);
 
           onRefreshed(newAccessToken);
 
@@ -56,8 +54,8 @@ export const responseErrorHandler = async (error: AxiosError) => {
           ] = `Bearer ${newAccessToken}`;
           return solveAxios(originalRequest);
         } catch (refreshError) {
-          deleteCookie(ACCESS_TOKEN_KEY);
-          deleteCookie(REFRESH_TOKEN_KEY);
+          await cookieManager.delete(ACCESS_TOKEN_KEY);
+          await cookieManager.delete(REFRESH_TOKEN_KEY);
           return Promise.reject(refreshError);
         } finally {
           isRefreshing = false;

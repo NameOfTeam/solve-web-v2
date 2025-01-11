@@ -3,7 +3,7 @@
 import { API_URL } from "@/constants/api";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/constants/token";
 import { LoginForm } from "@/types/auth/loginForm";
-import { BaseResponse } from "@/types/common/base";
+import { BaseResponse } from "@/types/response/base";
 import { TokenResponse } from "@/types/response/tokenResponse";
 import axios from "axios";
 import Image from "next/image";
@@ -11,9 +11,9 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import GIF from "@/assets/login_bg.gif";
-import { setCookie } from "@/utils/cookie";
-import SocialLogin from "@/components/SocialLogin";
-import ThemedIcon from "@/components/ThemedIcon";
+import SocialLogin from "@/components/ui/SocialLogin";
+import ThemedIcon from "@/components/ui/ThemedIcon";
+import { cookieManager } from "@/utils/cookie";
 
 const Login = () => {
   const router = useRouter();
@@ -38,8 +38,8 @@ const Login = () => {
         loginData
       );
       if (data) {
-        setCookie(ACCESS_TOKEN_KEY, data.data.accessToken);
-        setCookie(REFRESH_TOKEN_KEY, data.data.refreshToken);
+        await cookieManager.set(ACCESS_TOKEN_KEY, data.data.accessToken);
+        await cookieManager.set(REFRESH_TOKEN_KEY, data.data.refreshToken);
         router.push("/");
       }
     } catch {}
