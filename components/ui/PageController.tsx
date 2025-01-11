@@ -1,5 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import ThemedIcon from "./ThemedIcon";
+import { PageResponse } from "@/types/response/page";
+import { Workbook } from "@/types/workbook/workbook";
+import { Problem } from "@/types/problem/problem";
+import { Contest } from "@/types/contest/contest";
 
 const PageController = ({
   page,
@@ -8,7 +12,7 @@ const PageController = ({
 }: {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
-  data: any;
+  data: PageResponse<Workbook | Problem | Contest>;
 }) => {
   const totalPages = data.totalPages || 0;
   const startPage = Math.max(0, page - 4);

@@ -4,6 +4,8 @@ import React, { Suspense } from "react";
 import ProblemList from "@/components/problem/ProblemList";
 import ProblemFilter from "@/components/problem/ProblemFilter";
 import { getProblemSerch } from "@/api/problem/getProblemSearch";
+import { PageResponse } from "@/types/response/page";
+import { Problem } from "@/types/problem/problem";
 
 const Problems = async ({
   searchParams,
@@ -36,7 +38,7 @@ const Problems = async ({
           <Suspense>
             <ProblemList
               query={query as string | undefined}
-              initialData={initialData}
+              initialData={initialData as PageResponse<Problem>}
             />
           </Suspense>
         </div>

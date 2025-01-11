@@ -3,6 +3,8 @@ import Banner from "@/components/ui/Banner";
 import Search from "@/components/ui/Search";
 import WorkbookFilter from "@/components/workbook/WorkbookFilter";
 import WorkbookList from "@/components/workbook/WorkbookList";
+import { PageResponse } from "@/types/response/page";
+import { Workbook } from "@/types/workbook/workbook";
 import React, { Suspense } from "react";
 
 const Workbooks = async ({
@@ -31,7 +33,7 @@ const Workbooks = async ({
           </div>
           <Suspense>
             <WorkbookList
-              initialData={initialData}
+              initialData={initialData as PageResponse<Workbook>}
               query={query as string | undefined}
             />
           </Suspense>

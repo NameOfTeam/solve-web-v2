@@ -6,6 +6,7 @@ import { Problem } from "@/types/problem/problem";
 import { UseQueryOptions } from "@tanstack/react-query";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
+import { defaultPageResponse } from "@/utils/defaultPageResponse";
 
 const useGetProblemList = (
   {
@@ -19,14 +20,14 @@ const useGetProblemList = (
     query?: string;
     options?: UseQueryOptions<PageResponse<Problem>, Error>;
   },
-  initialData?: PageResponse<Problem>
+  initialData: PageResponse<Problem>
 ) => {
   const { states, order, tiers } = useProblemFilterStore();
   const cookies = useCookies();
   const accessToken = cookies.get(ACCESS_TOKEN_KEY);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<PageResponse<Problem> | null>(
-    initialData || null
+  const [data, setData] = useState<PageResponse<Problem>>(
+    initialData
   );
 
   const fetchData = async () => {
@@ -44,9 +45,9 @@ const useGetProblemList = (
         query,
         accessToken || undefined
       );
-      setData(response);
+      setData(response as PageResponse<Problem>);
     } catch {
-      setData(null);
+      setData(defaultPageResponse() as PageResponse<Problem>);
     } finally {
       setLoading(false);
     }

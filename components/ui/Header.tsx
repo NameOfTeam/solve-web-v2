@@ -15,7 +15,7 @@ const Header = () => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [user]);
 
   return (
     <div className="w-full h-[72px] bg-container border-b border-bg-border px-40 flex items-center gap-x-10 relative overflow-visible">

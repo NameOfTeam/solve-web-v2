@@ -8,7 +8,7 @@ import { useCookies } from "next-client-cookies";
 const useGetMe = () => {
   const cookies = useCookies();
   const accessToken = cookies.get(ACCESS_TOKEN_KEY);
-  const { setUser } = useUserStore();
+  const { user, setUser } = useUserStore();
 
   const fetchUser = async () => {
     if (!accessToken) {
@@ -19,6 +19,7 @@ const useGetMe = () => {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       if (data) {
+        if(JSON.stringify(data.data) === JSON.stringify(user)) return;
         setUser(data.data);
       }
     } catch {

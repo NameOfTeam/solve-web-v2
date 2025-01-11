@@ -3,6 +3,7 @@ import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import { useWorkbookFilterStore } from "@/stores/workbook/useWorkbookFilterStore";
 import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";
+import { defaultPageResponse } from "@/utils/defaultPageResponse";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
 
@@ -16,11 +17,11 @@ const useGetWorkbookList = (
     size?: number;
     query?: string;
   },
-  initialData?: PageResponse<Workbook>
+  initialData: PageResponse<Workbook>
 ) => {
   const { filter } = useWorkbookFilterStore();
-  const [data, setData] = useState<PageResponse<Workbook> | null>(
-    initialData || null
+  const [data, setData] = useState<PageResponse<Workbook>>(
+    initialData
   );
   const [loading, setLoading] = useState<boolean>(false);
   const tokenStore = useCookies();
@@ -39,9 +40,9 @@ const useGetWorkbookList = (
         query,
         accessToken || undefined
       );
-      setData(response);
+      setData(response as PageResponse<Workbook>);
     } catch {
-      setData(null);
+      setData(defaultPageResponse() as PageResponse<Workbook>);
     } finally {
       setLoading(false);
     }

@@ -11,7 +11,7 @@ const ContestList = ({
   initialData,
   query,
 }: {
-  initialData?: PageResponse<Contest>;
+  initialData: PageResponse<Contest>;
   query?: string;
 }) => {
   const [page, setPage] = useState(0);

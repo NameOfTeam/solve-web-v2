@@ -5,6 +5,7 @@ import { PageResponse } from "@/types/response/page";
 import { Contest } from "@/types/contest/contest";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
+import { defaultPageResponse } from "@/utils/defaultPageResponse";
 
 const useGetContestList = (
   {
@@ -16,11 +17,11 @@ const useGetContestList = (
     size?: number;
     query?: string;
   },
-  initialData?: PageResponse<Contest>
+  initialData: PageResponse<Contest>
 ) => {
   const { state } = useContestFilterStore();
-  const [data, setData] = useState<PageResponse<Contest> | null>(
-    initialData || null
+  const [data, setData] = useState<PageResponse<Contest>>(
+    initialData
   );
   const [loading, setLoading] = useState<boolean>(false);
   const tokenStore = useCookies();
@@ -39,9 +40,9 @@ const useGetContestList = (
         query,
         accessToken || undefined
       );
-      setData(response);
+      setData(response as PageResponse<Contest>);
     } catch {
-      setData(null);
+      setData(defaultPageResponse() as PageResponse<Contest>);
     } finally {
       setLoading(false);
     }

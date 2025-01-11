@@ -4,6 +4,8 @@ import ContestFilter from "@/components/contest/ContestFilter";
 import ContestList from "@/components/contest/ContestList";
 import Search from "@/components/ui/Search";
 import React, { Suspense } from "react";
+import { PageResponse } from "@/types/response/page";
+import { Contest } from "@/types/contest/contest";
 
 const Contests = async ({
   searchParams,
@@ -32,7 +34,7 @@ const Contests = async ({
           <Suspense>
             <ContestList
               query={query as string | undefined}
-              initialData={initialData}
+              initialData={initialData as PageResponse<Contest>}
             />
           </Suspense>
         </div>

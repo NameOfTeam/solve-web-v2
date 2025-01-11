@@ -1,6 +1,9 @@
+import { Contest } from "@/types/contest/contest";
+import { Problem } from "@/types/problem/problem";
 import { PageResponse } from "@/types/response/page"
+import { Workbook } from "@/types/workbook/workbook";
 
-export const defaultPageResponse = () : PageResponse<[]> => {
+export const defaultPageResponse = () : PageResponse<Workbook | Problem | Contest> => {
   return {
     content: [],
     pageable: {
