@@ -133,7 +133,7 @@ const Signup = () => {
               </div>
               <button
                 type="submit"
-                className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
+                className=" bg-primary-700 h-12 rounded-lg text-white disabled:bg-container-border"
                 disabled={isSubmitting || email.trim().length < 1}
               >
                 인증 발송하기
@@ -182,7 +182,7 @@ const Signup = () => {
               </div>
               <button
                 type="button"
-                className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
+                className=" bg-primary-700 h-12 rounded-lg text-white disabled:bg-container-border"
                 onClick={() => {
                   setPhase("EMAIL");
                 }}
@@ -208,7 +208,7 @@ const Signup = () => {
               </div>
               <button
                 type="button"
-                className=" bg-primary-700 h-12 rounded-lg text-container"
+                className=" bg-primary-700 h-12 rounded-lg text-white"
                 onClick={move}
               >
                 로그인 페이지로 이동
@@ -246,7 +246,7 @@ const Signup = () => {
               </div>
               <button
                 type="button"
-                className=" bg-primary-700 h-12 rounded-lg text-container disabled:bg-container-border"
+                className=" bg-primary-700 h-12 rounded-lg text-white disabled:bg-container-border"
                 disabled={isSubmitting || username.trim().length < 1}
                 onClick={() => {
                   setPhase("PASSWORD");

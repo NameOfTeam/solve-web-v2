@@ -6,12 +6,11 @@ const useVerify = () => {
   const verify = async (token: string) => {
     try {
       const { data } = await axios.post<BaseResponse<{ success: boolean }>>(
-        `${API_URL}/auth/verify`,
+        `${API_URL}/auth/verify?token=${token}`,
         {},
-        { params: { token } }
       );
       if (data) {
-        data.data.success;
+        return data.data.success;
       }
     } catch {
       return false;
