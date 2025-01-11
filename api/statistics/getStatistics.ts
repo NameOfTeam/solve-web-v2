@@ -1,7 +1,7 @@
 "use server";
 
 import { API_URL } from "@/constants/api";
-import { BaseResponse } from "@/types/common/base";
+import { BaseResponse } from "@/types/response/base";
 import { Statistics } from "@/types/statistics/statistics";
 import axios from "axios";
 

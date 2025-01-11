@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import solveAxios from "@/libs/axios/solveAxios";
 import { useUserStore } from "@/stores/user/useUserStore";
-import { BaseResponse } from "@/types/common/base";
+import { BaseResponse } from "@/types/response/base";
 import { User } from "@/types/user/user";
 import { useCookies } from "next-client-cookies";
 
@@ -11,7 +11,7 @@ const useGetMe = () => {
   const { setUser } = useUserStore();
 
   const fetchUser = async () => {
-    if(!accessToken) {
+    if (!accessToken) {
       return;
     }
     try {

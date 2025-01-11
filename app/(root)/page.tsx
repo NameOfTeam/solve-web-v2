@@ -1,10 +1,10 @@
 import { getContests } from "@/api/contest/getContests";
 import { getStatistics } from "@/api/statistics/getStatistics";
 import { getWorkbooks } from "@/api/workbook/getWorkbooks";
-import CardWrapper from "@/components/CardWrapper";
-import ItemWrapper from "@/components/ItemWrapper";
-import MainMenu from "@/components/MainMenu";
-import StatCard from "@/components/StatCard";
+import CardWrapper from "@/components/ui/CardWrapper";
+import ItemWrapper from "@/components/ui/ItemWrapper";
+import MainMenu from "@/components/ui/MainMenu";
+import StatCard from "@/components/ui/StatCard";
 import React from "react";
 
 const Home = async () => {

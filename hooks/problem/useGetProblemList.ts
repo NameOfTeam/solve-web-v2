@@ -1,7 +1,7 @@
 import { getProblemSerch } from "@/api/problem/getProblemSearch";
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
-import { PageResponse } from "@/types/common/page";
+import { PageResponse } from "@/types/response/page";
 import { Problem } from "@/types/problem/problem";
 import { UseQueryOptions } from "@tanstack/react-query";
 import { useCookies } from "next-client-cookies";
@@ -52,9 +52,9 @@ const useGetProblemList = (
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchData();
-  },[page, size, states, order, tiers, accessToken]);
+  }, [page, size, states, order, tiers, accessToken, query]);
 
   return data;
 };

@@ -3,8 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/themeContext";
 import { CookiesProvider } from "next-client-cookies/server";
-import ChangeTheme from "@/components/ChangeTheme";
-import ProgressProvider from "@/components/ProgressProvider";
+import ChangeTheme from "@/components/ui/ChangeTheme";
+import ProgressProvider from "@/components/provider/ProgressProvider";
 
 const pretendard = localFont({
   src: "./fonts/pretendard.woff2",

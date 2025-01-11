@@ -6,11 +6,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TokenResponse } from "@/types/response/tokenResponse";
-import { BaseResponse } from "@/types/common/base";
+import { BaseResponse } from "@/types/response/base";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import GIF from "@/assets/signup.gif";
-import ThemedIcon from "@/components/ThemedIcon";
+import ThemedIcon from "@/components/ui/ThemedIcon";
 
 const Signup = () => {
   const [fadeIn, setFadeIn] = useState(true);

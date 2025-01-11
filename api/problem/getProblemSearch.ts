@@ -1,10 +1,11 @@
 "use server";
 
 import solveAxios from "@/libs/axios/solveAxios";
-import { BaseResponse } from "@/types/common/base";
-import { PageResponse } from "@/types/common/page";
+import { BaseResponse } from "@/types/response/base";
+import { PageResponse } from "@/types/response/page";
 import { Problem } from "@/types/problem/problem";
 import { Tier } from "@/types/tier/tier";
+import { defaultPageResponse } from "@/utils/defaultPageResponse";
 
 export const getProblemSerch = async (
   page: number = 0,
@@ -33,20 +34,24 @@ export const getProblemSerch = async (
     params.tiers = tiers;
   }
 
-  const { data } = await solveAxios.get<BaseResponse<PageResponse<Problem>>>(
-    "/problems/search",
-    {
-      params,
-      paramsSerializer: (params) => {
-        return new URLSearchParams(params).toString();
-      },
-      headers: accessToken
-        ? {
-            Authorization: `Bearer ${accessToken}`,
-          }
-        : {},
-    }
-  );
+  try {
+    const { data } = await solveAxios.get<BaseResponse<PageResponse<Problem>>>(
+      "/problems/search",
+      {
+        params,
+        paramsSerializer: (params) => {
+          return new URLSearchParams(params).toString();
+        },
+        headers: accessToken
+          ? {
+              Authorization: `Bearer ${accessToken}`,
+            }
+          : {},
+      }
+    );
 
-  return data.data;
+    return data.data;
+  } catch {
+    return defaultPageResponse();
+  }
 };

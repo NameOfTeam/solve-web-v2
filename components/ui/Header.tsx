@@ -7,25 +7,33 @@ import useGetMe from "@/hooks/user/useGetMe";
 import Image from "next/image";
 import { API_URL } from "@/constants/api";
 import { useUserStore } from "@/stores/user/useUserStore";
+import HeaderExtension from "./HeaderExtension";
 
 const Header = () => {
   const fetchUser = useGetMe();
   const { user } = useUserStore();
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchUser();
-  },[]);
+  }, []);
 
   return (
-    <div className="w-full h-[72px] border-b border-bg-border px-40 flex items-center gap-x-10">
+    <div className="w-full h-[72px] bg-container border-b border-bg-border px-40 flex items-center gap-x-10 relative overflow-visible">
       <Link href="/" className="cursor-pointer text-main-container">
         <Logo width={116} height={116} />
       </Link>
-      <div className="gap-x-10 flex items-center flex-1 text-xl text-main-container">
+
+      <div className="gap-x-4 h-full flex items-center text-base text-main-container header relative overflow-visible">
         <Link href="/problems">문제</Link>
-        <Link href="/store">상점</Link>
+        <Link href="/workbooks">문제집</Link>
         <Link href="/contests">대회</Link>
+        <Link href="/boards">게시판</Link>
+        <Link href="/store">상점</Link>
+        <HeaderExtension />
       </div>
+
+      <div className="flex-1" />
+
       {user?.id ? (
         <Link
           className="w-12 h-12 rounded-full cursor-pointer"
@@ -33,7 +41,7 @@ const Header = () => {
         >
           <Image
             src={`${API_URL}/avatars/${user.id}.webp`}
-            alt=""
+            alt="User avatar"
             className="rounded-full"
             width={48}
             height={48}

@@ -1,5 +1,5 @@
 import { API_URL } from "@/constants/api";
-import { BaseResponse } from "@/types/common/base";
+import { BaseResponse } from "@/types/response/base";
 import axios from "axios";
 
 const useVerify = () => {

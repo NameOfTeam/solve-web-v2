@@ -1,5 +1,5 @@
 import React from "react";
-import WorkbookItem from "./WorkbookItem";
+import WorkbookItem from "../workbook/WorkbookItem";
 import { Workbook } from "@/types/workbook/workbook";
 
 const ItemWrapper = ({ data }: { data: Workbook[] }) => {

@@ -1,4 +1,4 @@
-import { IconType } from "@/components/ThemedIcon";
+import { IconType } from "@/components/ui/ThemedIcon";
 import Flag from "@/assets/flag.svg";
 import Workbook from "@/assets/workbook.svg";
 import Shop from "@/assets/shop.svg";
@@ -14,7 +14,7 @@ import Naver from "@/assets/naver.svg";
 import Kakao from "@/assets/kakao.svg";
 import Search from "@/assets/search.svg";
 import Dropdown from "@/assets/drop_down.svg";
-import Boards from '@/assets/boards.svg'
+import Boards from "@/assets/boards.svg";
 import ArrowLeftBack from "@/assets/arrow-left-back.svg";
 
 export const ICONS = {

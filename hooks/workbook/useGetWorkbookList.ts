@@ -1,7 +1,7 @@
 import { getWorkbookSearch } from "@/api/workbook/getWorkbookSearch";
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import { useWorkbookFilterStore } from "@/stores/workbook/useWorkbookFilterStore";
-import { PageResponse } from "@/types/common/page";
+import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
@@ -49,7 +49,7 @@ const useGetWorkbookList = (
 
   useEffect(() => {
     fetchData();
-  }, [page, size, filter, accessToken]);
+  }, [page, size, filter, accessToken, query]);
 
   return data;
 };

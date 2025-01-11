@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
-import ThemedIcon from "./ThemedIcon";
+import ThemedIcon from "../ui/ThemedIcon";
 import { IconName } from "@/constants/icons";
 
 const MainMenu = ({

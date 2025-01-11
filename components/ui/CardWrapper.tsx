@@ -2,7 +2,7 @@
 
 import { Contest } from "@/types/contest/contest";
 import React from "react";
-import ContestCard from "./ContestCard";
+import ContestCard from "../contest/ContestCard";
 
 const CardWrapper = ({ data }: { data: Contest[] }) => {
   return (

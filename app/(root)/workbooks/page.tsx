@@ -1,9 +1,9 @@
-import { getWorkbookSearch } from '@/api/workbook/getWorkbookSearch';
-import Banner from '@/components/Banner';
-import Search from '@/components/Search';
-import WorkbookFilter from '@/components/WorkbookFilter';
-import WorkbookList from '@/components/WorkbookList';
-import React, { Suspense } from 'react'
+import { getWorkbookSearch } from "@/api/workbook/getWorkbookSearch";
+import Banner from "@/components/ui/Banner";
+import Search from "@/components/ui/Search";
+import WorkbookFilter from "@/components/workbook/WorkbookFilter";
+import WorkbookList from "@/components/workbook/WorkbookList";
+import React, { Suspense } from "react";
 
 const Workbooks = async ({
   searchParams,
@@ -30,7 +30,10 @@ const Workbooks = async ({
             <WorkbookFilter />
           </div>
           <Suspense>
-            <WorkbookList  initialData={initialData} query={query as string | undefined} />
+            <WorkbookList
+              initialData={initialData}
+              query={query as string | undefined}
+            />
           </Suspense>
         </div>
       </div>
@@ -38,4 +41,4 @@ const Workbooks = async ({
   );
 };
 
-export default Workbooks
+export default Workbooks;

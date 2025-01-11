@@ -1,8 +1,8 @@
-import Banner from "@/components/Banner";
-import Search from "@/components/Search";
+import Banner from "@/components/ui/Banner";
+import Search from "@/components/ui/Search";
 import React, { Suspense } from "react";
-import ProblemList from "@/components/ProblemList";
-import ProblemFilter from "@/components/ProblemFilter";
+import ProblemList from "@/components/problem/ProblemList";
+import ProblemFilter from "@/components/problem/ProblemFilter";
 import { getProblemSerch } from "@/api/problem/getProblemSearch";
 
 const Problems = async ({
@@ -13,7 +13,14 @@ const Problems = async ({
     | undefined;
 }) => {
   const query = (await searchParams)?.query;
-  const initialData = await getProblemSerch(0, 15, [], "LATEST" , [], query as string)
+  const initialData = await getProblemSerch(
+    0,
+    15,
+    [],
+    "LATEST",
+    [],
+    query as string
+  );
 
   return (
     <div className="w-full overflow-visible">
@@ -27,7 +34,10 @@ const Problems = async ({
             <ProblemFilter />
           </div>
           <Suspense>
-            <ProblemList query={query as string | undefined} initialData={initialData} />
+            <ProblemList
+              query={query as string | undefined}
+              initialData={initialData}
+            />
           </Suspense>
         </div>
       </div>

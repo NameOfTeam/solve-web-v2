@@ -1,8 +1,8 @@
 import { getContestSearch } from "@/api/contest/getContestSearch";
-import Banner from "@/components/Banner";
-import ContestFilter from "@/components/ContestFilter";
-import ContestList from "@/components/ContestList";
-import Search from "@/components/Search";
+import Banner from "@/components/ui/Banner";
+import ContestFilter from "@/components/contest/ContestFilter";
+import ContestList from "@/components/contest/ContestList";
+import Search from "@/components/ui/Search";
 import React, { Suspense } from "react";
 
 const Contests = async ({
@@ -30,7 +30,10 @@ const Contests = async ({
             <ContestFilter />
           </div>
           <Suspense>
-            <ContestList query={query as string | undefined} initialData={initialData} />
+            <ContestList
+              query={query as string | undefined}
+              initialData={initialData}
+            />
           </Suspense>
         </div>
       </div>

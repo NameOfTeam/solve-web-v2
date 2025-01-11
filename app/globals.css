@@ -18,6 +18,28 @@
   }
 }
 
+@keyframes popup {
+  0% {
+    transform: scale(0.9);
+  }
+  80%{
+    transform: scale(1.01);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+.header-extension {
+  animation: popup 0.2s forwards;
+}
+
+.header {
+  &:hover > .header-extension {
+    display: flex;
+  }
+}
+
 @layer base {
   :root {
     --bg: #fafafa;

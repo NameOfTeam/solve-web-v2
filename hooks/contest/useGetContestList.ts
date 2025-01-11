@@ -1,7 +1,7 @@
 import { getContestSearch } from "@/api/contest/getContestSearch";
 import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import { useContestFilterStore } from "@/stores/contest/useContestFilterStore";
-import { PageResponse } from "@/types/common/page";
+import { PageResponse } from "@/types/response/page";
 import { Contest } from "@/types/contest/contest";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
@@ -19,7 +19,9 @@ const useGetContestList = (
   initialData?: PageResponse<Contest>
 ) => {
   const { state } = useContestFilterStore();
-  const [data, setData] = useState<PageResponse<Contest> | null>(initialData || null);
+  const [data, setData] = useState<PageResponse<Contest> | null>(
+    initialData || null
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const tokenStore = useCookies();
   const accessToken = tokenStore.get(ACCESS_TOKEN_KEY);
@@ -47,7 +49,7 @@ const useGetContestList = (
 
   useEffect(() => {
     fetchData();
-  }, [page, size, state, accessToken]);
+  }, [page, size, state, query, accessToken]);
 
   return data;
 };

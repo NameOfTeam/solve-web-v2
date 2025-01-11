@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "../ui/Dropdown";
 import { useUserStore } from "@/stores/user/useUserStore";
 
 const ProblemFilter = () => {

@@ -1,10 +1,9 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import ReactQueryProviders from "@/components/ReactQueryProviders";
+import Footer from "@/components/ui/Footer";
+import Header from "@/components/ui/Header";
+import ReactQueryProviders from "@/components/provider/ReactQueryProviders";
 import React, { PropsWithChildren } from "react";
 
 const RootLayout = ({ children }: PropsWithChildren) => {
-
   return (
     <ReactQueryProviders>
       <Header />
