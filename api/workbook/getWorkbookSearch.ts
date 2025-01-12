@@ -10,8 +10,7 @@ export const getWorkbookSearch = async (
   page: number = 0,
   size: number = 15,
   filter: null | "POPULAR" | "BOOKMARKED",
-  query?: string,
-  accessToken?: string
+  query?: string
 ) => {
   const params: Record<string, any> = {
     page,
@@ -34,11 +33,6 @@ export const getWorkbookSearch = async (
         paramsSerializer: (params) => {
           return new URLSearchParams(params).toString();
         },
-        headers: accessToken
-          ? {
-              Authorization: `Bearer ${accessToken}`,
-            }
-          : {},
       }
     );
 

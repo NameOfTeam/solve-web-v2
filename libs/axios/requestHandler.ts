@@ -7,11 +7,10 @@ export const requestHandler = async (
 ) => {
   console.log(config);
 
-  if (typeof window === "undefined") {
-    const accessToken = await cookieManager.get(ACCESS_TOKEN_KEY);
-    if (accessToken) {
-      config.headers[REQUEST_TOKEN_KEY] = `Bearer ${accessToken}`;
-    }
+  const accessToken = await cookieManager.get(ACCESS_TOKEN_KEY);
+
+  if (accessToken) {
+    config.headers[REQUEST_TOKEN_KEY] = `Bearer ${accessToken}`;
   }
 
   if (config.data instanceof FormData) {

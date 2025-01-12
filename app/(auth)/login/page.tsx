@@ -64,7 +64,7 @@ const Login = () => {
       >
         <div
           className="absolute top-4 left-4 cursor-pointer "
-          onClick={router.back}
+          onClick={() => router.push('/')}
         >
           <ThemedIcon
             icon="arrow-left-back"

@@ -25,14 +25,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.variable}>
-        <CookiesProvider>
-          <ThemeProvider>
-            <ProgressProvider>
+        <ProgressProvider>
+          <CookiesProvider>
+            <ThemeProvider>
               <div className="w-full h-screen bg-bg">{children}</div>
-            </ProgressProvider>
-            <ChangeTheme />
-          </ThemeProvider>
-        </CookiesProvider>
+
+              <ChangeTheme />
+            </ThemeProvider>
+          </CookiesProvider>
+        </ProgressProvider>
       </body>
     </html>
   );

@@ -40,6 +40,10 @@
   }
 }
 
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+}
+
 @layer base {
   :root {
     --bg: #fafafa;

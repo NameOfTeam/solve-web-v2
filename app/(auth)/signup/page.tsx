@@ -71,7 +71,7 @@ const Signup = () => {
             onClick={() => {
               switch (phase) {
                 case "USERNAME":
-                  router.back();
+                  router.push("/");
                   break;
                 case "PASSWORD":
                   setPhase("USERNAME");

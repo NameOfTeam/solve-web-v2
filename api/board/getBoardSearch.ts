@@ -1,41 +1,33 @@
-"use server";
+"use server"
 
 import solveAxios from "@/libs/axios/solveAxios";
+import { Board } from "@/types/board/board";
 import { BaseResponse } from "@/types/response/base";
 import { PageResponse } from "@/types/response/page";
-import { Problem } from "@/types/problem/problem";
-import { Tier } from "@/types/tier/tier";
 import { defaultPageResponse } from "@/utils/defaultPageResponse";
 
-export const getProblemSerch = async (
+export const getBoardSearch = async (
   page: number = 0,
   size: number = 15,
-  states: string[],
-  order: string,
-  tiers: Tier[],
-  query?: string
+  state: null | "FREE" | "ANOUNCE" | "QUESTION" | "SUGGESTION",
+  query?: string,
 ) => {
   const params: Record<string, any> = {
-    order,
     page,
     size,
   };
+
+  if (state) {
+    params.state = state;
+  }
 
   if (query) {
     params.query = query;
   }
 
-  if (states.length > 0) {
-    params.states = states;
-  }
-
-  if (tiers.length > 0) {
-    params.tiers = tiers;
-  }
-
   try {
-    const { data } = await solveAxios.get<BaseResponse<PageResponse<Problem>>>(
-      "/problems/search",
+    const { data } = await solveAxios.get<BaseResponse<PageResponse<Board>>>(
+      "/boards/search",
       {
         params,
         paramsSerializer: (params) => {

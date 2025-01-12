@@ -23,8 +23,8 @@ const Home = async () => {
         <div className="w-80 flex flex-col items-center gap-y-3">
           <p className="text-4xl font-[700] text-main-container">SOLVE</p>
           <div className="w-full h-[2px] bg-main-container"></div>
-          <p className="text-[22px] font-[500] tracking-[2.2px] text-main-container">
-            더 나은 개발자가 되는 곳
+          <p className="text-base font-[500] tracking-[2.2px] text-main-container">
+            당신의 찬란하고 위대한 발걸음을 위하여
           </p>
         </div>
       </div>

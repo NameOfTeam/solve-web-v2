@@ -29,7 +29,7 @@ const Verify = () => {
 
   useEffect(() => {
     letVerify();
-  }, [token]);
+  }, [token, letVerify]);
 
   useEffect(() => {
     const interval = setTimeout(() => {

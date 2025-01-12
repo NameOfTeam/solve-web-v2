@@ -1,10 +1,8 @@
 import { getWorkbookSearch } from "@/api/workbook/getWorkbookSearch";
-import { ACCESS_TOKEN_KEY } from "@/constants/token";
 import { useWorkbookFilterStore } from "@/stores/workbook/useWorkbookFilterStore";
 import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";
 import { defaultPageResponse } from "@/utils/defaultPageResponse";
-import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
 
 const useGetWorkbookList = (
@@ -24,8 +22,6 @@ const useGetWorkbookList = (
     initialData
   );
   const [loading, setLoading] = useState<boolean>(false);
-  const tokenStore = useCookies();
-  const accessToken = tokenStore.get(ACCESS_TOKEN_KEY);
 
   const fetchData = async () => {
     if (loading) {
@@ -38,7 +34,6 @@ const useGetWorkbookList = (
         size,
         filter,
         query,
-        accessToken || undefined
       );
       setData(response as PageResponse<Workbook>);
     } catch {
@@ -50,7 +45,7 @@ const useGetWorkbookList = (
 
   useEffect(() => {
     fetchData();
-  }, [page, size, filter, accessToken, query]);
+  }, [page, size, filter, query]);
 
   return data;
 };
