@@ -9,8 +9,8 @@ export interface Board {
   author: User;
   createdAt: string;
   updatedAt: string;
-  category: "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "INFO";
+  category: "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "INFORMATION";
   problem: Problem;
-  liked: boolean,
+  isLiked: boolean,
   likeCount: number;
 }

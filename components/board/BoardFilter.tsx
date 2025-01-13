@@ -9,7 +9,7 @@ const BoardFilter = () => {
   return (
     <div className="flex font-[400] text-base text-main-container">
       <div
-        className={`min-w-16 h-8 flex items-center justify-center  cursor-pointer box-content px-1 ${
+        className={`h-8 flex items-center justify-center  cursor-pointer box-content px-4 ${
           state === null
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
@@ -19,7 +19,7 @@ const BoardFilter = () => {
         전체
       </div>
       <div
-        className={`min-w-16 h-8 flex items-center justify-center cursor-pointer box-content px-1 ${
+        className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
           state === "FREE"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
@@ -29,7 +29,17 @@ const BoardFilter = () => {
         자유
       </div>
       <div
-        className={`min-w-16 h-8 flex items-center justify-center border-b cursor-pointer box-content px-1 ${
+        className={`h-8 flex items-center justify-center border-b cursor-pointer box-content px-4 ${
+          state === "INFORMATION"
+            ? "border-secondary-700 border-b-[2px]"
+            : "border-bg-border border-b"
+        }`}
+        onClick={() => setState("INFORMATION")}
+      >
+        질문
+      </div>
+      <div
+        className={`h-8 flex items-center justify-center border-b cursor-pointer box-content px-4 ${
           state === "QUESTION"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
@@ -39,7 +49,7 @@ const BoardFilter = () => {
         질문
       </div>
       <div
-        className={`min-w-16 h-8 flex items-center justify-center cursor-pointer box-content px-2 ${
+        className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
           state === "SUGGESTION"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
@@ -49,7 +59,7 @@ const BoardFilter = () => {
         수정 제안
       </div>
       <div
-        className={`min-w-16 h-8 flex items-center justify-center cursor-pointer box-content px-2 ${
+        className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
           state === "NOTICE"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
@@ -59,7 +69,7 @@ const BoardFilter = () => {
         공지사항
       </div>
       <div
-        className={`min-w-16 h-8 flex items-center justify-center cursor-pointer box-content px-1 ${
+        className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
           state === "WRITE"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"

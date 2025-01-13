@@ -8,7 +8,7 @@ export interface User {
   solvedCount: number;
   streak: number;
   maxStreak: number;
-  solvedToday: boolean;
+  isSolvedToday: boolean;
   rank: string;
   introduction?: string;
 }

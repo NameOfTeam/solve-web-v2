@@ -9,9 +9,9 @@ export interface Workbook {
   author: User;
   bookmarkCount: number;
   likeCount: number;
-  bookmarked: boolean;
-  liked: boolean;
+  isBookmarked: boolean;
+  isLiked: boolean;
   progress: number;
   createdAt: string;
   updatedAt: string;
-}
+} 
