@@ -1,6 +1,6 @@
 export interface BoardFilterState {
-  state: null | "FREE" | "ANOUNCE" | "QUESTION" | "SUGGESTION" | "WRITE";
+  state: null | "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "WRITE" | "INFO";
   setState: (
-    state: null | "FREE" | "ANOUNCE" | "QUESTION" | "SUGGESTION" | "WRITE"
+    state: null | "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "WRITE" | "INFO"
   ) => void;
 }

@@ -9,7 +9,7 @@ import { defaultPageResponse } from "@/utils/defaultPageResponse";
 export const getBoardSearch = async (
   page: number = 0,
   size: number = 15,
-  state: null | "FREE" | "ANOUNCE" | "QUESTION" | "SUGGESTION",
+  state: null | "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "INFO",
   query?: string,
 ) => {
   const params: Record<string, any> = {

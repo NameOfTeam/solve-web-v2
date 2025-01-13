@@ -30,7 +30,7 @@ const useGetBoardList = (
       const response = await getBoardSearch(
         page,
         size,
-        state as "FREE" | "ANOUNCE" | "QUESTION" | "SUGGESTION" | null,
+        state as "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "INFO" | null,
         query
       );
       setData(response as PageResponse<Board>);

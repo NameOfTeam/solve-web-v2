@@ -50,11 +50,11 @@ const BoardFilter = () => {
       </div>
       <div
         className={`min-w-16 h-8 flex items-center justify-center cursor-pointer box-content px-2 ${
-          state === "ANOUNCE"
+          state === "NOTICE"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => setState("ANOUNCE")}
+        onClick={() => setState("NOTICE")}
       >
         공지사항
       </div>
