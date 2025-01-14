@@ -22,8 +22,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { isSubmitting, isSubmitSuccessful, isValid },
+    formState: { isSubmitting, isValid },
   } = useForm<LoginForm>({
     mode: "onChange",
     defaultValues: {
@@ -121,8 +120,7 @@ const Login = () => {
               type="submit"
               disabled={
                 isSubmitting ||
-                isSubmitSuccessful ||
-                isValid
+                !isValid
               }
               className="bg-primary-700 h-12 rounded-lg text-white disabled:bg-bg-border"
             >

@@ -11,14 +11,16 @@ import { useRouter } from "next/navigation";
 import { parseCategory } from "@/utils/parseCategory";
 
 const BoardList = ({
+  state,
   initialData,
   query,
 }: {
+  state: "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "INFORMATION" | null;
   initialData: PageResponse<Board>;
   query?: string;
 }) => {
   const [page, setPage] = useState(0);
-  const boards = useGetBoardList({ page, query }, initialData);
+  const boards = useGetBoardList({ page, query }, state, initialData);
   const router = useRouter();
 
   return (

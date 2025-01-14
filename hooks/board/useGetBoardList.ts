@@ -1,5 +1,4 @@
 import { getBoardSearch } from "@/api/board/getBoardSearch";
-import { useBoardFilterStore } from "@/stores/board/useBoardFilterStore";
 import { Board } from "@/types/board/board";
 import { PageResponse } from "@/types/response/page";
 import { defaultPageResponse } from "@/utils/defaultPageResponse";
@@ -15,9 +14,9 @@ const useGetBoardList = (
     size?: number;
     query?: string;
   },
+  state: "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "INFORMATION" | null,
   initialData: PageResponse<Board>
 ) => {
-  const { state } = useBoardFilterStore();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<PageResponse<Board>>(initialData);
 

@@ -135,7 +135,7 @@ const Signup = () => {
                 type="submit"
                 className=" bg-primary-700 h-12 rounded-lg text-white disabled:bg-container-border"
                 disabled={
-                  isSubmitting || isSubmitSuccessful || isValid 
+                  isSubmitting || isSubmitSuccessful || !isValid 
                 
                 }
               >

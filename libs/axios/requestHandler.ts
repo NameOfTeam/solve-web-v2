@@ -5,8 +5,6 @@ import { cookieManager } from "@/utils/cookie";
 export const requestHandler = async (
   config: InternalAxiosRequestConfig<any>
 ) => {
-  console.log(config);
-
   const accessToken = await cookieManager.get(ACCESS_TOKEN_KEY);
 
   if (accessToken) {

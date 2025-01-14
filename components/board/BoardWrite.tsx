@@ -6,10 +6,21 @@ import { useForm } from "react-hook-form";
 import { BoardForm } from "@/types/board/boardForm";
 import { useCategoryStore } from "@/stores/board/useCategoryStore";
 import Markdown from "../markdown/Markdown";
+import { createPost } from "@/api/board/createPost";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/stores/user/useUserStore";
 
 
 const BoardWrite = () => {
   const [isPreview, setIsPreview] = useState(false);
+  const router = useRouter();
+  const { user } = useUserStore();
+
+  useEffect(()=>{
+    if(!user) {
+      router.push('/boards');
+    }
+  },[router]);
 
   const {
     register,
@@ -34,23 +45,16 @@ const BoardWrite = () => {
     setValue("category", category);
   }, [category]);
 
-  const testContent = `
-# 제목
+  const onSubmit = async (data: BoardForm) => {
+    const postId = await createPost(data);
+    return postId && router.push(`/boards/${postId}`);
+  }
 
-- 리스트 항목 1
-- 리스트 항목 2
-
-**굵은 텍스트**
-
-\`\`\`js
-console.log("코드 블록");
-\`\`\`
-`;
 
   return (
     <form
       className="w-full h-full overflow-visible flex flex-col gap-y-8"
-      onSubmit={handleSubmit((e) => console.log(e))}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <div className="w-full h-full flex flex-col gap-y-2 overflow-visible">
         <div className="w-full flex items-center justify-between overflow-visible">
@@ -89,9 +93,28 @@ console.log("코드 블록");
         </div>
       </div>
 
-      <div className="w-full flex flex-col">
-        <div className="flex items-center justify-end gap-2 mb-2">
-          <button onClick={() => setIsPreview((prev) => !prev)}>교체</button>
+      <div className="w-full flex flex-col gap-y-2">
+        <div className="w-full h-14 bg-container border border-bg-border px-7 flex items-center text-base font-[600] text-main-container">
+          <div
+            className={`px-4 py-2 text-center box-content border-b cursor-pointer ${
+              isPreview
+                ? "border-container-border"
+                : "border-secondary-700"
+            } `}
+            onClick={() => setIsPreview(false)}
+          >
+            작성
+          </div>
+          <div
+            className={`px-4 py-2 text-center box-content border-b cursor-pointer ${
+              !isPreview
+                ? "border-container-border"
+                : "border-secondary-700"
+            } `}
+            onClick={() => setIsPreview(true)}
+          >
+            미리보기
+          </div>
         </div>
 
         <div className="w-full h-[480px] border border-bg-border">
@@ -117,7 +140,7 @@ console.log("코드 블록");
 
       <button
         disabled={!isValid || isSubmitting}
-        className="self-end w-full max-w-28 h-12 text-lg text-main-container bg-primary-600 disabled:bg-bg-border disabled:cursor-not-allowed rounded-lg cursor-pointer"
+        className="self-end w-full max-w-28 h-12 text-lg text-white bg-primary-600 disabled:bg-bg-border disabled:cursor-not-allowed rounded-lg cursor-pointer"
       >
         게시
       </button>

@@ -1,11 +1,10 @@
+import React from 'react'
 import { getBoardSearch } from "@/api/board/getBoardSearch";
 import BoardList from "@/components/board/BoardList";
-import BoardWrapper from "@/components/board/BoardWrapper";
 import { Board } from "@/types/board/board";
 import { PageResponse } from "@/types/response/page";
-import React from "react";
 
-const Boards = async ({
+const QuestionBoard = async ({
   searchParams,
 }: {
   searchParams?:
@@ -13,11 +12,14 @@ const Boards = async ({
     | undefined;
 }) => {
   const query = (await searchParams)?.query;
-  const initialData = await getBoardSearch(0, 15, null, query as string);
+  const initialData = await getBoardSearch(0, 15, "QUESTION", query as string);
 
   return (
-    <BoardList initialData={initialData as PageResponse<Board>} query={query as string | undefined} state={null} />
+    <BoardList
+      initialData={initialData as PageResponse<Board>}
+      query={query as string | undefined}
+      state="QUESTION"
+    />
   );
 };
-
-export default Boards;
+export default QuestionBoard

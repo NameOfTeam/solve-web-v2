@@ -11,6 +11,12 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
+      '@types/unist':
+        specifier: ^3.0.3
+        version: 3.0.3
+      ast-to-react:
+        specifier: link:react-markdown/lib/ast-to-react
+        version: link:react-markdown/lib/ast-to-react
       axios:
         specifier: ^1.7.9
         version: 1.7.9
@@ -50,6 +56,12 @@ importers:
       remark-gfm:
         specifier: ^4.0.0
         version: 4.0.0
+      remark-spoilers:
+        specifier: ^0.5.2
+        version: 0.5.2
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
       zustand:
         specifier: ^5.0.2
         version: 5.0.2(@types/react@19.0.2)(immer@10.1.1)(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
@@ -2675,6 +2687,9 @@ packages:
 
   remark-rehype@11.1.1:
     resolution: {integrity: sha512-g/osARvjkBXb6Wo0XvAeXQohVta8i84ACbenPpoSsxTOQH/Ae0/RGP4WZgnMH5pMLpsj4FG7OHmcIcXxpza8eQ==}
+
+  remark-spoilers@0.5.2:
+    resolution: {integrity: sha512-YnHYLjyB/NBK6zHRJ1WvlQePRZQg8mi7ocU4Xj7Y9sLjdZQwnb0VTsqLUw0mmMn+d72GqNnddvdhzL00WBvAyA==}
 
   remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
@@ -6308,6 +6323,10 @@ snapshots:
       mdast-util-to-hast: 13.2.0
       unified: 11.0.5
       vfile: 6.0.3
+
+  remark-spoilers@0.5.2:
+    dependencies:
+      space-separated-tokens: 1.1.5
 
   remark-stringify@11.0.0:
     dependencies:

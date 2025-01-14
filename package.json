@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "@types/unist": "^3.0.3",
     "axios": "^1.7.9",
     "cookies-next": "^5.0.2",
     "lucide-react": "^0.471.1",
@@ -23,6 +24,8 @@
     "react-syntax-highlighter": "^15.6.1",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
+    "remark-spoilers": "^0.5.2",
+    "unist-util-visit": "^5.0.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
