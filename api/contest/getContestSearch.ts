@@ -1,5 +1,3 @@
-"use server";
-
 import solveAxios from "@/libs/axios/solveAxios";
 import { BaseResponse } from "@/types/response/base";
 import { PageResponse } from "@/types/response/page";

@@ -1,7 +1,9 @@
 import React from "react";
 
-const Post = ({ params }: { params: Promise<{ slug: string }> }) => {
-  return <div>Post</div>;
+const Post = async ({ params }: { params: Promise<{ postId: string }> }) => {
+  const { postId } = await params;
+
+  return <div>{postId}</div>;
 };
 
 export default Post;

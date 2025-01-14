@@ -4,6 +4,7 @@ import React, { useEffect, useState, useId } from "react";
 import ThemedIcon from "./ThemedIcon";
 import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
 import { Tier } from "@/types/tier/tier";
+import { useCategoryStore } from "@/stores/board/useCategoryStore";
 
 const DROPDOWN_TOGGLE_EVENT = "dropdownToggle";
 
@@ -13,7 +14,7 @@ const Dropdown = ({
   data,
 }: {
   defaultValue: string;
-  type: "STATE" | "TIER" | "FILTER";
+  type: "STATE" | "TIER" | "FILTER" | "CATEGORY";
   data: { name: string; value: string }[];
 }) => {
   const [opened, setOpened] = useState(false);
@@ -21,6 +22,7 @@ const Dropdown = ({
 
   const { states, tiers, order, setTiers, setOrder, setStates } =
     useProblemFilterStore();
+  const { category, setCategory } = useCategoryStore();
 
   useEffect(() => {
     const handleDropdownToggle = (e: CustomEvent) => {
@@ -64,14 +66,17 @@ const Dropdown = ({
     } else if (type === "TIER") {
       const newTier = tiers.includes(value as Tier)
         ? tiers.filter((item) => item !== value)
-        : [...tiers, value] as Tier[];
+        : ([...tiers, value] as Tier[]);
       setTiers(newTier);
     }
   };
 
   const getDisplayValue = () => {
-    if (type === "FILTER") {
-      const selectedItem = data.find((item) => item.value === order);
+    if (type === "FILTER" || type === "CATEGORY") {
+      const selectedItem =
+        type === "FILTER"
+          ? data.find((item) => item.value === order)
+          : data.find((item) => item.value === category);
       return selectedItem ? selectedItem.name : defaultValue;
     } else {
       return defaultValue;
@@ -130,7 +135,7 @@ const Dropdown = ({
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          {type === "FILTER"
+          {type === "FILTER" || type === "CATEGORY"
             ? data.map((item) => (
                 <p
                   key={item.value}
@@ -139,7 +144,18 @@ const Dropdown = ({
                       ? "text-secondary-500"
                       : "text-main-container"
                   }`}
-                  onClick={() => setOrder(item.value)}
+                  onClick={
+                    type === "CATEGORY"
+                      ? () =>
+                          setCategory(
+                            item.value as
+                              | "FREE"
+                              | "QUESTION"
+                              | "SUGGESTION"
+                              | "INFORMATION"
+                          )
+                      : () => setOrder(item.value)
+                  }
                 >
                   {item.name}
                 </p>

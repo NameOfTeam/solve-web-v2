@@ -1,4 +1,4 @@
-"use server";
+"use server"
 
 import { API_URL } from "@/constants/api";
 import { BaseResponse } from "@/types/response/base";

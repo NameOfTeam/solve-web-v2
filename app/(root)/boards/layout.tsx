@@ -18,9 +18,7 @@ const BoardLayout = ({ children }: PropsWithChildren) => {
             </div>
             <BoardFilter />
           </div>
-          <Suspense>
-            {children}
-          </Suspense>
+          {children}
         </div>
       </div>
     </div>

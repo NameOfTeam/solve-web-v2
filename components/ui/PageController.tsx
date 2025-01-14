@@ -16,13 +16,20 @@ const PageController = ({
   data: PageResponse<Workbook | Problem | Contest | Board>;
 }) => {
   const totalPages = data.totalPages || 0;
-  const startPage = Math.max(0, page - 4);
+  let startPage = Math.max(0, page - 4);
+
+  if (totalPages > 10 && page >= totalPages - 5) {
+    startPage = totalPages - 10;
+  }
+
+  startPage = Math.max(0, startPage);
+
   const endPage = Math.min(totalPages, startPage + 10);
 
   return (
     <div className="w-full flex justify-center gap-x-3">
       <div
-        onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
+        onClick={() => setPage((prev) => Math.max(prev - 10, 0))}
         className={`w-10 h-10 flex justify-center items-center text-xl cursor-pointer ${
           page === 0 && "opacity-0"
         }`}
@@ -52,7 +59,7 @@ const PageController = ({
         );
       })}
       <div
-        onClick={() => setPage((prev) => Math.min(prev + 1, totalPages - 1))}
+        onClick={() => setPage((prev) => Math.min(prev + 10, totalPages - 1))}
         className={`w-10 h-10 flex justify-center items-center text-xl cursor-pointer ${
           data && page === totalPages - 1 && "opacity-0"
         }`}

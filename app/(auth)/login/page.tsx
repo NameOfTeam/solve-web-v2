@@ -23,8 +23,9 @@ const Login = () => {
     register,
     handleSubmit,
     watch,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful, isValid },
   } = useForm<LoginForm>({
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -51,9 +52,6 @@ const Login = () => {
       router.push("/signup");
     }, 350);
   };
-
-  const email = watch("email");
-  const password = watch("password");
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-container-border px-40">
@@ -95,10 +93,8 @@ const Login = () => {
                   type="text"
                   id="email"
                   {...register("email", {
-                    minLength: {
-                      value: 1,
-                      message: "이메일을 입력해주세요",
-                    },
+                    required: "이메일을 입력해주세요.",
+                    minLength: 1
                   })}
                   className=" border border-bg-border h-14 px-3 focus:outline-none rounded-lg text-main-container bg-bg"
                   placeholder="이메일을 입력해주세요"
@@ -113,10 +109,8 @@ const Login = () => {
                   type="password"
                   id="password"
                   {...register("password", {
-                    minLength: {
-                      value: 1,
-                      message: "비밀번호를 입력해주세요",
-                    },
+                    required: "비밀번호를 입력해주세요",
+                    minLength: 1,
                   })}
                   className=" border border-bg-border rounded-lg h-14 px-3 focus:outline-none text-main-container bg-bg"
                   placeholder="비밀번호를 입력해주세요"
@@ -127,8 +121,8 @@ const Login = () => {
               type="submit"
               disabled={
                 isSubmitting ||
-                email.trim().length < 1 ||
-                password.trim().length < 1
+                isSubmitSuccessful ||
+                isValid
               }
               className="bg-primary-700 h-12 rounded-lg text-white disabled:bg-bg-border"
             >

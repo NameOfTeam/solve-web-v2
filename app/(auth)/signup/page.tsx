@@ -18,7 +18,7 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful, isValid },
     watch,
   } = useForm<SignupForm>({
     defaultValues: {
@@ -46,7 +46,6 @@ const Signup = () => {
     } catch {}
   };
 
-  const email = watch("email");
   const password = watch("password");
   const passwordConfirm = watch("passwordConfirm");
   const username = watch("username");
@@ -124,6 +123,7 @@ const Signup = () => {
                     type="text"
                     id="email"
                     {...register("email", {
+                      required: "이메일을 입력해주세요",
                       minLength: 1,
                     })}
                     className=" border border-bg-border rounded-lg h-14 px-3 focus:outline-none bg-bg"
@@ -134,7 +134,10 @@ const Signup = () => {
               <button
                 type="submit"
                 className=" bg-primary-700 h-12 rounded-lg text-white disabled:bg-container-border"
-                disabled={isSubmitting || email.trim().length < 1}
+                disabled={
+                  isSubmitting || isSubmitSuccessful || isValid 
+                
+                }
               >
                 인증 발송하기
               </button>
@@ -155,6 +158,7 @@ const Signup = () => {
                   <input
                     type="password"
                     {...register("password", {
+                      required: "비밀번호를 입력해주세요",
                       minLength: 1,
                     })}
                     className=" border border-bg-border rounded-lg h-14 px-3 focus:outline-none bg-bg"
@@ -167,6 +171,7 @@ const Signup = () => {
                     type="password"
                     {...register("passwordConfirm", {
                       required: "비밀번호를 다시 입력해주세요",
+                      minLength: 1,
                     })}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
@@ -230,6 +235,7 @@ const Signup = () => {
                   <input
                     type="text"
                     {...register("username", {
+                      required: "아이디를 입력해주세요.",
                       minLength: 1,
                     })}
                     onKeyDown={(e) => {

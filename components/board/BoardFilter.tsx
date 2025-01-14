@@ -36,7 +36,7 @@ const BoardFilter = () => {
         }`}
         onClick={() => setState("INFORMATION")}
       >
-        질문
+        정보
       </div>
       <div
         className={`h-8 flex items-center justify-center border-b cursor-pointer box-content px-4 ${

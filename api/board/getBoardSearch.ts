@@ -1,5 +1,3 @@
-"use server"
-
 import solveAxios from "@/libs/axios/solveAxios";
 import { Board } from "@/types/board/board";
 import { BaseResponse } from "@/types/response/base";
@@ -18,7 +16,7 @@ export const getBoardSearch = async (
   };
 
   if (state) {
-    params.state = state;
+    params.category = state;
   }
 
   if (query) {
@@ -27,7 +25,7 @@ export const getBoardSearch = async (
 
   try {
     const { data } = await solveAxios.get<BaseResponse<PageResponse<Board>>>(
-      "/boards/search",
+      "/posts/search",
       {
         params,
         paramsSerializer: (params) => {

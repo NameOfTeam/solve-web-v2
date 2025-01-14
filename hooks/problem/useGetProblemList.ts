@@ -8,7 +8,7 @@ import { defaultPageResponse } from "@/utils/defaultPageResponse";
 const useGetProblemList = (
   {
     page = 0,
-    size = 15,
+    size = 10,
     query,
   }: {
     page?: number;
