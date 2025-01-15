@@ -1,4 +1,4 @@
-import { getPostDetail } from "@/api/board/getBoardDetail";
+import { getPostDetail } from "@/api/board/getPostDetail";
 import PostDetail from "@/components/board/PostDetail";
 import React from "react";
 

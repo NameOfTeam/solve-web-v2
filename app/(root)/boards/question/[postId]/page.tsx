@@ -1,8 +1,12 @@
-import { getPostDetail } from "@/api/board/getBoardDetail";
+import { getPostDetail } from "@/api/board/getPostDetail";
 import PostDetail from "@/components/board/PostDetail";
 import React from "react";
 
-const QuestionPost = async ({ params }: { params: Promise<{ postId: string }> }) => {
+const QuestionPost = async ({
+  params,
+}: {
+  params: Promise<{ postId: string }>;
+}) => {
   const { postId } = await params;
   const postData = await getPostDetail(postId);
 
