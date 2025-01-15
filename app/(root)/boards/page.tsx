@@ -1,6 +1,5 @@
 import { getBoardSearch } from "@/api/board/getBoardSearch";
 import BoardList from "@/components/board/BoardList";
-import BoardWrapper from "@/components/board/BoardWrapper";
 import { Board } from "@/types/board/board";
 import { PageResponse } from "@/types/response/page";
 import React from "react";

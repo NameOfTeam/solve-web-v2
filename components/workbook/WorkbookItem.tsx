@@ -17,15 +17,28 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
         <p className="flex-[1] text-main-container">만든이</p>
         <p className="flex-[1.5] text-main-container">업데이트</p>
         <p className="flex-[1] text-main-container">진행도</p>
-        <div className="w-14 h-6 border border-container-border rounded-[4px] pl-1 pr-[6px] flex justify-between items-center self-center">
+        <div
+          className={`w-14 h-6 border ${
+            data.isLiked
+              ? "border-primary-700 bg-primary-700"
+              : "border-container-border bg-container"
+          } self-start rounded-[4px] pl-1 pr-[6px] flex justify-between items-center`}
+        >
           <ThemedIcon
             height={20}
             width={20}
             icon="bookmark"
+            color={data.isLiked ? "white" : ""}
             variant="container"
             shade="border"
           />
-          <p className="text-xs text-container-border">{data.bookmarkCount}</p>
+          <p
+            className={`text-xs ${
+              data.isLiked ? "text-white" : "text-container-border"
+            }`}
+          >
+            {data.likeCount}
+          </p>
         </div>
       </div>
       <div className="w-full font-[400] text-sm flex items-center whitespace-nowrap">
@@ -40,9 +53,28 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
         <p className="flex-[1] text-main-container">
           {data.progress} / {data.problems.length}
         </p>
-        <div className="w-14 h-6 border border-primary-700 bg-primary-700 rounded-[4px] pl-1 pr-[6px] flex justify-between items-center">
-          <ThemedIcon height={20} width={20} icon="like" color="white" />
-          <p className="text-xs text-white">{data.likeCount}</p>
+        <div
+          className={`w-14 h-6 border ${
+            data.isLiked
+              ? "border-primary-700 bg-primary-700"
+              : "border-container-border bg-container"
+          } self-end rounded-[4px] pl-1 pr-[6px] flex justify-between items-center`}
+        >
+          <ThemedIcon
+            height={20}
+            width={20}
+            icon="like"
+            color={data.isLiked ? "white" : ""}
+            variant="container"
+            shade="border"
+          />
+          <p
+            className={`text-xs ${
+              data.isLiked ? "text-white" : "text-container-border"
+            }`}
+          >
+            {data.likeCount}
+          </p>
         </div>
       </div>
     </Link>

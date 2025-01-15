@@ -23,7 +23,7 @@ const BoardFilter = () => {
       </div>
       <div
         className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
-          pathname === "/boards/free"
+          pathname.includes("/boards/free")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
@@ -33,7 +33,7 @@ const BoardFilter = () => {
       </div>
       <div
         className={`h-8 flex items-center justify-center border-b cursor-pointer box-content px-4 ${
-          pathname === "/boards/information"
+          pathname.includes("/boards/information")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
@@ -43,7 +43,7 @@ const BoardFilter = () => {
       </div>
       <div
         className={`h-8 flex items-center justify-center border-b cursor-pointer box-content px-4 ${
-          pathname === "/boards/question"
+          pathname.includes("/boards/question")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
@@ -53,7 +53,7 @@ const BoardFilter = () => {
       </div>
       <div
         className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
-          pathname === "/boards/suggestion"
+          pathname.includes("/boards/suggestion")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
@@ -63,7 +63,7 @@ const BoardFilter = () => {
       </div>
       <div
         className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
-          pathname === "/boards/notice"
+          pathname.includes("/boards/notice")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
@@ -74,7 +74,7 @@ const BoardFilter = () => {
       {user?.id && (
         <div
           className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
-            pathname === "/boards/write"
+            pathname.includes("/boards/write")
               ? "border-secondary-700 border-b-[2px] font-[600]"
               : "border-bg-border border-b"
           }`}

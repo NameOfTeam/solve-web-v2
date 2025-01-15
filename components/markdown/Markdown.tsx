@@ -1,17 +1,11 @@
 "use client";
 
-import { FC, MouseEvent } from "react";
+import { FC } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
-import rehypeRaw from "rehype-raw";
-import { remarkSpoiler } from "@/utils/remarkSpoiler";
-import Spoiler from "./Spoiler";
+import hljs from "highlight.js/lib/common";
+import "highlight.js/styles/github-dark.css";
 
-type ExtendedComponents = any & {
-  spoiler: FC<{ children: React.ReactNode }>;
-};
 
 interface MarkdownProps {
   content: string;
@@ -72,24 +66,32 @@ const components = {
       {children || href}
     </a>
   ),
-  code: ({ className, children }: CodeProps) => {
+  code({ className, children, ...props }: CodeProps) {
     const match = /language-(\w+)/.exec(className || "");
-    return match ? (
-      <div className="mb-4 rounded-lg overflow-hidden bg-bg-border">
-        <SyntaxHighlighter
-          style={nord}
-          language={match[1]}
-          PreTag="div"
-          className="!bg-bg-border"
-        >
-          {String(children).trim()}
-        </SyntaxHighlighter>
-      </div>
-    ) : (
-      <code className="px-2 py-1 bg-primary-100 rounded-md text-sm font-mono text-primary-800">
-        {children}
-      </code>
-    );
+
+    if (match) {
+      const language = match[1];
+      const code = String(children).replace(/\n$/, "");
+
+      if (language && code) {
+        const highlighted = hljs.highlight(code, { language });
+
+        return (
+          <div className="relative">
+            <div className="absolute right-2 top-2 text-xs text-gray-400">
+              {language}
+            </div>
+            <pre className={`rounded-lg p-4 text-main-container bg-bg overflow-x-auto`}>
+              <code
+                className={className}
+                dangerouslySetInnerHTML={{ __html: highlighted.value }}
+                {...props}
+              />
+            </pre>
+          </div>
+        );
+      }
+    }
   },
   blockquote: ({ children }: CommonProps) => (
     <blockquote className="pl-4 border-l-4 border-primary-300 my-4 italic text-main-container bg-primary-0 py-2 rounded-r">
@@ -122,28 +124,11 @@ const components = {
       {children}
     </td>
   ),
-  spoiler: ({ children }: CommonProps) => {
-    const handleClick = (e: MouseEvent<HTMLSpanElement>) => {
-      const target = e.target as HTMLSpanElement;
-      target.classList.toggle("text-black");
-      target.classList.toggle("text-white");
-    };
-
-    return (
-      <span
-        className="bg-black text-black rounded px-2 cursor-pointer"
-        onClick={handleClick}
-      >
-        {children}
-      </span>
-    );
-  },
 };
 
 const Markdown: FC<MarkdownProps> = ({ content }) => (
   <ReactMarkdown
     remarkPlugins={[remarkGfm]}
-    rehypePlugins={[rehypeRaw]}
     components={components}
   >
     {content}

@@ -32,7 +32,7 @@ const ProblemList = ({
           {problems && problems.content.length > 0 ? (
             problems.content.map((item, idx) => (
               <Link
-                href={`/problems/${item.id}`}
+                href={`/solve/${item.id}`}
                 className={`w-full h-14 ${
                   problems.content.length - 1 !== idx && "border-b"
                 } border-bg-border flex items-center text-base font-[400] px-6 text-main-container`}

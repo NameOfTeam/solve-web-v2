@@ -38,7 +38,7 @@ const BoardList = ({
           {boards && boards.content.length > 0 ? (
             boards.content.map((item, idx) => (
               <Link
-                href={`/boards/${item.id}`}
+                href={`/boards/${item.category.toLocaleLowerCase()}/${item.id}`}
                 className={`w-full h-14 ${
                   boards.content.length - 1 !== idx && "border-b"
                 } border-bg-border flex items-center text-base font-[400] px-6 text-main-container`}

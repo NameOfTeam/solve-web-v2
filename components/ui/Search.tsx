@@ -36,7 +36,7 @@ const Search = ({ route }: { route: string }) => {
         placeholder="문제를 검색하세요."
         {...register("query")}
       />
-      <Link className="cursor-pointer w-6 h-6" href="/problems">
+      <Link className="cursor-pointer w-6 h-6" href={`/${route}`}>
         <ThemedIcon
           icon="search"
           width={24}

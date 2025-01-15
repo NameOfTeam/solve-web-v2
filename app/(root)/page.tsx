@@ -12,10 +12,6 @@ const Home = async () => {
   const workbooksData = await getWorkbooks(0, 3);
   const statisticsData = await getStatistics();
 
-  console.log(contestsData);
-  console.log(workbooksData);
-  console.log(statisticsData);
-
   return (
     <div className="w-full">
       <div className="w-full h-[520px] bg-[#2b2b2b]"></div>
@@ -24,7 +20,7 @@ const Home = async () => {
           <p className="text-4xl font-[700] text-main-container">SOLVE</p>
           <div className="w-full h-[2px] bg-main-container"></div>
           <p className="text-base font-[500] tracking-[2.2px] text-main-container">
-            당신의 찬란하고 위대한 발걸음을 위하여
+            당신의 찬란한 발걸음을 위하여
           </p>
         </div>
       </div>
