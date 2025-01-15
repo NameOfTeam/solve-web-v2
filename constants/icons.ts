@@ -16,7 +16,8 @@ import Search from "@/assets/search.svg";
 import Dropdown from "@/assets/drop_down.svg";
 import Boards from "@/assets/boards.svg";
 import ArrowLeftBack from "@/assets/arrow-left-back.svg";
-import Close from "@/assets/close.svg";
+import Pen from "@/assets/pen.svg";
+import ChatBubble from "@/assets/chat_bubble.svg"
 
 export const ICONS = {
   flag: Flag,
@@ -36,7 +37,8 @@ export const ICONS = {
   kakao: Kakao,
   boards: Boards,
   "arrow-left-back": ArrowLeftBack,
-  close: Close,
+  pen: Pen,
+  "chat-bubble": ChatBubble
 } satisfies Record<string, IconType>;
 
 export type IconName = keyof typeof ICONS;
