@@ -8,7 +8,7 @@ const ContestCard = ({ data }: { data: Contest }) => {
   const timeLeft = useCounter(data.startAt);
 
   return (
-    <Link href={`/contests/${data.id}`} className="w-full h-52 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container rounded-lg cursor-pointer text-main-container">
+    <Link href={`/contests/${data.id}`} className="w-full h-52 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container overflow-hidden rounded-lg cursor-pointer text-main-container">
       <div className="flex flex-col gap-y-2">
         <p className="text-[20px] font-[600]">{data.title}</p>
         <p>

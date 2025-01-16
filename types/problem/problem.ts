@@ -1,3 +1,6 @@
+import { Tier } from "../tier/tier";
+import { User } from "../user/user";
+
 export interface Problem {
   id: number;
   title: string;
@@ -7,41 +10,18 @@ export interface Problem {
   memoryLimit: number;
   timeLimit: number;
   correctRate: number;
-  testCases: ProblemTestCase[];
-  author: ProblemAuthorResponse;
+  author: User;
   state?: ProblemSubmitState;
   solvedCount: number;
-  tier: string;
-  isSolved: boolean
+  tier: Tier;
+  isSolved: boolean;
+  examples: ProblemExample[];
 }
 
-interface ProblemAuthorResponse {
-  username: string;
-}
-
-export interface ProblemTestCase {
-  id: number;
+export interface ProblemExample {
   input: string;
   output: string;
-}
-
-export interface SubmitCode {
-  code: string;
-  testCases: ProblemTestCase[];
-  language: string;
-  timeLimit: number;
-  memoryLimit: number;
-}
-
-export interface ProblemSubmitResponse {
-  id: number;
-  result: string;
-}
-
-export interface ProblemSubmitProgressResponse {
-  submitId: number;
-  progress: number;
-  result: ProblemSubmitState;
+  description?: string;
 }
 
 export type ProblemSubmitState =

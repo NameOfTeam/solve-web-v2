@@ -4,7 +4,7 @@ import React from "react";
 import { PageResponse } from "@/types/response/page";
 import { Contest } from "@/types/contest/contest";
 
-const Contests = async ({
+const EndedContests = async ({
   searchParams,
 }: {
   searchParams?:
@@ -12,7 +12,7 @@ const Contests = async ({
     | undefined;
 }) => {
   const query = (await searchParams)?.query;
-  const initialData = await getContestSearch(0, 15, null, query as string);
+  const initialData = await getContestSearch(0, 15, "ENDED", query as string);
 
   return (
     <ContestList
@@ -22,4 +22,4 @@ const Contests = async ({
   );
 };
 
-export default Contests;
+export default EndedContests;

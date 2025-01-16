@@ -48,7 +48,7 @@ const Login = () => {
   const move = () => {
     setFadeIn(false);
     setTimeout(() => {
-      router.push("/signup");
+      router.replace("/signup");
     }, 350);
   };
 
@@ -61,7 +61,7 @@ const Login = () => {
       >
         <div
           className="absolute top-4 left-4 cursor-pointer "
-          onClick={() => router.push('/')}
+          onClick={router.back}
         >
           <ThemedIcon
             icon="arrow-left-back"
@@ -129,7 +129,7 @@ const Login = () => {
           </form>
 
           <div
-            className=" h-0 overflow-visible border border-container-border w-[420px] flex justify-center items-center
+            className=" h-0 border border-container-border w-[420px] flex justify-center items-center
           "
           >
             <p className=" bg-bg w-12 text-center text-bg-border text-sm">

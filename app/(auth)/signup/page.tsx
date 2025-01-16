@@ -53,7 +53,7 @@ const Signup = () => {
   const move = () => {
     setFadeIn(false);
     setTimeout(() => {
-      router.push("/login");
+      router.replace("/login");
     }, 350);
   };
 
@@ -70,7 +70,7 @@ const Signup = () => {
             onClick={() => {
               switch (phase) {
                 case "USERNAME":
-                  router.push("/");
+                  router.back();
                   break;
                 case "PASSWORD":
                   setPhase("USERNAME");

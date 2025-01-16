@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import CommentItem from "./CommentItem";
 import { useUserStore } from "@/stores/user/useUserStore";
 import { createComment } from "@/api/board/createComment";
+import { useInView } from "react-intersection-observer";
 
 const PostComment = ({ postId }: { postId: number }) => {
   const [comments, setComments] = useState<Comment[]>([]);
@@ -15,17 +16,19 @@ const PostComment = ({ postId }: { postId: number }) => {
     register,
     handleSubmit,
     formState: { isValid, isSubmitting },
-    setValue
+    setValue,
   } = useForm<{ content: string }>({ defaultValues: { content: "" } });
   const { user } = useUserStore();
+  const { inView, ref } = useInView();
 
   const fetchData = async () => {
     const data = await getComments(postId);
-    setComments(data || []);
+    setComments(data?.content || []);
   };
 
   const onSubmit = async (e: { content: string }) => {
     const data = await createComment(e, postId);
+
     if (data) {
       setValue("content", "");
       setComments(data);
@@ -39,7 +42,7 @@ const PostComment = ({ postId }: { postId: number }) => {
   return (
     <div className="w-full flex flex-col gap-y-4">
       <p className="text-lg">댓글 {comments.length}개</p>
-      <div className="w-full flex flex-col gap-y-4 py-4 border-b border-t border-bg-border">
+      <div className="w-full flex flex-col gap-y-4 py-4 border-t border-bg-border">
         {user?.id && (
           <form
             className="w-full flex gap-x-4 items-center"
@@ -63,9 +66,12 @@ const PostComment = ({ postId }: { postId: number }) => {
           </form>
         )}
         <div className="w-full">
-          {comments.map((comment) => (
+          {comments.length > 0 ? comments.map((comment) => (
             <CommentItem comment={comment} key={comment.id} />
-          ))}
+          )) : (
+            <div className="w-full h-40 flex items-center justify-center text-bg-border text-xl">댓글이 없습니다.</div>
+          )}
+          <div ref={ref} />
         </div>
       </div>
     </div>

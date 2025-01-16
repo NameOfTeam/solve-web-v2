@@ -17,7 +17,7 @@ const BoardFilter = () => {
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.push("/boards")}
+        onClick={() => router.replace("/boards")}
       >
         전체
       </div>
@@ -27,7 +27,7 @@ const BoardFilter = () => {
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.push("/boards/free")}
+        onClick={() => router.replace("/boards/free")}
       >
         자유
       </div>
@@ -37,7 +37,7 @@ const BoardFilter = () => {
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.push("/boards/information")}
+        onClick={() => router.replace("/boards/information")}
       >
         정보
       </div>
@@ -47,7 +47,7 @@ const BoardFilter = () => {
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.push("/boards/question")}
+        onClick={() => router.replace("/boards/question")}
       >
         질문
       </div>
@@ -57,7 +57,7 @@ const BoardFilter = () => {
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.push("/boards/suggestion")}
+        onClick={() => router.replace("/boards/suggestion")}
       >
         수정 제안
       </div>
@@ -67,7 +67,7 @@ const BoardFilter = () => {
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.push("/boards/notice")}
+        onClick={() => router.replace("/boards/notice")}
       >
         공지사항
       </div>
@@ -78,7 +78,7 @@ const BoardFilter = () => {
               ? "border-secondary-700 border-b-[2px] font-[600]"
               : "border-bg-border border-b"
           }`}
-          onClick={() => router.push("/boards/write")}
+          onClick={() => router.replace("/boards/write")}
         >
           글쓰기
         </div>

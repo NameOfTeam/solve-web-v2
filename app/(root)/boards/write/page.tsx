@@ -7,7 +7,7 @@ import { useCategoryStore } from "@/stores/board/useCategoryStore";
 import { createPost } from "@/api/board/createPost";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/stores/user/useUserStore";
-import Markdown from "@/components/markdown/Markdown";
+import Markdown from "@/components/editor/Markdown";
 import Dropdown from "@/components/ui/Dropdown";
 
 const BoardWrite = () => {
@@ -51,11 +51,11 @@ const BoardWrite = () => {
 
   return (
     <form
-      className="w-full h-full overflow-visible flex flex-col gap-y-8"
+      className="w-full h-full flex flex-col gap-y-8"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="w-full h-full flex flex-col gap-y-2 overflow-visible">
-        <div className="w-full flex items-center justify-between overflow-visible">
+      <div className="w-full h-full flex flex-col gap-y-2">
+        <div className="w-full flex items-center justify-between">
           <input
             type="text"
             className="max-w-[640px] w-full bg-transparent border-b border-bg-border py-2 text-[26px] outline-none text-main-container placeholder:text-bg-border"

@@ -25,11 +25,11 @@ const Problems = async ({
   );
 
   return (
-    <div className="w-full overflow-visible">
+    <div className="w-full">
       <Banner title="문제" description="취향에 맞는 문제를 풀어볼 수 있어요." />
-      <div className="h-except-banner px-52 overflow-visible">
-        <div className="w-full h-full py-9 overflow-visible flex flex-col gap-y-6">
-          <div className="flex flex-col gap-y-3 overflow-visible">
+      <div className="h-except-banner px-52">
+        <div className="w-full h-full py-9 flex flex-col gap-y-6">
+          <div className="flex flex-col gap-y-3">
             <div className="w-[520px]">
               <Search route="problems" />
             </div>

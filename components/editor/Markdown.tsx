@@ -48,10 +48,10 @@ const components = {
     <em className="italic text-main-container">{children}</em>
   ),
   ul: ({ children }: CommonProps) => (
-    <ul className="list-disc pl-6 mb-4 space-y-2">{children}</ul>
+    <ul className="list-disc list-inside pl-6 mb-4 space-y-2">{children}</ul>
   ),
   ol: ({ children }: CommonProps) => (
-    <ol className="list-decimal pl-6 mb-4 space-y-2">{children}</ol>
+    <ol className="list-decimal list-inside pl-6 mb-4 space-y-2">{children}</ol>
   ),
   li: ({ children }: CommonProps) => (
     <li className="text-main-container">{children}</li>
@@ -59,7 +59,7 @@ const components = {
   a: ({ href, children }: LinkProps) => (
     <a
       href={href}
-      className="text-main-container hover:text-primary-700 underline transition-colors duration-200"
+      className="text-main-container hover:text-info-500 underline transition-colors duration-200"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -81,7 +81,9 @@ const components = {
             <div className="absolute right-2 top-2 text-xs text-gray-400">
               {language}
             </div>
-            <pre className={`rounded-lg p-4 text-main-container bg-bg overflow-x-auto`}>
+            <pre
+              className={`rounded-lg p-4 text-main-container bg-bg overflow-x-auto`}
+            >
               <code
                 className={className}
                 dangerouslySetInnerHTML={{ __html: highlighted.value }}

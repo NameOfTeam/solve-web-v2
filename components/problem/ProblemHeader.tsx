@@ -1,24 +1,16 @@
 "use client";
 
-import { Tier } from "@/types/tier/tier";
 import React from "react";
 import ThemedIcon from "../ui/ThemedIcon";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { useCodeStore } from "@/stores/problem/useCodeStore";
 
-const ProblemHeader = ({
-  problemId,
-  title,
-  tier,
-}: {
-  problemId?: number;
-  title?: string;
-  tier?: Tier;
-}) => {
+const ProblemHeader = () => {
   const router = useRouter();
+  const { code } = useCodeStore();
 
   return (
-    <div className="w-full h-[72px] flex items-center gap-x-4 px-12">
+    <div className="w-full h-[72px] flex items-center gap-x-4 px-12 border-b border-bg-border bg-container">
       <div onClick={router.back} className="cursor-pointer">
         <ThemedIcon
           icon="arrow-left-back"
@@ -27,17 +19,6 @@ const ProblemHeader = ({
           variant="main"
           shade="container"
         />
-      </div>
-      <div className="text-[22px] font-[600] flex gap-x-3">
-        <span>{`# ${problemId}`}</span>
-        <span>・</span>
-        <Image
-          src={`/tiers/${tier?.toLowerCase()}.svg`}
-          alt=""
-          width={24}
-          height={24}
-        />
-        <span>{title}</span>
       </div>
     </div>
   );

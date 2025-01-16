@@ -8,7 +8,7 @@ const ProblemFilter = () => {
   const { user } = useUserStore();
 
   return (
-    <div className="flex gap-x-3 overflow-visible">
+    <div className="flex gap-x-3">
       {user && (
         <Dropdown
           data={[

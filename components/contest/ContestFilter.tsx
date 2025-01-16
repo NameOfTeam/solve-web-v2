@@ -1,50 +1,52 @@
 "use client";
 
 import { useContestFilterStore } from "@/stores/contest/useContestFilterStore";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 const ContestFilter = () => {
-  const { state, setState } = useContestFilterStore();
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className="flex font-[400] text-base text-main-container">
       <div
         className={`w-16 h-8 flex items-center justify-center  cursor-pointer box-content ${
-          state === null
+          pathname === "/contests"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => setState(null)}
+        onClick={() => router.replace("/contests")}
       >
         전체
       </div>
       <div
         className={`w-16 h-8 flex items-center justify-center cursor-pointer box-content ${
-          state === "UPCOMING"
+          pathname === "/contests/upcoming"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => setState("UPCOMING")}
+        onClick={() => router.replace("/contests/upcoming")}
       >
         예정
       </div>
       <div
         className={`w-16 h-8 flex items-center justify-center border-b cursor-pointer box-content ${
-          state === "ONGOING"
+          pathname === "/contests/ongoing"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => setState("ONGOING")}
+        onClick={() => router.replace("/contests/ongoing")}
       >
         진행중
       </div>
       <div
         className={`w-16 h-8 flex items-center justify-center cursor-pointer box-content ${
-          state === "ENDED"
+          pathname === "/contests/ended"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => setState("ENDED")}
+        onClick={() => router.replace("/contests/ended")}
       >
         종료
       </div>

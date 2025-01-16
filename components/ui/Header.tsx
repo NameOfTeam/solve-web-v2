@@ -18,12 +18,12 @@ const Header = () => {
   }, [user, fetchUser]);
 
   return (
-    <div className="w-full h-[72px] bg-container border-b border-bg-border px-40 flex items-center gap-x-10 relative overflow-visible">
+    <div className="w-full h-[72px] bg-container border-b border-bg-border px-40 flex items-center gap-x-10 relative">
       <Link href="/" className="cursor-pointer text-main-container">
         <Logo width={116} height={52} />
       </Link>
 
-      <div className="gap-x-7 h-full flex items-center text-base text-main-container header relative overflow-visible">
+      <div className="gap-x-7 h-full flex items-center text-base text-main-container header relative">
         <Link href="/problems">문제</Link>
         <Link href="/workbooks">문제집</Link>
         <Link href="/contests">대회</Link>

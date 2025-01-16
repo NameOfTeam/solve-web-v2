@@ -2,7 +2,7 @@
 
 import { Board } from "@/types/board/board";
 import React from "react";
-import Markdown from "../markdown/Markdown";
+import Markdown from "../editor/Markdown";
 import PostHeader from "./PostHeader";
 import PostComment from "./PostComment";
 

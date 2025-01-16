@@ -29,7 +29,6 @@ export default function RootLayout({
           <CookiesProvider>
             <ThemeProvider>
               <div className="w-full h-screen bg-bg">{children}</div>
-
               <ChangeTheme />
             </ThemeProvider>
           </CookiesProvider>

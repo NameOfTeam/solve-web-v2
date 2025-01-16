@@ -21,7 +21,7 @@ const CommentItem = ({ comment }: { comment: Comment }) => {
     if (postId && comment.id) {
       console.log(postId, comment.id);
       const data = await getReplies(postId as string, comment.id);
-      setReplies(data || []);
+      setReplies(data?.content || []);
     }
   };
 
