@@ -1,5 +1,4 @@
 import { getContestSearch } from "@/api/contest/getContestSearch";
-import { useContestFilterStore } from "@/stores/contest/useContestFilterStore";
 import { PageResponse } from "@/types/response/page";
 import { Contest } from "@/types/contest/contest";
 import { useEffect, useState } from "react";
@@ -15,9 +14,9 @@ const useGetContestList = (
     size?: number;
     query?: string;
   },
+  state: "UPCOMING" | "ONGOING" | "ENDED" | null,
   initialData: PageResponse<Contest>
 ) => {
-  const { state } = useContestFilterStore();
   const [data, setData] = useState<PageResponse<Contest>>(
     initialData
   );

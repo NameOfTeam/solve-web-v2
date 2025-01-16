@@ -18,6 +18,7 @@ const Contests = async ({
     <ContestList
       query={query as string | undefined}
       initialData={initialData as PageResponse<Contest>}
+      state={null}
     />
   );
 };

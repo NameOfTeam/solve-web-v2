@@ -2,6 +2,7 @@
 
 import { CodeEditor } from "@/components/editor/CodeEditor";
 import ProblemHeader from "@/components/problem/ProblemHeader";
+import ProblemInput from "@/components/problem/ProblemInput";
 import ProblemTabs from "@/components/problem/ProblemTabs";
 import Dropdown from "@/components/ui/Dropdown";
 import { useCodeStore } from "@/stores/problem/useCodeStore";
@@ -12,12 +13,10 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import AceEditor from "react-ace";
 
 const SolveLayout = ({ children }: PropsWithChildren) => {
   const [isResizing, setIsResizing] = useState(false);
   const [leftWidth, setLeftWidth] = useState(50);
-  const { code, setCode } = useCodeStore();
 
   const router = useRouter();
   const { problemId } = useParams();
@@ -91,14 +90,24 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
           style={{ width: `${100 - leftWidth}%` }}
         >
           <div className="flex-1 w-full rounded-lg bg-container border-bg-border border overflow-hidden">
-            <Dropdown
-              data={[{ name: "Python", value: "PYTHON" }, { name: "Java", value: "JAVA" }, { name: "C", value: "C" }, { name: "Node.js", value: "NODE_JS" }]}
-              defaultValue="PYTHON"
-              type="LANGUAGE"
-            />
+            <div className="w-24 pl-3 py-2">
+              <Dropdown
+                data={[
+                  { name: "Python", value: "PYTHON" },
+                  { name: "Java", value: "JAVA" },
+                  { name: "C", value: "C" },
+                  { name: "Node.js", value: "NODE_JS" },
+                ]}
+                defaultValue="PYTHON"
+                type="LANGUAGE"
+                hideBorder={true}
+              />
+            </div>
             <CodeEditor />
           </div>
-          <div className="h-60 w-full rounded-lg bg-container border-bg-border border"></div>
+          <div className="h-60 w-full rounded-lg bg-container border-bg-border border">
+            <ProblemInput />
+          </div>
         </div>
       </div>
     </div>

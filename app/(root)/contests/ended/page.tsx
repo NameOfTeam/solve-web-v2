@@ -18,6 +18,7 @@ const EndedContests = async ({
     <ContestList
       query={query as string | undefined}
       initialData={initialData as PageResponse<Contest>}
+      state="ENDED"
     />
   );
 };

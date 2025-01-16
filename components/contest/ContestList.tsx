@@ -9,13 +9,15 @@ import PageController from "../ui/PageController";
 
 const ContestList = ({
   initialData,
+  state,
   query,
 }: {
   initialData: PageResponse<Contest>;
+  state: "UPCOMING" | "ONGOING" | "ENDED" | null
   query?: string;
 }) => {
   const [page, setPage] = useState(0);
-  const contests = useGetContestList({ page, query }, initialData);
+  const contests = useGetContestList({ page, query }, state, initialData);
 
   return (
     <>

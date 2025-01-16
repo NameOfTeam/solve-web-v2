@@ -13,12 +13,12 @@ const Dropdown = ({
   defaultValue,
   type,
   data,
-  hideBorder
+  hideBorder,
 }: {
   defaultValue: string;
   type: "STATE" | "TIER" | "FILTER" | "CATEGORY" | "LANGUAGE";
   data: { name: string; value: string }[];
-  hideBorder?: boolean
+  hideBorder?: boolean;
 }) => {
   const [opened, setOpened] = useState(false);
   const dropdownId = useId();
@@ -119,7 +119,9 @@ const Dropdown = ({
   return (
     <div
       onClick={handleToggle}
-      className={`wrapper pr-3 pl-4 py-2 ${ "bg-container border border-bg-border"} rounded-lg flex justify-center items-center gap-x-2 relative cursor-pointer z-10`}
+      className={`wrapper ${
+        !hideBorder && "bg-container border border-bg-border pr-3 pl-4 py-2"
+      } rounded-lg flex justify-center items-center gap-x-2 relative cursor-pointer z-10`}
     >
       <p className="wrapper text-sm font-[600] text-main-container">
         {getDisplayValue()}
