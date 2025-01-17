@@ -21,6 +21,7 @@ const ProblemHeader = () => {
   const { running } = useRunningStore();
   const { problemId } = useParams();
   const { submitting, setSubmitting } = useSubmittingStore();
+  const [saving, setSaving] = useState(false);
 
   const run = async () => {
     const socketId = await runCode(code, language);
@@ -33,20 +34,27 @@ const ProblemHeader = () => {
 
   const submit = async () => {
     if (problemId) {
-      setSubmitting(true);
-      const data = await submitCode(
-        problemId as string,
-        code,
-        language,
-        "PUBLIC"
-      );
-      setSubmitId(data.id);
-      router.replace(`/solve/${problemId}/my-submits`);
+      try {
+        setSubmitting(true);
+        const data = await submitCode(
+          problemId as string,
+          code,
+          language,
+          "PUBLIC"
+        );
+        setSubmitId(data.id);
+        router.replace(`/solve/${problemId}/my-submits`);
+      } catch {
+        setSubmitId(0);
+        setSubmitting(false);
+      }
     }
   };
 
+  const save = () => {};
+
   return (
-    <div className="w-full h-[72px] flex items-center gap-x-4 px-12 border-b border-bg-border bg-container">
+    <div className="w-full h-[72px] flex items-center gap-x-4 px-12 border-b border-bg-border bg-container justify-between">
       <div onClick={router.back} className="cursor-pointer">
         <ThemedIcon
           icon="arrow-left-back"
@@ -56,12 +64,28 @@ const ProblemHeader = () => {
           shade="container"
         />
       </div>
-      <button onClick={running ? stop : run}>
-        {running ? "종료" : "실행"}
-      </button>
-      <button onClick={submit} disabled={running || submitting}>
-        {submitting ? "채점 중..." : "제출"}
-      </button>
+      <div className="flex gap-x-2">
+        <button
+          onClick={save}
+          disabled={running || submitting || saving}
+          className="px-4 py-2 rounded border-none outline-none bg-secondary-700 text-white cursor-pointer disabled:bg-secondary-100"
+        >
+          {saving ? "저장 중..." : "저장"}
+        </button>
+        <button
+          onClick={running ? stop : run}
+          className="px-4 py-2 rounded border-none outline-none bg-secondary-700 text-white cursor-pointer disabled:bg-secondary-100"
+        >
+          {running ? "종료" : "실행"}
+        </button>
+        <button
+          onClick={submit}
+          disabled={running || submitting}
+          className="px-4 py-2 rounded border-none outline-none bg-primary-700 text-white cursor-pointer disabled:bg-primary-100"
+        >
+          {submitting ? "채점 중..." : "제출"}
+        </button>
+      </div>
     </div>
   );
 };

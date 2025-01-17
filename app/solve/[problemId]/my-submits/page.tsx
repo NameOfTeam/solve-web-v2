@@ -4,13 +4,17 @@ import { WS_URL } from "@/constants/api";
 import { useSubmitSocketIdStore } from "@/stores/socket/useSubmitSocketIdStore";
 import { useSubmittingStore } from "@/stores/socket/useSubmittingStore";
 import { ScoringData } from "@/types/problem/scoring";
+import { isWrongAnswer } from "@/utils/isWrongAnswer";
+import { languageParser } from "@/utils/languageParser";
+import { submitStatusParser } from "@/utils/submitStatusParser";
 import React, { useEffect, useRef, useState } from "react";
 
 const MySubmits = () => {
   const { id, setId } = useSubmitSocketIdStore();
   const socketClient = useRef<WebSocket | null>(null);
   const { setSubmitting } = useSubmittingStore();
-  const [newSubmit, setNewSubmit] = useState<ScoringData>();
+  const [newSubmit, setNewSubmit] = useState<ScoringData | null>(null);
+  const [submits, setSubmits] = useState<ScoringData[]>([]);
 
   useEffect(() => {
     if (id !== 0) {
@@ -25,6 +29,9 @@ const MySubmits = () => {
         }
       };
       socketClient.current.onclose = () => {
+        if (newSubmit) {
+          setSubmits((prev) => [...prev, newSubmit]);
+        }
         setSubmitting(false);
       };
     } else {
@@ -50,9 +57,70 @@ const MySubmits = () => {
         <p className="flex-1 px-4 text-center">메모리</p>
         <p className="flex-1 px-4 text-center">시간</p>
       </div>
-      <div>
-        <div>{newSubmit?.progress.toFixed()}%</div>
-      </div>
+      {newSubmit && (
+        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border">
+          <p
+            className={`flex-[8] px-4 ${
+              newSubmit.result === "PENDING" ||
+              newSubmit.result === "JUDGING" ||
+              newSubmit.result === "JUDGING_IN_PROGRESS"
+                ? ""
+                : isWrongAnswer(newSubmit.result)
+                ? "text-danger-300"
+                : "text-secondary-500"
+            }`}
+          >
+            {submitStatusParser(newSubmit?.result)}
+            {newSubmit.result === "PENDING" ||
+              newSubmit.result === "JUDGING" ||
+              (newSubmit.result === "JUDGING_IN_PROGRESS" &&
+                `( ${newSubmit?.progress.toFixed()}% )`)}
+          </p>
+          <p className="flex-1 px-4 text-center">
+            {newSubmit.language ? languageParser(newSubmit.language) : ""}
+          </p>
+          <p className="flex-1 px-4 text-center">
+            {newSubmit?.memoryUsage || ""}
+            {newSubmit.memoryUsage && "KB"}
+          </p>
+          <p className="flex-1 px-4 text-center">
+            {newSubmit?.timeUsage || ""}
+            {newSubmit.timeUsage && "ms"}
+          </p>
+        </div>
+      )}
+      {submits.reverse().map((item) => (
+        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border" key={item.submitId}>
+          <p
+            className={`flex-[8] px-4 ${
+              item.result === "PENDING" ||
+              item.result === "JUDGING" ||
+              item.result === "JUDGING_IN_PROGRESS"
+                ? ""
+                : isWrongAnswer(item.result)
+                ? "text-danger-300"
+                : "text-secondary-500"
+            }`}
+          >
+            {submitStatusParser(item?.result)}
+            {item.result === "PENDING" ||
+              item.result === "JUDGING" ||
+              (item.result === "JUDGING_IN_PROGRESS" &&
+                `( ${item?.progress.toFixed()}% )`)}
+          </p>
+          <p className="flex-1 px-4 text-center">
+            {item.language ? languageParser(item.language) : ""}
+          </p>
+          <p className="flex-1 px-4 text-center">
+            {item?.memoryUsage || ""}
+            {item.memoryUsage && "KB"}
+          </p>
+          <p className="flex-1 px-4 text-center">
+            {item?.timeUsage || ""}
+            {item.timeUsage && "ms"}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };

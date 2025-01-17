@@ -7,14 +7,8 @@ export const submitCode = async (
   language: string,
   visibility: string
 ) => {
-  try {
-    const { data } = await solveAxios.post<
-      BaseResponse<{ id: number; result: string }>
-    >(`/problems/${problemId}/submit`, { code, language, visibility });
-    return data.data;
-  } catch {
-    return {
-      id: 0,
-    };
-  }
+  const { data } = await solveAxios.post<
+    BaseResponse<{ id: number; result: string }>
+  >(`/submits?problemId=${problemId}`, { code, language, visibility });
+  return data.data;
 };
