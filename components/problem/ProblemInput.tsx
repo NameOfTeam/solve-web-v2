@@ -1,6 +1,7 @@
 "use client";
 
 import { WS_URL } from "@/constants/api";
+import { useCodeStore } from "@/stores/problem/useCodeStore";
 import { useRunningStore } from "@/stores/socket/useRunningStore";
 import { useRunSocketIdStore } from "@/stores/socket/useRunSocketIdStore";
 import { escaper } from "@/utils/escaper";
@@ -15,6 +16,7 @@ const ProblemInput = () => {
   const [input, setInput] = useState("");
   const [readOnly, setReadOnly] = useState(true);
   const { setRunning } = useRunningStore();
+  const { setCode } = useCodeStore();
 
   const send = () => {
     const message = escaper(input);
@@ -70,6 +72,8 @@ const ProblemInput = () => {
       }
     }
     return () => {
+      setCode("");
+      setId(0);
       socketClient.current?.close();
     };
   }, [id]);
