@@ -65,6 +65,7 @@ const ProblemInput = () => {
         ) {
           setLogs((prev) => [...prev, "프로세스가 종료되었습니다."]);
           setReadOnly(true);
+          setId(0);
         }
       } catch (error) {
         console.error("Error parsing message data:", error);

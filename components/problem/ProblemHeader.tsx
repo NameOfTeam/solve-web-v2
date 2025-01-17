@@ -11,6 +11,7 @@ import { useRunningStore } from "@/stores/socket/useRunningStore";
 import { submitCode } from "@/api/problem/submitCode";
 import { useSubmitSocketIdStore } from "@/stores/socket/useSubmitSocketIdStore";
 import { useSubmittingStore } from "@/stores/socket/useSubmittingStore";
+import { saveCode } from "@/api/problem/saveCode";
 
 const ProblemHeader = () => {
   const router = useRouter();
@@ -51,7 +52,14 @@ const ProblemHeader = () => {
     }
   };
 
-  const save = () => {};
+  const save = async () => {
+    if (problemId) {
+      setSaving(true);
+      const isSaved = await saveCode(problemId as string, code, language);
+      console.log(isSaved);
+      setSaving(false);
+    }
+  };
 
   return (
     <div className="w-full h-[72px] flex items-center gap-x-4 px-12 border-b border-bg-border bg-container justify-between">

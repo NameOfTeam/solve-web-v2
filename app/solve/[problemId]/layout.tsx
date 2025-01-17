@@ -1,11 +1,13 @@
 "use client";
 
+import { getSavedCode } from "@/api/problem/getSavedCode";
 import { CodeEditor } from "@/components/editor/CodeEditor";
 import ProblemHeader from "@/components/problem/ProblemHeader";
 import ProblemInput from "@/components/problem/ProblemInput";
 import ProblemTabs from "@/components/problem/ProblemTabs";
 import Dropdown from "@/components/ui/Dropdown";
 import { useCodeStore } from "@/stores/problem/useCodeStore";
+import { useLanguageStore } from "@/stores/problem/useLanguageStore";
 import { useParams, useRouter } from "next/navigation";
 import React, {
   PropsWithChildren,
@@ -17,9 +19,23 @@ import React, {
 const SolveLayout = ({ children }: PropsWithChildren) => {
   const [isResizing, setIsResizing] = useState(false);
   const [leftWidth, setLeftWidth] = useState(50);
+  const { setCode } = useCodeStore();
+  const { language, setLanguage } = useLanguageStore();
 
   const router = useRouter();
   const { problemId } = useParams();
+
+  const getSave = async () => {
+    if (problemId) {
+      const save = await getSavedCode(problemId as string);
+      setCode(save.code);
+      setLanguage(save.language);
+    }
+  };
+
+  useEffect(()=>{
+    getSave();
+  },[]);
 
   useEffect(() => {
     router.prefetch(`/solve/${problemId}/my-submits`);
@@ -98,7 +114,7 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
                   { name: "C", value: "C" },
                   { name: "Node.js", value: "NODE_JS" },
                 ]}
-                defaultValue="PYTHON"
+                defaultValue={language}
                 type="LANGUAGE"
                 hideBorder={true}
               />
