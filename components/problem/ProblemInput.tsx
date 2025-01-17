@@ -5,6 +5,7 @@ import { useCodeStore } from "@/stores/problem/useCodeStore";
 import { useRunningStore } from "@/stores/socket/useRunningStore";
 import { useRunSocketIdStore } from "@/stores/socket/useRunSocketIdStore";
 import { escaper } from "@/utils/escaper";
+import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const ProblemInput = () => {
@@ -17,6 +18,7 @@ const ProblemInput = () => {
   const [readOnly, setReadOnly] = useState(true);
   const { setRunning } = useRunningStore();
   const { setCode } = useCodeStore();
+  const { problemId } = useParams();
 
   const send = () => {
     const message = escaper(input);
@@ -35,46 +37,50 @@ const ProblemInput = () => {
   };
 
   useEffect(() => {
-    if (id !== 0) {
-      setLogs([]);
-      socketClient.current = new WebSocket(`${WS_URL}/run/${id}`);
-      socketClient.current.onopen = () => {
-        setReadOnly(false);
-        textareaRef.current?.focus();
-        setLogs((prev) => [...prev, "프로세스가 시작되었습니다."]);
-        setRunning(true);
-      };
-      socketClient.current.onmessage = (e) => {
-        try {
-          const data = JSON.parse(e.data);
-          if (data.type === "output") {
-            setLogs((prev) => [...prev, data.content]);
-          } else if (
-            data.type === "status" &&
-            data.content === "Execution completed"
-          ) {
-            setLogs((prev) => [...prev, "프로세스가 종료되었습니다."]);
-            setReadOnly(true);
-          }
-        } catch (error) {
-          console.error("Error parsing message data:", error);
-          console.log("Received data:", e.data);
+    setCode("");
+  }, [problemId]);
+
+  useEffect(() => {
+    if (id === 0) {
+      setRunning(false);
+      return;
+    }
+    console.log(id);
+    setLogs([]);
+    socketClient.current = new WebSocket(`${WS_URL}/run/${id}`);
+    socketClient.current.onopen = () => {
+      setReadOnly(false);
+      textareaRef.current?.focus();
+      setLogs((prev) => [...prev, "프로세스가 시작되었습니다."]);
+      setRunning(true);
+    };
+    socketClient.current.onmessage = (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        if (data.type === "output") {
+          setLogs((prev) => [...prev, data.content]);
+        } else if (
+          data.type === "status" &&
+          data.content === "Execution completed"
+        ) {
+          setLogs((prev) => [...prev, "프로세스가 종료되었습니다."]);
+          setReadOnly(true);
         }
-      };
-      socketClient.current.onclose = () => {
-        setRunning(false);
-        setReadOnly(true);
-      };
-    } else {
-      if (socketClient.current?.CLOSED || socketClient.current?.CLOSING) {
+      } catch (error) {
+        console.error("Error parsing message data:", error);
+        console.log("Received data:", e.data);
+      }
+    };
+    socketClient.current.onclose = () => {
+      setRunning(false);
+      setReadOnly(true);
+    };
+    return () => {
+      if (id !== 0) {
         socketClient.current?.close();
+        setRunning(false);
         setId(0);
       }
-    }
-    return () => {
-      setCode("");
-      setId(0);
-      socketClient.current?.close();
     };
   }, [id]);
 

@@ -17,7 +17,11 @@ const MySubmits = () => {
   const [submits, setSubmits] = useState<ScoringData[]>([]);
 
   useEffect(() => {
-    if (id !== 0) {
+    console.log(id);
+    if (id === 0) {
+      setSubmitting(false);
+      return;
+    }
       socketClient.current = new WebSocket(`${WS_URL}/progress/${id}`);
       socketClient.current.onmessage = (e) => {
         try {
@@ -34,14 +38,12 @@ const MySubmits = () => {
         }
         setSubmitting(false);
       };
-    } else {
-      if (socketClient.current?.CLOSED || socketClient.current?.CLOSING) {
+    return () => {
+      if (id !== 0) {
         socketClient.current?.close();
+        setSubmitting(false);
         setId(0);
       }
-    }
-    return () => {
-      socketClient.current?.close();
     };
   }, [id]);
 

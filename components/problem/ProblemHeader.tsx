@@ -74,6 +74,7 @@ const ProblemHeader = () => {
         </button>
         <button
           onClick={running ? stop : run}
+          disabled={submitting || saving}
           className="px-4 py-2 rounded border-none outline-none bg-secondary-700 text-white cursor-pointer disabled:bg-secondary-100"
         >
           {running ? "종료" : "실행"}
