@@ -27,15 +27,17 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
 
   const getSave = async () => {
     if (problemId) {
-      const save = await getSavedCode(problemId as string);
-      setCode(save.code);
-      setLanguage(save.language);
+      const save = await getSavedCode(problemId as string, language);
+      if(save.code && save.language) {
+        setCode(save.code);
+        setLanguage(save.language);
+      }
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getSave();
-  },[]);
+  }, [language]);
 
   useEffect(() => {
     router.prefetch(`/solve/${problemId}/my-submits`);
