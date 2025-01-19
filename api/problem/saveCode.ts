@@ -6,8 +6,12 @@ export const saveCode = async (
   language: string
 ) => {
   try {
-    await solveAxios.post(`/problems/${problemId}/code`, { code, language });
-    return true
+    await solveAxios.post(
+      `/problems/${problemId}/code`,
+      {},
+      { params: { code, language } }
+    );
+    return true;
   } catch {
     return false;
   }

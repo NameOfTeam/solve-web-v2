@@ -15,7 +15,7 @@ const ContestItem = ({ data }: { data: Contest }) => {
       href={`/contests/${data.id}`}
       className="w-full h-24 bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7"
     >
-      <div className="w-full font-[600] text-base flex items-end whitespace-nowrap">
+      <div className="w-full font-[600] gap-1 text-base flex items-end whitespace-nowrap">
         <p className="text-lg flex-[4.5] text-main-container">{data.title}</p>
         <p className="flex-[1.4] text-main-container">
           {data.state === "UPCOMING"
@@ -27,8 +27,8 @@ const ContestItem = ({ data }: { data: Contest }) => {
         <p className="flex-[1.1] text-main-container">시작</p>
         <p className="flex-[1.1] text-main-container">종료</p>
       </div>
-      <div className="w-full font-[400] text-sm flex items-center whitespace-nowrap">
-        <p className="text-sm flex-[4.5] text-main-container">
+      <div className="w-full font-[400] gap-1 text-sm flex items-center whitespace-nowrap">
+        <p className="text-sm flex-[4.5] text-main-container overflow-hidden whitespace-nowrap text-ellipsis">
           <span
             className={`${
               data.state === "UPCOMING"

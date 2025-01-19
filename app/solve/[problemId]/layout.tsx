@@ -5,6 +5,7 @@ import { CodeEditor } from "@/components/editor/CodeEditor";
 import ProblemHeader from "@/components/problem/ProblemHeader";
 import ProblemInput from "@/components/problem/ProblemInput";
 import ProblemTabs from "@/components/problem/ProblemTabs";
+import ProgressProvider from "@/components/provider/ProgressProvider";
 import Dropdown from "@/components/ui/Dropdown";
 import { useCodeStore } from "@/stores/problem/useCodeStore";
 import { useLanguageStore } from "@/stores/problem/useLanguageStore";
@@ -28,7 +29,7 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
   const getSave = async () => {
     if (problemId) {
       const save = await getSavedCode(problemId as string, language);
-      if(save.code && save.language) {
+      if (save.code && save.language) {
         setCode(save.code);
         setLanguage(save.language);
       }
@@ -83,52 +84,61 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
   }, [isResizing, resize, stopResizing]);
 
   return (
-    <div className="w-full h-screen bg-bg text-main-container">
-      <ProblemHeader />
-      <div className="flex w-full px-12 py-4 h-except-header">
-        <div
-          className="h-full flex flex-col gap-y-4"
-          style={{ width: `${leftWidth}%` }}
-        >
-          <ProblemTabs />
-          {children}
-        </div>
-        <div
-          className="w-6 h-full flex items-center justify-center cursor-col-resize"
-          onMouseDown={startResizing}
-        >
+    <ProgressProvider>
+      <div className="w-full h-screen bg-bg text-main-container">
+        <ProblemHeader />
+        <div className="flex w-full px-12 py-4 h-except-header">
           <div
-            className={`w-[2px] h-8 transition-colors ${
-              isResizing ? "bg-bg-border" : "bg-container-border"
-            }`}
-          ></div>
-        </div>
-        <div
-          className="h-full flex flex-col gap-y-4"
-          style={{ width: `${100 - leftWidth}%` }}
-        >
-          <div className="flex-1 w-full rounded-lg bg-container border-bg-border border overflow-hidden">
-            <div className="w-24 pl-3 py-2">
-              <Dropdown
-                data={[
-                  { name: "Python", value: "PYTHON" },
-                  { name: "Java", value: "JAVA" },
-                  { name: "C", value: "C" },
-                  { name: "Node.js", value: "NODE_JS" },
-                ]}
-                defaultValue={language}
-                type="LANGUAGE"
-                hideBorder={true}
-              />
-            </div>
-            <CodeEditor />
+            className="h-full flex flex-col gap-y-4"
+            style={{ width: `${leftWidth}%` }}
+          >
+            <ProblemTabs />
+            {children}
           </div>
-          <div className="h-60 w-full rounded-lg bg-container border-bg-border border">
-            <ProblemInput />
+          <div
+            className="w-6 h-full flex items-center justify-center cursor-col-resize"
+            onMouseDown={startResizing}
+          >
+            <div
+              className={`w-[2px] h-8 transition-colors ${
+                isResizing ? "bg-bg-border" : "bg-container-border"
+              }`}
+            ></div>
+          </div>
+          <div
+            className="h-full flex flex-col gap-y-4"
+            style={{ width: `${100 - leftWidth}%` }}
+          >
+            <div className="flex-1 w-full rounded-lg bg-container border-bg-border border overflow-hidden">
+              <div className="px-2 py-2 flex gap-x-2">
+                <Dropdown
+                  data={[
+                    { name: "Python", value: "PYTHON" },
+                    { name: "Java", value: "JAVA" },
+                    { name: "C", value: "C" },
+                    { name: "Node.js", value: "NODE_JS" },
+                  ]}
+                  defaultValue={language}
+                  type="LANGUAGE"
+                />
+                <Dropdown
+                  data={[
+                    { name: "공개", value: "PUBLIC" },
+                    { name: "비공개", value: "PRIVATE" },
+                  ]}
+                  defaultValue="PUBLIC"
+                  type="VISIBILITY"
+                />
+              </div>
+              <CodeEditor />
+            </div>
+            <div className="h-60 w-full rounded-lg bg-container border-bg-border border">
+              <ProblemInput />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ProgressProvider>
   );
 };
 

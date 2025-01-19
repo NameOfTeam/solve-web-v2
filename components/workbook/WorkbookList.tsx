@@ -9,13 +9,15 @@ import PageController from "../ui/PageController";
 
 const WorkbookList = ({
   initialData,
+  filter,
   query,
 }: {
   initialData: PageResponse<Workbook>;
+  filter: null | "BOOKMARKED" | "POPULAR";
   query?: string;
 }) => {
   const [page, setPage] = useState(0);
-  const workbooks = useGetWorkbookList({ page, query }, initialData);
+  const workbooks = useGetWorkbookList({ page, query }, filter, initialData);
 
   return (
     <>

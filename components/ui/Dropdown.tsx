@@ -6,6 +6,7 @@ import { useProblemFilterStore } from "@/stores/problem/useProblemFilterStore";
 import { Tier } from "@/types/tier/tier";
 import { useCategoryStore } from "@/stores/board/useCategoryStore";
 import { useLanguageStore } from "@/stores/problem/useLanguageStore";
+import { useVisibilityStore } from "@/stores/problem/useVisibilityStore";
 
 const DROPDOWN_TOGGLE_EVENT = "dropdownToggle";
 
@@ -13,12 +14,10 @@ const Dropdown = ({
   defaultValue,
   type,
   data,
-  hideBorder,
 }: {
   defaultValue: string;
-  type: "STATE" | "TIER" | "FILTER" | "CATEGORY" | "LANGUAGE";
+  type: "STATE" | "TIER" | "FILTER" | "CATEGORY" | "LANGUAGE" | "VISIBILITY";
   data: { name: string; value: string }[];
-  hideBorder?: boolean;
 }) => {
   const [opened, setOpened] = useState(false);
   const dropdownId = useId();
@@ -27,6 +26,7 @@ const Dropdown = ({
     useProblemFilterStore();
   const { category, setCategory } = useCategoryStore();
   const { language, setLanguage } = useLanguageStore();
+  const { visibility, setVisibility } = useVisibilityStore();
 
   useEffect(() => {
     const handleDropdownToggle = (e: CustomEvent) => {
@@ -76,12 +76,19 @@ const Dropdown = ({
   };
 
   const getDisplayValue = () => {
-    if (type === "FILTER" || type === "CATEGORY" || type === "LANGUAGE") {
+    if (
+      type === "FILTER" ||
+      type === "CATEGORY" ||
+      type === "LANGUAGE" ||
+      type === "VISIBILITY"
+    ) {
       const selectedItem =
         type === "FILTER"
           ? data.find((item) => item.value === order)
           : type === "LANGUAGE"
           ? data.find((item) => item.value === language)
+          : type === "VISIBILITY"
+          ? data.find((item) => item.value === visibility)
           : data.find((item) => item.value === category);
       return selectedItem ? selectedItem.name : defaultValue;
     } else {
@@ -119,9 +126,7 @@ const Dropdown = ({
   return (
     <div
       onClick={handleToggle}
-      className={`wrapper ${
-        !hideBorder && "bg-container border border-bg-border pr-3 pl-4 py-2"
-      } rounded-lg flex justify-center items-center gap-x-2 relative cursor-pointer z-10`}
+      className="wrapper bg-container border border-bg-border pr-3 pl-4 py-2 rounded-lg flex justify-center items-center gap-x-2 relative cursor-pointer z-10"
     >
       <p className="wrapper text-sm font-[600] text-main-container">
         {getDisplayValue()}
@@ -143,14 +148,18 @@ const Dropdown = ({
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          {type === "FILTER" || type === "CATEGORY" || type === "LANGUAGE"
+          {type === "FILTER" ||
+          type === "CATEGORY" ||
+          type === "LANGUAGE" ||
+          type === "VISIBILITY"
             ? data.map((item) => (
                 <p
                   key={item.value}
                   className={`dropdown text-sm font-[400] whitespace-nowrap px-1 cursor-pointer ${
                     order === item.value ||
                     language === item.value ||
-                    category === item.value
+                    category === item.value ||
+                    visibility === item.value
                       ? "text-secondary-500"
                       : "text-main-container"
                   }`}
@@ -169,6 +178,8 @@ const Dropdown = ({
                           setLanguage(
                             item.value as "PYTHON" | "NODE_JS" | "C" | "JAVA"
                           )
+                      : type === "VISIBILITY"
+                      ? () => setVisibility(item.value as "PUBLIC" | "PRIVATE")
                       : () => setOrder(item.value)
                   }
                 >

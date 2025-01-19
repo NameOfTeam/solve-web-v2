@@ -1,6 +1,6 @@
 import { ProblemSubmitState } from "./problem";
 
-export interface ScoringData {
+export interface SubmitData {
   result: ProblemSubmitState;
   progress: number;
   submitId: string;

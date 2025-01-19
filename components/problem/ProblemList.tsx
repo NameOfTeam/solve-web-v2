@@ -51,7 +51,12 @@ const ProblemList = ({
                   className={`flex-[8] px-4 ${
                     item.state === "ACCEPTED"
                       ? "text-secondary-500"
-                      : "text-main-container"
+                      : item.state === "JUDGING_IN_PROGRESS" ||
+                        item.state === "PENDING" ||
+                        item.state === "JUDGING" || 
+                        !item.state
+                      ? "text-main-container"
+                      : "text-danger-500"
                   }`}
                 >
                   {item.title}

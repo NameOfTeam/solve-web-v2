@@ -12,7 +12,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
       href={`/workbooks/${data.id}`}
       className="w-full h-24 bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7"
     >
-      <div className="w-full font-[600] text-base flex items-end whitespace-nowrap">
+      <div className="w-full font-[600] gap-1 text-base flex items-end whitespace-nowrap">
         <p className="text-lg flex-[8] text-main-container">{data.title}</p>
         <p className="flex-[1] text-main-container">만든이</p>
         <p className="flex-[1.5] text-main-container">업데이트</p>
@@ -41,8 +41,8 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
           </p>
         </div>
       </div>
-      <div className="w-full font-[400] text-sm flex items-center whitespace-nowrap">
-        <p className="text-sm flex-[8] text-main-container">
+      <div className="w-full font-[400] gap-1 text-sm flex items-center whitespace-nowrap">
+        <p className="text-sm flex-[8] text-main-container overflow-hidden whitespace-nowrap text-ellipsis">
           No. {data.id}
           {data.description && ` ・ ${data.description}`}
         </p>

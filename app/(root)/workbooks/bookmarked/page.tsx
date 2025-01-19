@@ -1,13 +1,10 @@
 import { getWorkbookSearch } from "@/api/workbook/getWorkbookSearch";
-import Banner from "@/components/ui/Banner";
-import Search from "@/components/ui/Search";
-import WorkbookFilter from "@/components/workbook/WorkbookFilter";
 import WorkbookList from "@/components/workbook/WorkbookList";
 import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";
-import React, { Suspense } from "react";
+import React from "react";
 
-const Workbooks = async ({
+const BookmarkedWorkbooks = async ({
   searchParams,
 }: {
   searchParams?:
@@ -15,15 +12,20 @@ const Workbooks = async ({
     | undefined;
 }) => {
   const query = (await searchParams)?.query;
-  const initialData = await getWorkbookSearch(0, 15, null, query as string);
+  const initialData = await getWorkbookSearch(
+    0,
+    15,
+    "BOOKMARKED",
+    query as string
+  );
 
   return (
     <WorkbookList
       initialData={initialData as PageResponse<Workbook>}
       query={query as string | undefined}
-      filter={null}
+      filter="BOOKMARKED"
     />
   );
 };
 
-export default Workbooks;
+export default BookmarkedWorkbooks;

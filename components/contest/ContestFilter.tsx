@@ -1,12 +1,17 @@
 "use client";
 
-import { useContestFilterStore } from "@/stores/contest/useContestFilterStore";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 const ContestFilter = () => {
   const router = useRouter();
   const pathname = usePathname();
+
+  useEffect(() => {
+    router.prefetch("/contests/upcoming");
+    router.prefetch("/contests/ongoing");
+    router.prefetch("/contests/ended");
+  }, [router]);
 
   return (
     <div className="flex font-[400] text-base text-main-container">

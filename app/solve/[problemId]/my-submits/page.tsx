@@ -1,64 +1,100 @@
 "use client";
 
+import { getMySubmits } from "@/api/problem/getMySubmits";
 import { WS_URL } from "@/constants/api";
 import { useSubmitSocketIdStore } from "@/stores/socket/useSubmitSocketIdStore";
 import { useSubmittingStore } from "@/stores/socket/useSubmittingStore";
-import { ScoringData } from "@/types/problem/scoring";
+import { SubmitData } from "@/types/problem/submit";
 import { isWrongAnswer } from "@/utils/isWrongAnswer";
 import { languageParser } from "@/utils/languageParser";
 import { submitStatusParser } from "@/utils/submitStatusParser";
+import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const MySubmits = () => {
   const { id, setId } = useSubmitSocketIdStore();
   const socketClient = useRef<WebSocket | null>(null);
+  const hasConnected = useRef(false);
   const { setSubmitting } = useSubmittingStore();
-  const [newSubmit, setNewSubmit] = useState<ScoringData | null>(null);
-  const [submits, setSubmits] = useState<ScoringData[]>([]);
+  const [newSubmit, setNewSubmit] = useState<SubmitData | null>(null);
+  const [submits, setSubmits] = useState<SubmitData[]>([]);
+  const { problemId } = useParams();
+
+  const fetchData = async () => {
+    if(problemId) {
+      const data = await getMySubmits(problemId as string);
+      setSubmits(data);
+    }
+  } 
+
+  useEffect(()=>{
+    fetchData();
+  },[problemId]);
 
   useEffect(() => {
-    console.log(id);
     if (id === 0) {
       setSubmitting(false);
+      hasConnected.current = false;
       return;
     }
-      socketClient.current = new WebSocket(`${WS_URL}/progress/${id}`);
-      socketClient.current.onmessage = (e) => {
-        try {
-          const data: ScoringData = JSON.parse(e.data);
+
+    if (hasConnected.current) return;
+
+    hasConnected.current = true;
+    socketClient.current = new WebSocket(`${WS_URL}/progress/${id}`);
+
+    socketClient.current.onmessage = (e) => {
+      try {
+        const data: SubmitData = JSON.parse(e.data);
+        if (
+          data.result !== "JUDGING" &&
+          data.result !== "PENDING" &&
+          data.result !== "JUDGING_IN_PROGRESS"
+        ) {
+          setSubmits((prev) => [data, ...prev]);
+          setNewSubmit(null);
+          setId(0);
+        } else {
           setNewSubmit(data);
-        } catch (error) {
-          console.error("Error parsing message data:", error);
-          console.log("Received data:", e.data);
         }
-      };
-      socketClient.current.onclose = () => {
-        if (newSubmit) {
-          setSubmits((prev) => [...prev, newSubmit]);
-        }
-        setSubmitting(false);
-      };
-    return () => {
-      if (id !== 0) {
-        socketClient.current?.close();
-        setSubmitting(false);
-        setId(0);
+      } catch (error) {
+        console.error("Error parsing message data:", error);
+        console.log("Received data:", e.data);
       }
     };
-  }, [id]);
+
+    socketClient.current.onclose = () => {
+      setSubmitting(false);
+      socketClient.current = null;
+      hasConnected.current = false;
+    };
+
+    return () => {
+      if (id === 0) {
+        socketClient.current?.close();
+        socketClient.current = null;
+        setSubmitting(false);
+        hasConnected.current = false;
+      }
+    };
+  }, [id, setId, setSubmitting]);
 
   return (
     <div className="flex-1 bg-container border border-bg-border rounded-lg px-7 py-5 overflow-y-scroll">
       <div className="w-full px-4 pb-2 flex justify-between text-sm border-b border-bg-border">
-        <p className="font-[400] text-bg-border">10개의 제출</p>
+        <p className="font-[400] text-bg-border">
+          {`${submits.length + (newSubmit ? 1 : 0)}개의 제출`}
+        </p>
         <p className="font-[600] cursor-pointer">새로고침</p>
       </div>
+
       <div className="w-full h-9 flex items-center text-sm font-[600] border-b border-bg-border">
         <p className="flex-[8] px-4">상태</p>
         <p className="flex-1 px-4 text-center">언어</p>
         <p className="flex-1 px-4 text-center">메모리</p>
         <p className="flex-1 px-4 text-center">시간</p>
       </div>
+
       {newSubmit && (
         <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border">
           <p
@@ -72,11 +108,11 @@ const MySubmits = () => {
                 : "text-secondary-500"
             }`}
           >
-            {submitStatusParser(newSubmit?.result)}
-            {newSubmit.result === "PENDING" ||
+            {submitStatusParser(newSubmit.result)}
+            {(newSubmit.result === "PENDING" ||
               newSubmit.result === "JUDGING" ||
-              (newSubmit.result === "JUDGING_IN_PROGRESS" &&
-                `( ${newSubmit?.progress.toFixed()}% )`)}
+              newSubmit.result === "JUDGING_IN_PROGRESS") &&
+              `( ${newSubmit.progress.toFixed()}% )`}
           </p>
           <p className="flex-1 px-4 text-center">
             {newSubmit.language ? languageParser(newSubmit.language) : ""}
@@ -91,35 +127,36 @@ const MySubmits = () => {
           </p>
         </div>
       )}
-      {submits.reverse().map((item) => (
-        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border" key={item.submitId}>
+
+      {submits.map((submit) => (
+        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border" key={submit.submitId}>
           <p
             className={`flex-[8] px-4 ${
-              item.result === "PENDING" ||
-              item.result === "JUDGING" ||
-              item.result === "JUDGING_IN_PROGRESS"
+              submit.result === "PENDING" ||
+              submit.result === "JUDGING" ||
+              submit.result === "JUDGING_IN_PROGRESS"
                 ? ""
-                : isWrongAnswer(item.result)
+                : isWrongAnswer(submit.result)
                 ? "text-danger-300"
                 : "text-secondary-500"
             }`}
           >
-            {submitStatusParser(item?.result)}
-            {item.result === "PENDING" ||
-              item.result === "JUDGING" ||
-              (item.result === "JUDGING_IN_PROGRESS" &&
-                `( ${item?.progress.toFixed()}% )`)}
+            {submitStatusParser(submit.result)}
+            {(submit.result === "PENDING" ||
+              submit.result === "JUDGING" ||
+              submit.result === "JUDGING_IN_PROGRESS") &&
+              `( ${submit.progress.toFixed()}% )`}
           </p>
           <p className="flex-1 px-4 text-center">
-            {item.language ? languageParser(item.language) : ""}
+            {submit.language ? languageParser(submit.language) : ""}
           </p>
           <p className="flex-1 px-4 text-center">
-            {item?.memoryUsage || ""}
-            {item.memoryUsage && "KB"}
+            {submit.memoryUsage || ""}
+            {submit.memoryUsage && "KB"}
           </p>
           <p className="flex-1 px-4 text-center">
-            {item?.timeUsage || ""}
-            {item.timeUsage && "ms"}
+            {submit.timeUsage || ""}
+            {submit.timeUsage && "ms"}
           </p>
         </div>
       ))}

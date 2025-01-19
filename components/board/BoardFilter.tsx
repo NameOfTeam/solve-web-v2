@@ -2,12 +2,20 @@
 
 import { useUserStore } from "@/stores/user/useUserStore";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 const BoardFilter = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { user } = useUserStore();
+
+  useEffect(()=>{
+    router.prefetch("/boards/free");
+    router.prefetch("/boards/information");
+    router.prefetch("/boards/question");
+    router.prefetch("/boards/suggestion");
+    router.prefetch("/boards/notice");
+  },[router]);
 
   return (
     <div className="flex font-[400] text-base text-main-container">

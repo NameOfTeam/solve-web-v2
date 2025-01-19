@@ -1,5 +1,4 @@
 import { getWorkbookSearch } from "@/api/workbook/getWorkbookSearch";
-import { useWorkbookFilterStore } from "@/stores/workbook/useWorkbookFilterStore";
 import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";
 import { defaultPageResponse } from "@/utils/defaultPageResponse";
@@ -15,12 +14,10 @@ const useGetWorkbookList = (
     size?: number;
     query?: string;
   },
+  filter: "BOOKMARKED" | "POPULAR" | null,
   initialData: PageResponse<Workbook>
 ) => {
-  const { filter } = useWorkbookFilterStore();
-  const [data, setData] = useState<PageResponse<Workbook>>(
-    initialData
-  );
+  const [data, setData] = useState<PageResponse<Workbook>>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchData = async () => {
@@ -29,12 +26,7 @@ const useGetWorkbookList = (
     }
     setLoading(true);
     try {
-      const response = await getWorkbookSearch(
-        page,
-        size,
-        filter,
-        query,
-      );
+      const response = await getWorkbookSearch(page, size, filter, query);
       setData(response as PageResponse<Workbook>);
     } catch {
       setData(defaultPageResponse() as PageResponse<Workbook>);

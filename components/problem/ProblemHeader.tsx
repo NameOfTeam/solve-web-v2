@@ -12,6 +12,7 @@ import { submitCode } from "@/api/problem/submitCode";
 import { useSubmitSocketIdStore } from "@/stores/socket/useSubmitSocketIdStore";
 import { useSubmittingStore } from "@/stores/socket/useSubmittingStore";
 import { saveCode } from "@/api/problem/saveCode";
+import { useVisibilityStore } from "@/stores/problem/useVisibilityStore";
 
 const ProblemHeader = () => {
   const router = useRouter();
@@ -22,6 +23,7 @@ const ProblemHeader = () => {
   const { running } = useRunningStore();
   const { problemId } = useParams();
   const { submitting, setSubmitting } = useSubmittingStore();
+  const { visibility } = useVisibilityStore();
   const [saving, setSaving] = useState(false);
 
   const run = async () => {
@@ -41,10 +43,12 @@ const ProblemHeader = () => {
           problemId as string,
           code,
           language,
-          "PUBLIC"
+          visibility
         );
         setSubmitId(data.id);
-        router.replace(`/solve/${problemId}/my-submits`);
+        setTimeout(() => {
+          router.replace(`/solve/${problemId}/my-submits`);
+        }, 100);
       } catch {
         setSubmitId(0);
         setSubmitting(false);
