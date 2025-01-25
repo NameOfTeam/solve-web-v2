@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, Suspense } from "react";
 
-const AUthLayout = ({ children }: PropsWithChildren) => {
+const AuthLayout = ({ children }: PropsWithChildren) => {
   return <Suspense>{children}</Suspense>;
 };
 
-export default AUthLayout;
+export default AuthLayout;
