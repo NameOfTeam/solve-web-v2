@@ -24,7 +24,7 @@ const Header = () => {
         <div className=" flex items-center text-base h-full text-main-container header relative whitespace-nowrap z-[999]">
 
           <svg className="lg:hidden stroke-main-container w-[36px] h-full" viewBox="0 0 24 24">
-            <path d="M4 6H20M4 12H20M4 18H20" strokeWidth="2px" stroke-linecap="round" stroke-linejoin="round" width="36px" height="36px"/>
+            <path d="M4 6H20M4 12H20M4 18H20" strokeWidth="2px" strokeLinecap="round" strokeLinejoin="round" width="36px" height="36px"/>
           </svg>
 
           <div className="gap-x-7 flex max-lg:hidden ">
