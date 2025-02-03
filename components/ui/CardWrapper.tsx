@@ -14,7 +14,7 @@ const CardWrapper = ({ data }: { data: Contest[] }) => {
           ))}
         </div>
       ) : (
-        <div className="w-full h-64 flex justify-center items-center border border-bg-border rounded-lg">
+        <div className="w-full h-44 flex justify-center items-center border border-bg-border rounded-lg">
           <p className="text-bg-border text-2xl">대회가 없습니다.</p>
         </div>
       )}

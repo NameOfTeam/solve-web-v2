@@ -16,10 +16,10 @@ const MainMenu = ({
 }) => {
   return (
     <Link
-      className="px-3 py-5 flex flex-col gap-y-2 items-center justify-center cursor-pointer"
+      className="flex flex-col gap-y-2 items-center justify-center cursor-pointer"
       href={href}
     >
-      <div className="border-[1.2px] border-bg-border p-3 rounded-lg bg-container mx-4">
+      <div className="border-[1.2px] border-bg-border p-3 rounded-lg bg-container">
         <ThemedIcon
           icon={icon}
           height={48}
@@ -28,7 +28,7 @@ const MainMenu = ({
           shade="container"
         />
       </div>
-      <p className="text-[16px] font-[600] text-main-container">{title}</p>
+      <p className="text-base font-[600] text-main-container">{title}</p>
     </Link>
   );
 };
