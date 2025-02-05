@@ -15,7 +15,7 @@ const Home = async () => {
   return (
     <div className="w-full">
       <div className="w-full h-[520px] bg-[#2b2b2b]"></div>
-      <div className="w-full py-20 flex justify-center">
+      {/* <div className="w-full py-20 flex justify-center">
         <div className="w-80 flex flex-col items-center gap-y-3">
           <p className="text-4xl font-[700] text-main-container">SOLVE</p>
           <div className="w-full h-[2px] bg-main-container"></div>
@@ -23,8 +23,8 @@ const Home = async () => {
             당신의 찬란한 발걸음을 위하여
           </p>
         </div>
-      </div>
-      <div className="flex justify-center gap-[3%]">
+      </div> */}
+      <div className="flex justify-center gap-[2%] py-16">
         <MainMenu icon="problem" title="문제" href="/problems" />
         <MainMenu icon="workbook" title="문제집" href="/workbooks" />
         <MainMenu icon="flag" title="대회" href="/contests" />
@@ -32,23 +32,23 @@ const Home = async () => {
         <MainMenu icon="boards" title="게시판" href="/boards" />
       </div>
       <div className="flex justify-center x-screen py-9">
-        <div className="flex flex-col gap-y-5 w-[72%]">
-          <div className="w-full flex flex-col items-start gap-1 md:justify-between md:items-center md:flex-row">
-            <p className="text-2xl font-[600] text-main-container">
+        <div className="flex flex-col gap-y-3 w-[72%]">
+          <div className="w-full flex flex-col items-start gap-2 md:justify-between md:items-end md:flex-row">
+            <p className="text-xl font-[600] text-main-container">
               최근 진행된 / 진행 중인 대회들
             </p>
             <div className="flex gap-x-5">
-              <div className="flex gap-x-2 items-center">
+              <div className="flex gap-x-[6] items-center">
                 <span className="w-4 h-4 bg-primary-700 rounded-full"></span>
-                <p className="text-main-container">시작 예정</p>
+                <p className="text-main-container text-sm">시작 예정</p>
               </div>
-              <div className="flex gap-x-2 items-center">
+              <div className="flex gap-x-[6] items-center">
                 <span className="w-4 h-4 bg-secondary-500 rounded-full"></span>
-                <p className="text-main-container">진행 중</p>
+                <p className="text-main-container text-sm">진행 중</p>
               </div>
-              <div className="flex gap-x-2 items-center">
+              <div className="flex gap-x-[6] items-center">
                 <span className="w-4 h-4 bg-danger-500 rounded-full"></span>
-                <p className="text-main-container">종료</p>
+                <p className="text-main-container text-sm">종료</p>
               </div>
             </div>
           </div>
@@ -56,8 +56,8 @@ const Home = async () => {
         </div>
       </div>
       <div className="flex justify-center x-screen py-9">
-        <div className="flex flex-col gap-y-5 w-[72%]">  
-          <p className="text-2xl font-[600] text-main-container">
+        <div className="flex flex-col gap-y-3 w-[72%]">  
+          <p className="text-xl font-[600] text-main-container">
             문제집으로 실력 상승
           </p>
           <ItemWrapper data={workbooksData || []} />

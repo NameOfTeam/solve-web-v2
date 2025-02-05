@@ -8,13 +8,13 @@ const CardWrapper = ({ data }: { data: Contest[] }) => {
   return (
     <>
       {data.length > 0 ? (
-        <div className="w-full grid grid-cols-3 gap-6 max-xl:grid-cols-2 max-[850px]:grid-cols-1">
+        <div className="w-full grid grid-cols-3 gap-3 max-xl:grid-cols-2 max-[850px]:grid-cols-1">
           {data.map((item) => (
             <ContestCard key={item.id} data={item} />
           ))}
         </div>
       ) : (
-        <div className="w-full h-44 flex justify-center items-center border border-bg-border rounded-lg">
+        <div className="w-full h-44 flex justify-center items-center border border-bg-border bg-container rounded-lg">
           <p className="text-bg-border text-2xl">대회가 없습니다.</p>
         </div>
       )}

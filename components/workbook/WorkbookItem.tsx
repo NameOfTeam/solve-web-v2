@@ -13,7 +13,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
       className="w-full h-fit bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7 py-5"
     >
       <div className="w-full font-[400] text-base whitespace-nowrap flex lg:justify-between items-center max-lg:flex-col max-lg:gap-4 max-lg:items-start ">
-        <div className="flex gap-1 flex-col lg:max-w-80 max-lg:w-full">
+        <div className="flex gap-1 flex-col lg:max-w-72 max-lg:w-full">
           <p className="font-[600] text-lg text-main-container">{data.title}</p>
           <p className="text-sm text-main-container overflow-hidden whitespace-nowrap text-ellipsis">
             No. {data.id}
@@ -93,23 +93,6 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
         </div>
 
       </div>
-
-      {/* <div className="w-full font-[600] gap-1 text-base flex items-end whitespace-nowrap">
-        
-        
-        
-        
-
-        
-
-      </div>
-      <div className="w-full font-[400] gap-1 text-sm flex items-center whitespace-nowrap">
-        
-        
-        
-        
-
-      </div> */}
     </Link>
   );
 };

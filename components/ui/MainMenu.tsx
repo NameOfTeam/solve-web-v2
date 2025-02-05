@@ -22,8 +22,8 @@ const MainMenu = ({
       <div className="border-[1.2px] border-bg-border p-3 rounded-lg bg-container">
         <ThemedIcon
           icon={icon}
-          height={48}
-          width={48}
+          height={36}
+          width={36}
           variant="main"
           shade="container"
         />
