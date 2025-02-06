@@ -26,13 +26,13 @@ const BoardList = ({
   return (
     <>
       <div className="w-full h-full border border-bg-border bg-container rounded-lg">
-        <div className="w-full h-16 border-b border-bg-border flex items-center text-lg font-[600] px-6 text-main-container">
-          <p className="flex-[1] px-4 text-center">카테고리</p>
-          <p className="flex-[1] px-4 text-center">#</p>
-          <p className="flex-[8] px-4">제목</p>
-          <p className="flex-[1.3] px-4 text-center">언어</p>
-          <p className="flex-[1.3] px-4 text-center">글쓴이</p>
-          <p className="flex-[1.7] px-4 text-center">작성일</p>
+        <div className="w-full h-16 border-b border-bg-border flex items-center text-base font-[600] px-6 text-main-container">
+          <p className="w-20 text-center whitespace-nowrap flex-shrink-0 max-sm:hidden">카테고리</p>
+          <p className="w-14 text-center flex-shrink-0">#</p>
+          <p className="flex-[1] pl-4 whitespace-nowrap flex-shrink-0">제목</p>
+          <p className="w-28 whitespace-nowrap flex-shrink-0 text-center">언어</p>
+          <p className="w-20 text-center whitespace-nowrap flex-shrink-0">글쓴이</p>
+          <p className="w-20 text-center whitespace-nowrap flex-shrink-0 max-lg:hidden">작성일</p>
         </div>
         <div>
           {boards && boards.content.length > 0 ? (

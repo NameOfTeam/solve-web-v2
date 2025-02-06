@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import ThemedIcon from "./ThemedIcon";
 import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";
@@ -22,13 +22,18 @@ const PageController = ({
     startPage = totalPages - 10;
   }
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    console.log('page change')
+  }, [page]);
+
   startPage = Math.max(0, startPage);
 
   const endPage = Math.min(totalPages, startPage + 10);
 
-  const MoveToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  // const MoveToTop = () => {
+    
+  // }
   return (
     <div className="w-full flex justify-center items-center gap-x-3">
       <div
@@ -50,11 +55,10 @@ const PageController = ({
         return (
           <div
             key={pageNumber}
-            onClick={() => {
+            onClick={() => 
               setPage(pageNumber)
-              MoveToTop()
-            }}
-            className={`w-10 rounded-full flex justify-center items-center text-xl cursor-pointer font-[400] aspect-square flex-shrink-0 max-md:w-7 max-md:h-7 max-md:text-lg ${
+            }
+            className={`w-10 rounded-full flex justify-center items-center text-xl cursor-pointer font-[400] aspect-square flex-shrink-0 max-md:w-7 max-md:h-7 max-md:text-lg hover:bg-container ${
               page === pageNumber
                 ? "text-white bg-primary-600"
                 : "text-bg-border"

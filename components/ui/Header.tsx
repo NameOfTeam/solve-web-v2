@@ -58,7 +58,7 @@ const Header = () => {
             />
           </Link>
         ) : (
-          <Link href="/login" className="font-bold text-main-container whitespace-nowrap">
+          <Link href="/login" className="font-bold text-main-container whitespace-nowrap z-30">
             로그인
           </Link>
 

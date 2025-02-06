@@ -27,7 +27,7 @@ const ContestList = ({
             <ContestItem data={item} key={item.id} />
           ))
         ) : (
-          <div className="w-full h-72 flex items-center justify-center">
+          <div className="w-full h-72 flex items-center justify-center bg-container">
             <p className="text-2xl text-bg-border">등록된 대회가 없습니다.</p>
           </div>
         )}

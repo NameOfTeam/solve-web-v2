@@ -13,22 +13,11 @@ const ContestItem = ({ data }: { data: Contest }) => {
   return (
     <Link
       href={`/contests/${data.id}`}
-      className="w-full h-24 bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7"
+      className="w-full h-fit bg-container rounded-lg flex items-center px-7 py-5 whitespace-nowrap text-base gap-2 justify-between max-lg:flex-col max-lg:gap-4 max-lg:items-start"
     >
-      <div className="w-full font-[600] gap-1 text-base flex items-end whitespace-nowrap">
-        <p className="text-lg flex-[4.5] text-main-container">{data.title}</p>
-        <p className="flex-[1.4] text-main-container">
-          {data.state === "UPCOMING"
-            ? "시작까지"
-            : data.state === "ONGOING"
-            ? "남은시간"
-            : "우승자"}
-        </p>
-        <p className="flex-[1.1] text-main-container">시작</p>
-        <p className="flex-[1.1] text-main-container">종료</p>
-      </div>
-      <div className="w-full font-[400] gap-1 text-sm flex items-center whitespace-nowrap">
-        <p className="text-sm flex-[4.5] text-main-container overflow-hidden whitespace-nowrap text-ellipsis">
+      <div className="gap-1 flex-col overflow-hidden text-ellipsis max-lg:w-full">
+        <p className="text-lg text-main-container overflow-hidden text-ellipsis font-[600]">{data.title}</p>
+        <p className="text-sm text-main-container overflow-hidden whitespace-nowrap text-ellipsis">
           <span
             className={`${
               data.state === "UPCOMING"
@@ -47,17 +36,35 @@ const ContestItem = ({ data }: { data: Contest }) => {
 
           {data.description && ` ・ ${data.description}`}
         </p>
-        <p className="flex-[1.4] text-main-container">
+      </div>
+
+      <div className="flex gap-8 items-center max-lg:w-full max-lg:justify-between max-md:grid max-md:grid-cols-2 max-md:gap-2">
+        <div className="flex gap-[2px] flex-col min-w-28 max-lg:col-span-2">
+          <p className="text-main-container font-[600]">
+            {data.state === "UPCOMING"
+              ? "시작까지"
+              : data.state === "ONGOING"
+              ? "남은시간"
+              : "우승자"}
+          </p>
+          <p className="text-main-container text-sm">
           {data.state === "UPCOMING"
             ? startTimeLeft
             : data.state === "ONGOING"
             ? endTimeLeft
-            : data.winner?.username || ""}
-        </p>
-        <p className="flex-[1.1] text-main-container">
-          {formatDate(data.startAt)}
-        </p>
-        <p className="flex-[1.1] text-main-container">{formatDate(data.endAt)}</p>
+            : data.winner?.username || "우승자 없음"}
+          </p>
+        </div>
+
+        <div className="flex gap-[2px] flex-col">
+          <p className="text-main-container font-[600]">시작</p>
+          <p className="text-main-container text-sm">{formatDate(data.startAt)}</p>
+        </div>
+
+        <div className="flex gap-[2px] flex-col">
+          <p className="text-main-container font-[600]">종료</p>
+          <p className="text-main-container text-sm">{formatDate(data.endAt)}</p>
+        </div>
       </div>
     </Link>
   );

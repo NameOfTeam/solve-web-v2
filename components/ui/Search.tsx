@@ -33,7 +33,7 @@ const Search = ({ route }: { route: string }) => {
       <input
         type="text"
         className="bg-transparent outline-none py-3 text-main-container flex-1"
-        placeholder="문제를 검색하세요."
+        placeholder='검색어를 입력해주세요.'
         {...register("query")}
       />
       <Link className="cursor-pointer w-6 h-6" href={`/${route}`}>
