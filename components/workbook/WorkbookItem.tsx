@@ -8,14 +8,13 @@ import Link from "next/link";
 
 const WorkbookItem = ({ data }: { data: Workbook }) => {
   return (
-    <Link
-      href={`/workbooks/${data.id}`}
-      className="w-full h-fit bg-container rounded-lg flex flex-col justify-center items-center px-7 py-5"
+    <div
+      className="w-full h-fit font-[400] text-base bg-container rounded-lg flex flex-col justify-center items-center px-7 py-5 whitespace-nowrap"
     >
-      <div className="w-full font-[400] text-base whitespace-nowrap flex lg:justify-between items-center max-lg:flex-col max-lg:gap-4 max-lg:items-start ">
-        <div className="flex gap-1 flex-col lg:max-w-72 max-lg:w-full">
-          <p className="font-[600] text-lg text-main-container">{data.title}</p>
-          <p className="text-sm text-main-container overflow-hidden whitespace-nowrap text-ellipsis">
+      <div className="w-full flex lg:justify-between items-center max-lg:flex-col max-lg:gap-4 max-lg:items-start ">
+        <div className="gap-1 flex-col overflow-hidden text-ellipsis max-lg:w-full">
+          <Link href={`/workbooks/${data.id}`} className="font-[600] text-lg text-main-container">{data.title}</Link>
+          <p className="flex-1 text-sm text-main-container overflow-hidden whitespace-nowrap text-ellipsis">
             No. {data.id}
             {data.description && ` ・ ${data.description}`}
           </p>
@@ -24,7 +23,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
         <div className="flex gap-8 max-lg:w-full max-lg:justify-between max-md:grid max-md:grid-cols-2 max-md:gap-2">
           <div className="flex gap-1 flex-col">
             <p className="font-[600] text-main-container">만든이</p>
-            <p className=" text-info-500">{data.author.username}</p>
+            <Link href={`/profile/${data.author.id}`} className="text-info-500">{data.author.username}</Link>
           </div>
 
           <div className="flex gap-1 flex-col">
@@ -93,7 +92,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
         </div>
 
       </div>
-    </Link>
+    </div>
   );
 };
 

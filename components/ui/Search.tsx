@@ -27,7 +27,7 @@ const Search = ({ route }: { route: string }) => {
 
   return (
     <form
-      className="w-full font-[600] text-sm px-3 rounded-lg border border-bg-border bg-container flex items-center"
+      className="w-full font-[600] text-sm px-3 rounded-lg bg-container flex items-center sm:w-[460]"
       onSubmit={handleSubmit(search)}
     >
       <input

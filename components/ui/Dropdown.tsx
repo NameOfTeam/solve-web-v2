@@ -126,7 +126,7 @@ const Dropdown = ({
   return (
     <div
       onClick={handleToggle}
-      className="wrapper bg-container border border-bg-border pr-3 pl-4 py-2 rounded-lg flex justify-center items-center gap-x-2 relative cursor-pointer z-10"
+      className="wrapper bg-container pr-3 pl-4 py-2 rounded-lg flex justify-center items-center gap-x-2 relative cursor-pointer z-10"
     >
       <p className="wrapper text-sm font-[600] text-main-container">
         {getDisplayValue()}
@@ -144,7 +144,7 @@ const Dropdown = ({
       {opened && (
         <div
           className={`dropdown absolute top-10 left-[-1px] bg-container border border-bg-border rounded-lg px-3 py-3 flex flex-col gap-y-3 flex-wrap max-h-52 ${
-            data.length > 10 ? "w-80" : type === "STATE" && "w-40"
+            data.length > 10 ? "w-96" : type === "STATE" && "w-40"
           }`}
           onClick={(e) => e.stopPropagation()}
         >

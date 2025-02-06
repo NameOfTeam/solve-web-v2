@@ -26,8 +26,11 @@ const PageController = ({
 
   const endPage = Math.min(totalPages, startPage + 10);
 
+  const MoveToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   return (
-    <div className="w-full flex justify-center gap-x-3">
+    <div className="w-full flex justify-center items-center gap-x-3">
       <div
         onClick={() => setPage((prev) => Math.max(prev - 10, 0))}
         className={`w-10 h-10 flex justify-center items-center text-xl cursor-pointer ${
@@ -47,8 +50,11 @@ const PageController = ({
         return (
           <div
             key={pageNumber}
-            onClick={() => setPage(pageNumber)}
-            className={`w-10 h-10 rounded-full flex justify-center items-center text-xl cursor-pointer font-[400] ${
+            onClick={() => {
+              setPage(pageNumber)
+              MoveToTop()
+            }}
+            className={`w-10 rounded-full flex justify-center items-center text-xl cursor-pointer font-[400] aspect-square flex-shrink-0 max-md:w-7 max-md:h-7 max-md:text-lg ${
               page === pageNumber
                 ? "text-white bg-primary-600"
                 : "text-bg-border"
