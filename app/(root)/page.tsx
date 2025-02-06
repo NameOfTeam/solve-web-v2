@@ -8,23 +8,14 @@ import StatCard from "@/components/ui/StatCard";
 import React from "react";
 
 const Home = async () => {
-  const contestsData = await getContests(0, 6);
+  const contestsData = await getContests(0, 8);
   const workbooksData = await getWorkbooks(0, 3);
   const statisticsData = await getStatistics();
 
   return (
-    <div className="w-full">
+    <div className="w-full pb-16">
       <div className="w-full h-[520px] bg-[#2b2b2b]"></div>
-      {/* <div className="w-full py-20 flex justify-center">
-        <div className="w-80 flex flex-col items-center gap-y-3">
-          <p className="text-4xl font-[700] text-main-container">SOLVE</p>
-          <div className="w-full h-[2px] bg-main-container"></div>
-          <p className="text-base font-[500] tracking-[2.2px] text-main-container">
-            당신의 찬란한 발걸음을 위하여
-          </p>
-        </div>
-      </div> */}
-      <div className="flex justify-center gap-[2%] py-16">
+      <div className="flex justify-center gap-[2.4%] py-12">
         <MainMenu icon="problem" title="문제" href="/problems" />
         <MainMenu icon="workbook" title="문제집" href="/workbooks" />
         <MainMenu icon="flag" title="대회" href="/contests" />
@@ -33,25 +24,9 @@ const Home = async () => {
       </div>
       <div className="flex justify-center x-screen py-9">
         <div className="flex flex-col gap-y-3 w-[72%]">
-          <div className="w-full flex flex-col items-start gap-2 md:justify-between md:items-end md:flex-row">
-            <p className="text-xl font-[600] text-main-container">
-              최근 진행된 / 진행 중인 대회들
-            </p>
-            <div className="flex gap-x-5">
-              <div className="flex gap-x-[6] items-center">
-                <span className="w-4 h-4 bg-primary-700 rounded-full"></span>
-                <p className="text-main-container text-sm">시작 예정</p>
-              </div>
-              <div className="flex gap-x-[6] items-center">
-                <span className="w-4 h-4 bg-secondary-500 rounded-full"></span>
-                <p className="text-main-container text-sm">진행 중</p>
-              </div>
-              <div className="flex gap-x-[6] items-center">
-                <span className="w-4 h-4 bg-danger-500 rounded-full"></span>
-                <p className="text-main-container text-sm">종료</p>
-              </div>
-            </div>
-          </div>
+          <p className="text-xl font-[600] text-main-container">
+            최근 진행된 / 진행 중인 대회들
+          </p>
           <CardWrapper data={contestsData || []} />
         </div>
       </div>

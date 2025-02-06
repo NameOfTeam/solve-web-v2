@@ -16,10 +16,10 @@ const MainMenu = ({
 }) => {
   return (
     <Link
-      className="flex flex-col gap-y-2 items-center justify-center cursor-pointer"
+      className="flex flex-col gap-y-1 items-center justify-center cursor-pointer"
       href={href}
     >
-      <div className="border-[1.2px] border-bg-border p-3 rounded-lg bg-container">
+      <div className="p-3 rounded-lg bg-container">
         <ThemedIcon
           icon={icon}
           height={36}

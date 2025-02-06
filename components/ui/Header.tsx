@@ -40,7 +40,7 @@ const Header = () => {
 
         <div className="absolute flex justify-center w-full">
           <Link href="/" className="cursor-pointer text-main-container">
-            <Logo width={116} height={52} />
+            <Logo width={84} height={40} />
           </Link>
         </div>
 

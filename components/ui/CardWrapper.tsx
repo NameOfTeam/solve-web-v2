@@ -8,7 +8,7 @@ const CardWrapper = ({ data }: { data: Contest[] }) => {
   return (
     <>
       {data.length > 0 ? (
-        <div className="w-full grid grid-cols-3 gap-3 max-xl:grid-cols-2 max-[850px]:grid-cols-1">
+        <div className="w-full grid grid-cols-4 gap-3 max-xl:grid-cols-2 max-[850px]:grid-cols-1">
           {data.map((item) => (
             <ContestCard key={item.id} data={item} />
           ))}

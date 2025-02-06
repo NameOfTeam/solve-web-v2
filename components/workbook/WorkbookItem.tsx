@@ -10,7 +10,7 @@ const WorkbookItem = ({ data }: { data: Workbook }) => {
   return (
     <Link
       href={`/workbooks/${data.id}`}
-      className="w-full h-fit bg-container border border-bg-border rounded-lg flex flex-col justify-center items-center px-7 py-5"
+      className="w-full h-fit bg-container rounded-lg flex flex-col justify-center items-center px-7 py-5"
     >
       <div className="w-full font-[400] text-base whitespace-nowrap flex lg:justify-between items-center max-lg:flex-col max-lg:gap-4 max-lg:items-start ">
         <div className="flex gap-1 flex-col lg:max-w-72 max-lg:w-full">

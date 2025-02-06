@@ -8,13 +8,22 @@ const ContestCard = ({ data }: { data: Contest }) => {
   const timeLeft = useCounter(data.startAt);
 
   return (
-    <Link href={`/contests/${data.id}`} className="w-full h-52 px-7 py-9 relative flex flex-col justify-between border border-bg-border bg-container overflow-hidden rounded-lg cursor-pointer text-main-container">
-      <div className="flex flex-col gap-y-2">
-        <p className="text-[20px] font-[600]">{data.title}</p>
-        <p>
-          {formatDateWithTime(data.startAt)}
-          <br />~ {formatDateWithTime(data.endAt)}
-        </p>
+    <Link href={`/contests/${data.id}`} className="w-full h-44 px-7 py-6 pb-7 relative flex flex-col justify-between bg-container overflow-hidden rounded-lg text-main-container">
+      <div className="flex flex-col gap-y-[6px]">
+        {data.state === "UPCOMING" ? (
+          <p className="text-sm text-primary-700 font-[600]">진행 예정</p>
+        ) : data.state === "ENDED" ? (
+          <p className="text-sm text-danger-500 font-[600]">종료</p>
+        ) : (
+          <p className="text-sm text-secondary-500 font-[600]">진행중</p>
+        )}
+        <div className="flex flex-col gap-y-1">
+          <p className="text-[20px] font-[600] cursor-pointer text-ellipsis overflow-hidden whitespace-nowrap">{data.title}</p>
+          <p className="text-xs">
+            {formatDateWithTime(data.startAt)}
+            <br />~ {formatDateWithTime(data.endAt)}
+          </p>
+        </div>
       </div>
       <p className="text-base font-[600]">
         {data.state === "UPCOMING" ? (
@@ -23,20 +32,15 @@ const ContestCard = ({ data }: { data: Contest }) => {
             <span className="font-[600]">{timeLeft || "Loading..."}</span>
           </span>
         ) : data.state === "ENDED" ? (
-          "종료"
+          <span>
+            {data.winner === null ?
+            <span className="text-sm">우승자 없음</span> :
+            <span>우승<p className="text-info-500">{data.winner.username}</p></span>}
+          </span>
         ) : (
           "진행중!"
         )}
       </p>
-      <div
-        className={`${
-          data.state === "UPCOMING"
-            ? "bg-primary-800"
-            : data.state === "ONGOING"
-            ? "bg-secondary-500"
-            : "bg-danger-500"
-        } w-10 h-48 rotate-45 absolute bottom-[-60px] right-4`}
-      ></div>
     </Link>
   );
 };

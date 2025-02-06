@@ -55,17 +55,17 @@ input:-webkit-autofill:focus {
 
 @layer base {
   :root {
-    --bg: #f6f6f6;
-    --bg-border: #dbdbdb;
+    --bg: #f5f6f8;
+    --bg-border: #e5e5e5;
     --container: #ffffff;
     --container-border: #dddddd;
     --main-container: #1b1b1b;
   }
 
   html[theme="purple"] {
-    --bg: #44414f;
-    --bg-border: #595663;
-    --container: #333139;
+    --bg: #423F4A;
+    --bg-border: #605C6B;
+    --container: #474552;
     --container-border: #8c899a;
     --main-container: #f5f5f5;
   }
