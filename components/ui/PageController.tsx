@@ -22,18 +22,9 @@ const PageController = ({
     startPage = totalPages - 10;
   }
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log('page change')
-  }, [page]);
-
   startPage = Math.max(0, startPage);
 
   const endPage = Math.min(totalPages, startPage + 10);
-
-  // const MoveToTop = () => {
-    
-  // }
   return (
     <div className="w-full flex justify-center items-center gap-x-3">
       <div

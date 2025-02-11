@@ -13,7 +13,7 @@ const SolveDetail = async ({
   const problemData = await getProblemDetail(problemId);
 
   return (
-    <div className="flex-1 bg-container border border-bg-border rounded-lg px-7 py-5 overflow-y-scroll">
+    <div className="flex-1 bg-container rounded-lg py-4 px-6 overflow-y-scroll">
       <div className="w-full flex items-center justify-between">
         <div className="flex gap-x-2 items-center font-[600] text-[26px]">
           <p>{problemData?.title}</p>

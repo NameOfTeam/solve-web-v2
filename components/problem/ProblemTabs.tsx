@@ -9,9 +9,9 @@ const ProblemTabs = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-full border border-bg-border bg-container rounded-lg py-4 px-7 flex items-center gap-x-4">
+    <div className="w-full bg-container rounded-lg py-4 px-6 flex items-center gap-2 flex-wrap">
       <div
-        className={`px-4 py-2 rounded border text-base cursor-pointer ${
+        className={`px-4 py-2 rounded border text-sm cursor-pointer ${
           pathname === `/solve/${problemId}`
             ? "bg-secondary-600 border-secondary-600 text-white font-[600]"
             : "bg-container border-container-border text-container-border font-[600]"
@@ -21,7 +21,7 @@ const ProblemTabs = () => {
         제출
       </div>
       <div
-        className={`px-4 py-2 rounded border text-base cursor-pointer ${
+        className={`px-4 py-2 rounded border text-sm cursor-pointer ${
           pathname === `/solve/${problemId}/my-submits`
             ? "bg-secondary-600 border-secondary-600 text-white font-[600]"
             : "bg-container border-container-border text-container-border font-[600]"
@@ -31,7 +31,7 @@ const ProblemTabs = () => {
         내 제출
       </div>
       <div
-        className={`px-4 py-2 rounded border text-base cursor-pointer ${
+        className={`px-4 py-2 rounded border text-sm cursor-pointer ${
           pathname === `/solve/${problemId}/status`
             ? "bg-secondary-600 border-secondary-600 text-white font-[600]"
             : "bg-container border-container-border text-container-border font-[600]"
@@ -41,7 +41,7 @@ const ProblemTabs = () => {
         채점 현황
       </div>
       <div
-        className={`px-4 py-2 rounded border text-base cursor-pointer ${
+        className={`px-4 py-2 rounded border text-sm cursor-pointer ${
           pathname === `/solve/${problemId}/boards`
             ? "bg-secondary-600 border-secondary-600 text-white font-[600]"
             : "bg-container border-container-border text-container-border font-[600]"

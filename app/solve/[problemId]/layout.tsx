@@ -87,29 +87,31 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
     <ProgressProvider>
       <div className="w-full h-screen bg-bg text-main-container">
         <ProblemHeader />
-        <div className="flex w-full px-12 py-4 h-except-header">
+        <div className="flex w-full px-10 py-4 h-except-header">
           <div
-            className="h-full flex flex-col gap-y-4"
+            className="h-full flex flex-col gap-y-3 shrink-0"
             style={{ width: `${leftWidth}%` }}
           >
             <ProblemTabs />
             {children}
           </div>
+
           <div
-            className="w-6 h-full flex items-center justify-center cursor-col-resize"
+            className="w-4 h-full flex items-center justify-center cursor-col-resize"
             onMouseDown={startResizing}
           >
             <div
               className={`w-[2px] h-8 transition-colors ${
-                isResizing ? "bg-bg-border" : "bg-container-border"
+                isResizing ? "bg-container-border" : "bg-bg-border"
               }`}
             ></div>
           </div>
+
           <div
-            className="h-full flex flex-col gap-y-4"
+            className="h-full flex flex-col gap-y-3"
             style={{ width: `${100 - leftWidth}%` }}
           >
-            <div className="flex-1 w-full rounded-lg bg-container border-bg-border border overflow-hidden">
+            <div className="flex-1 w-full rounded-lg bg-container overflow-hidden">
               <div className="px-2 py-2 flex gap-x-2">
                 <Dropdown
                   data={[
@@ -132,9 +134,11 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
               </div>
               <CodeEditor />
             </div>
-            <div className="h-60 w-full rounded-lg bg-container border-bg-border border">
+
+            <div className="h-60 w-full rounded-lg bg-container">
               <ProblemInput />
             </div>
+
           </div>
         </div>
       </div>

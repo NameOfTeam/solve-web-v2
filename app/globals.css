@@ -56,9 +56,9 @@ input:-webkit-autofill:focus {
 @layer base {
   :root {
     --bg: #f5f6f8;
-    --bg-border: #e5e5e5;
+    --bg-border: #dddddd;
     --container: #ffffff;
-    --container-border: #dddddd;
+    --container-border: #e5e5e5;
     --main-container: #1b1b1b;
   }
 
