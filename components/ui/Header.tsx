@@ -46,15 +46,15 @@ const Header = () => {
 
         {user?.id ? (
           <Link
-            className="w-12 h-12 rounded-full cursor-pointer"
+            className="w-10 h-10 rounded-full cursor-pointer z-50"
             href={`/user/${user.username}`}
           >
             <Image
               src={`${API_URL}/avatars/${user.id}.webp`}
               alt="User avatar"
               className="rounded-full"
-              width={48}
-              height={48}
+              width={40}
+              height={40}
             />
           </Link>
         ) : (
