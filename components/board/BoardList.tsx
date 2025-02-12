@@ -25,14 +25,14 @@ const BoardList = ({
 
   return (
     <>
-      <div className="w-full h-full border border-bg-border bg-container rounded-lg">
+      <div className="w-full h-full bg-container rounded-lg">
         <div className="w-full h-16 border-b border-bg-border flex items-center text-base font-[600] px-6 text-main-container">
           <p className="w-20 text-center whitespace-nowrap flex-shrink-0 max-sm:hidden">카테고리</p>
-          <p className="w-14 text-center flex-shrink-0">#</p>
+          <p className="w-14 text-center flex-shrink-0 max-lg:hidden">#</p>
           <p className="flex-[1] pl-4 whitespace-nowrap flex-shrink-0">제목</p>
-          <p className="w-28 whitespace-nowrap flex-shrink-0 text-center">언어</p>
-          <p className="w-20 text-center whitespace-nowrap flex-shrink-0">글쓴이</p>
-          <p className="w-20 text-center whitespace-nowrap flex-shrink-0 max-lg:hidden">작성일</p>
+          <p className="w-28 whitespace-nowrap flex-shrink-0 text-center max-md:hidden">언어</p>
+          <p className="w-32 text-center whitespace-nowrap flex-shrink-0">글쓴이</p>
+          <p className="w-32 text-center whitespace-nowrap flex-shrink-0 max-lg:hidden">작성일</p>
         </div>
         <div>
           {boards && boards.content.length > 0 ? (
@@ -41,29 +41,25 @@ const BoardList = ({
                 href={`/boards/${item.category.toLocaleLowerCase()}/${item.id}`}
                 className={`w-full h-14 ${
                   boards.content.length - 1 !== idx && "border-b"
-                } border-bg-border flex items-center text-base font-[400] px-6 text-main-container`}
+                } border-bg-border flex items-center text-base font-[400] px-6 text-main-container whitespace-nowrap`}
                 key={item.id}
               >
-                <p className="flex-[1] px-4 flex justify-center items-center">
+                <p className="w-20 flex justify-center items-center">
                   {parseCategory(item.category)}
                 </p>
-                <p className="flex-[1] px-4 text-center">{item.id}</p>
-                <p className="flex-[8] px-4 text-main-container">
-                  {item.title}
-                </p>
-                <p className="flex-[1.3] px-4 text-center">{item.language}</p>
+                <p className="w-14 text-center max-lg:hidden">{item.id}</p>
+                <p className="flex-[8] px-4 text-main-container overflow-hidden text-ellipsis">{item.title}</p>
+                <p className="w-28 text-center max-md:hidden">{item.language}</p>
                 <p
                   onClick={(e) => {
                     e.stopPropagation();
                     router.push(`/users/${item.author.username}`);
                   }}
-                  className="flex-[1.3] px-4 text-center text-info-500"
+                  className="w-32 text-center text-info-500"
                 >
                   {item.author.username}
                 </p>
-                <p className="flex-[1.7] px-4 text-center">
-                  {formatDate(item.createdAt)}
-                </p>
+                <p className="w-32 text-center max-lg:hidden">{formatDate(item.createdAt)}</p>
               </Link>
             ))
           ) : (

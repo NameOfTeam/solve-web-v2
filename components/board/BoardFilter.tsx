@@ -18,7 +18,7 @@ const BoardFilter = () => {
   },[router]);
 
   return (
-    <div className="flex font-[400] text-base text-main-container">
+    <div className="flex font-[400] text-base text-main-container overflow-scroll">
       <div
         className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname === "/boards"
