@@ -89,7 +89,7 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
         <ProblemHeader />
         <div className="flex w-full px-10 py-4 h-except-header">
           <div
-            className="h-full flex flex-col gap-y-3 shrink-0"
+            className="h-full min-w-80 flex flex-col gap-y-3 shrink-0"
             style={{ width: `${leftWidth}%` }}
           >
             <ProblemTabs />
@@ -97,7 +97,7 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
           </div>
 
           <div
-            className="w-4 h-full flex items-center justify-center cursor-col-resize"
+            className="w-4 h-full flex items-center justify-center cursor-col-resize flex-shrink-0"
             onMouseDown={startResizing}
           >
             <div
@@ -108,8 +108,8 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
           </div>
 
           <div
-            className="h-full flex flex-col gap-y-3"
-            style={{ width: `${100 - leftWidth}%` }}
+            className="h-full w-full flex flex-col gap-y-3"
+            style={{ width: `calc(${100 - leftWidth}% - 16px)` }}
           >
             <div className="flex-1 w-full rounded-lg bg-container overflow-hidden">
               <div className="px-2 py-2 flex gap-x-2">
