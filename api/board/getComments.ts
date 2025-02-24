@@ -3,14 +3,17 @@ import { Comment } from "@/types/board/comment";
 import { BaseResponse } from "@/types/response/base";
 import { PageResponse } from "@/types/response/page";
 
-export const getComments = async (postId: number) => {
+export const getComments = async (
+  postId: number,
+  cursorId: number | undefined
+) => {
   try {
-    const { data } = await solveAxios.get<BaseResponse<PageResponse<Comment>>>(
+    const { data } = await solveAxios.get<BaseResponse<Comment[]>>(
       `/posts/${postId}/comments`,
-      { params: { size: 1000 } }
+      { params: { postId: postId, cursorId: cursorId } }
     );
     return data.data;
   } catch {
-    return;
+    return [];
   }
 };

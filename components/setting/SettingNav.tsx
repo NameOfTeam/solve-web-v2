@@ -3,9 +3,9 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const SettingNav = () => {
-  const [state, setState] = useState<"DISPLAY" | "LANGUAGE" | "PRIVACY">(
-    "PRIVACY"
-  );
+  const [state, setState] = useState<
+    "DISPLAY" | "LANGUAGE" | "PRIVACY" | "THEME"
+  >("PRIVACY");
 
   const route = useRouter();
 
@@ -42,6 +42,21 @@ const SettingNav = () => {
         }}
       >
         <p>디스플레이</p>
+      </div>
+      <div
+        className={`h-8 flex items-center justify-center  cursor-pointer box-content px-4 ${
+          state === "THEME"
+            ? "border-secondary-700 border-b-[2px]"
+            : "border-bg-border border-b"
+        }`}
+        onClick={() => {
+          if (state !== "THEME") {
+            route.push("/settings/theme");
+            setState("THEME");
+          }
+        }}
+      >
+        <p>테마</p>
       </div>
       <div
         className={`h-8 flex items-center justify-center  cursor-pointer box-content px-4 ${

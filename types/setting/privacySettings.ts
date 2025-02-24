@@ -19,12 +19,8 @@ export interface PrivacySettings {
     showGender: boolean;
   };
   birth: {
-    birth: Date;
+    birth: string;
     showBirth: boolean;
   };
   link: string[];
-}
-
-export interface DisplaySettings {
-  showTierIcon: "SHOWALL" | "HIDEALL" | "SHOWSOLVEDPROBLEM";
 }

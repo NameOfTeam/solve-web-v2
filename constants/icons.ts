@@ -15,9 +15,11 @@ import Kakao from "@/assets/kakao.svg";
 import Search from "@/assets/search.svg";
 import Dropdown from "@/assets/drop_down.svg";
 import Boards from "@/assets/boards.svg";
-import ArrowLeftBack from "@/assets/arrow-left-back.svg";
+import ArrowLeft from "@/assets/arrow-left.svg";
 import Pen from "@/assets/pen.svg";
-import ChatBubble from "@/assets/chat_bubble.svg"
+import ChatBubble from "@/assets/chat_bubble.svg";
+import Close from "@/assets/close.svg";
+import Add from "@/assets/add.svg";
 
 export const ICONS = {
   flag: Flag,
@@ -36,9 +38,11 @@ export const ICONS = {
   naver: Naver,
   kakao: Kakao,
   boards: Boards,
-  "arrow-left-back": ArrowLeftBack,
+  "arrow-left-back": ArrowLeft,
   pen: Pen,
-  "chat-bubble": ChatBubble
+  "chat-bubble": ChatBubble,
+  close: Close,
+  add: Add,
 } satisfies Record<string, IconType>;
 
 export type IconName = keyof typeof ICONS;

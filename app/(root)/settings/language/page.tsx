@@ -1,23 +1,31 @@
 "use client";
 
 import ThemedIcon from "@/components/ui/ThemedIcon";
-import React from "react";
+import { LanguageSettings } from "@/types/setting/privacySettings";
+import React, { useEffect, useState } from "react";
 
 const Language = () => {
-  const languages = {
-    selected: ["JAVA", "KOTLIN"],
-    left: [
-      "PYTHON",
-      "C",
-      "GO",
-      "C#",
-      "JAVASCRIPT",
-      "RUBY",
-      "C++",
-      "RUST",
-      "GOLF",
-      "TYPESCRIPT",
-    ],
+  const [languages, setLanguages] = useState<LanguageSettings>({
+    selected: [],
+    left: ["PYTHON", "C", "JAVA", "NODE"],
+  });
+
+  useEffect(() => {
+    console.log(languages);
+  }, [languages]);
+
+  const moveToSelected = (lang: string) => {
+    setLanguages({
+      selected: [...languages.selected, lang],
+      left: languages.left.filter((item) => item !== lang),
+    });
+  };
+
+  const moveToLeft = (lang: string) => {
+    setLanguages({
+      left: [...languages.left, lang],
+      selected: languages.selected.filter((item) => item !== lang),
+    });
   };
 
   return (
@@ -30,10 +38,13 @@ const Language = () => {
               <div
                 key={language}
                 className="bg-bg border-bg-border border-[1.2px] h-12 px-6 rounded-lg flex items-center mb-3"
+                onClick={() => {
+                  moveToLeft(language);
+                }}
               >
                 <p className="flex-1 font-normal">{language}</p>
                 <button>
-                  <ThemedIcon icon="arrow-left-back" width={24} height={24} />
+                  <ThemedIcon icon="close" width={24} height={24} />
                 </button>
               </div>
             ))}
@@ -46,10 +57,13 @@ const Language = () => {
               <div
                 key={language}
                 className="bg-bg border-bg-border border-[1.2px] h-12 px-6 rounded-lg flex items-center mb-3"
+                onClick={() => {
+                  moveToSelected(language);
+                }}
               >
                 <p className="flex-1 font-normal">{language}</p>
                 <button>
-                  <ThemedIcon icon="arrow-left-back" width={24} height={24} />
+                  <ThemedIcon icon="add" width={24} height={24} />
                 </button>
               </div>
             ))}
