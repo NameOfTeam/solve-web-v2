@@ -121,7 +121,7 @@ const ProblemInput = () => {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="w-full px-3 py-2 text-sm border-b border-bg-border">실행결과</div>
+      <div className="w-full px-4 py-2 text-sm border-b border-bg-border">실행결과</div>
       <div
         ref={containerRef}
         className="w-full flex-1 bg-container text-main-container overflow-y-auto p-3 font-mono text-sm rounded-lg"

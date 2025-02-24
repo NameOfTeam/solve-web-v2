@@ -27,7 +27,7 @@ const WorkbookList = ({
             <WorkbookItem data={item} key={item.id} />
           ))
         ) : (
-          <div className="w-full h-72 flex items-center justify-center">
+          <div className="w-full h-72 flex items-center justify-center bg-container rounded-lg">
             <p className="text-2xl text-bg-border">등록된 문제집이 없습니다.</p>
           </div>
         )}

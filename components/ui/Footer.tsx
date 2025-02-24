@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1A1A1A] text-gray-400 pt-16 pb-20 px-48">
-      <div className="mx-auto px-4">
-        <div className="grid grid-cols-5 gap-x-4 mb-20">
+    <footer className="w-full bg-[#1A1A1A] text-gray-400 pt-16 pb-20">
+      <div className="mx-auto w-[72%] gap-8 flex flex-col">
+        <div className="grid grid-cols-5 gap-4 max-lg:grid-cols-3 max-lg:gap-y-6">
           <div className="flex flex-col gap-y-3">
             <h3 className="text-white mb-2 text-base font-medium">SOLVE</h3>
             <Link href="/discord" className="hover:text-white text-sm">
@@ -77,7 +77,6 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-
         <div className="flex flex-col gap-y-1 text-sm">
           <h2 className="text-white font-medium mb-2">Solve - (슬로건 삽입)</h2>
           <p>대표: 진민오</p>

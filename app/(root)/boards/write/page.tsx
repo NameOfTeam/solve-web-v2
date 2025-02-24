@@ -59,7 +59,7 @@ const BoardWrite = () => {
           <input
             type="text"
             className="max-w-[640px] w-full bg-transparent border-b border-bg-border py-2 text-[26px] outline-none text-main-container placeholder:text-bg-border"
-            placeholder="제목*"
+            placeholder="제목 *"
             {...register("title", {
               required: "제목은 필수입니다.",
               minLength: {
@@ -92,7 +92,7 @@ const BoardWrite = () => {
       </div>
 
       <div className="w-full flex flex-col gap-y-2">
-        <div className="w-full h-14 bg-container border border-bg-border px-7 flex items-center text-base font-[600] text-main-container">
+        <div className="w-full h-14 bg-container rounded-lg px-7 flex items-center text-base font-[600] text-main-container">
           <div
             className={`px-4 py-2 text-center box-content border-b cursor-pointer ${
               isPreview ? "border-container-border" : "border-secondary-700"
@@ -111,14 +111,14 @@ const BoardWrite = () => {
           </div>
         </div>
 
-        <div className="w-full h-[480px] border border-bg-border">
+        <div className="w-full h-[480px]">
           {isPreview ? (
-            <div className="w-full h-full overflow-auto p-6 prose prose-slate max-w-none bg-container text-main-container">
+            <div className="w-full h-full rounded-lg overflow-auto p-6 prose prose-slate max-w-none bg-container text-main-container">
               <Markdown content={content} />
             </div>
           ) : (
             <textarea
-              className="w-full h-full resize-none p-6 outline-none bg-container text-main-container"
+              className="w-full h-full rounded-lg resize-none p-6 outline-none bg-container text-main-container"
               placeholder="마크다운 형식으로 작성해주세요."
               {...register("content", {
                 required: "본문은 필수입니다.",

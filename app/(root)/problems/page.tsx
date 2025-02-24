@@ -25,14 +25,12 @@ const Problems = async ({
   );
 
   return (
-    <div className="w-full">
+    <div className="w-full flex items-center flex-col">
       <Banner title="문제" description="취향에 맞는 문제를 풀어볼 수 있어요." />
-      <div className="h-except-banner px-52">
+      <div className="h-except-banner w-[72%]">
         <div className="w-full h-full py-9 flex flex-col gap-y-6">
           <div className="flex flex-col gap-y-3">
-            <div className="w-[520px]">
-              <Search route="problems" />
-            </div>
+            <Search route="problems" />
             <ProblemFilter />
           </div>
           <Suspense>

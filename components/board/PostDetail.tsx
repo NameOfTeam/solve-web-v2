@@ -14,7 +14,7 @@ const PostDetail = ({ postData }: { postData?: Board }) => {
   return (
     <div className="w-full py-6 flex flex-col gap-y-8 text-main-container">
       <PostHeader postData={postData} />
-      <div className="w-full py-6 px-7 min-h-60 bg-container border border-bg-border rounded">
+      <div className="w-full py-4 px-5 min-h-60 bg-container rounded">
         <Markdown content={postData.content} />
       </div>
       <PostComment postId={postData.id} />

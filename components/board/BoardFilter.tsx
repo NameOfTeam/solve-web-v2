@@ -18,9 +18,9 @@ const BoardFilter = () => {
   },[router]);
 
   return (
-    <div className="flex font-[400] text-base text-main-container">
+    <div className="flex font-[400] text-base text-main-container overflow-scroll">
       <div
-        className={`h-8 flex items-center justify-center  cursor-pointer box-content px-4 ${
+        className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname === "/boards"
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
@@ -30,7 +30,7 @@ const BoardFilter = () => {
         전체
       </div>
       <div
-        className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
+        className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname.includes("/boards/free")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
@@ -40,7 +40,7 @@ const BoardFilter = () => {
         자유
       </div>
       <div
-        className={`h-8 flex items-center justify-center border-b cursor-pointer box-content px-4 ${
+        className={`h-8 flex items-center justify-center whitespace-nowrap border-b cursor-pointer box-content px-4 ${
           pathname.includes("/boards/information")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
@@ -50,7 +50,7 @@ const BoardFilter = () => {
         정보
       </div>
       <div
-        className={`h-8 flex items-center justify-center border-b cursor-pointer box-content px-4 ${
+        className={`h-8 flex items-center justify-center whitespace-nowrap border-b cursor-pointer box-content px-4 ${
           pathname.includes("/boards/question")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
@@ -60,7 +60,7 @@ const BoardFilter = () => {
         질문
       </div>
       <div
-        className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
+        className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname.includes("/boards/suggestion")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
@@ -70,7 +70,7 @@ const BoardFilter = () => {
         수정 제안
       </div>
       <div
-        className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
+        className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname.includes("/boards/notice")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
@@ -81,7 +81,7 @@ const BoardFilter = () => {
       </div>
       {user?.id && (
         <div
-          className={`h-8 flex items-center justify-center cursor-pointer box-content px-4 ${
+          className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
             pathname.includes("/boards/write")
               ? "border-secondary-700 border-b-[2px] font-[600]"
               : "border-bg-border border-b"

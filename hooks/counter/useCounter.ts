@@ -15,7 +15,7 @@ export const useCounter = (date: string) => {
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
-        setTimeLeft(`${days}일 ${hours}시간 ${minutes}분 ${seconds}초`);
+        setTimeLeft(`${days}일 ${hours<9 ? '0': ''}${hours}:${minutes<9 ? '0': ''}${minutes}:${seconds<9 ? '0' : ''}${seconds}`);
       }
     };
 

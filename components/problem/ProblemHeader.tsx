@@ -66,35 +66,36 @@ const ProblemHeader = () => {
   };
 
   return (
-    <div className="w-full h-[72px] flex items-center gap-x-4 px-12 border-b border-bg-border bg-container justify-between">
-      <div onClick={router.back} className="cursor-pointer">
+    <div className="w-full h-[72px] flex items-center gap-x-4 px-10 border-b border-bg-border bg-container justify-between">
+      <div onClick={router.back} className="cursor-pointer flex items-center gap-1 font-[600]">
         <ThemedIcon
           icon="arrow-left-back"
-          width={40}
-          height={40}
+          width={36}
+          height={36}
           variant="main"
           shade="container"
         />
+        돌아가기
       </div>
       <div className="flex gap-x-2">
         <button
           onClick={save}
           disabled={running || submitting || saving}
-          className="px-4 py-2 rounded border-none outline-none bg-secondary-700 text-white cursor-pointer disabled:bg-secondary-100"
+          className="text-sm px-4 py-2 rounded border-none outline-none bg-secondary-700 text-white cursor-pointer disabled:bg-secondary-100"
         >
           {saving ? "저장 중..." : "저장"}
         </button>
         <button
           onClick={running ? stop : run}
           disabled={submitting || saving}
-          className="px-4 py-2 rounded border-none outline-none bg-secondary-700 text-white cursor-pointer disabled:bg-secondary-100"
+          className="text-sm px-4 py-2 rounded border-none outline-none bg-secondary-700 text-white cursor-pointer disabled:bg-secondary-100"
         >
           {running ? "종료" : "실행"}
         </button>
         <button
           onClick={submit}
           disabled={running || submitting}
-          className="px-4 py-2 rounded border-none outline-none bg-primary-700 text-white cursor-pointer disabled:bg-primary-100"
+          className="text-sm px-4 py-2 rounded border-none outline-none bg-primary-700 text-white cursor-pointer disabled:bg-primary-100"
         >
           {submitting ? "채점 중..." : "제출"}
         </button>

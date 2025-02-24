@@ -80,7 +80,7 @@ const MySubmits = () => {
   }, [id, setId, setSubmitting]);
 
   return (
-    <div className="flex-1 bg-container border border-bg-border rounded-lg px-7 py-5 overflow-y-scroll">
+    <div className="flex-1 bg-container rounded-lg px-4 py-6 overflow-y-scroll">
       <div className="w-full px-4 pb-2 flex justify-between text-sm border-b border-bg-border">
         <p className="font-[400] text-bg-border">
           {`${submits.length + (newSubmit ? 1 : 0)}개의 제출`}
@@ -88,17 +88,17 @@ const MySubmits = () => {
         <p className="font-[600] cursor-pointer">새로고침</p>
       </div>
 
-      <div className="w-full h-9 flex items-center text-sm font-[600] border-b border-bg-border">
+      <div className="w-full h-9 flex items-center text-sm font-[600] border-b border-bg-border whitespace-nowrap">
         <p className="flex-[8] px-4">상태</p>
-        <p className="flex-1 px-4 text-center">언어</p>
-        <p className="flex-1 px-4 text-center">메모리</p>
-        <p className="flex-1 px-4 text-center">시간</p>
+        <p className="w-16 text-center">언어</p>
+        <p className="w-16 text-center">메모리</p>
+        <p className="w-16 text-center">시간</p>
       </div>
 
       {newSubmit && (
         <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border">
           <p
-            className={`flex-[8] px-4 ${
+            className={`flex-[8] pl-4 pr-2 ${
               newSubmit.result === "PENDING" ||
               newSubmit.result === "JUDGING" ||
               newSubmit.result === "JUDGING_IN_PROGRESS"
@@ -129,9 +129,9 @@ const MySubmits = () => {
       )}
 
       {submits.map((submit) => (
-        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border" key={submit.submitId}>
+        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border whitespace-nowrap" key={submit.submitId}>
           <p
-            className={`flex-[8] px-4 ${
+            className={`flex-[8] px-4 overflow-hidden text-ellipsis ${
               submit.result === "PENDING" ||
               submit.result === "JUDGING" ||
               submit.result === "JUDGING_IN_PROGRESS"
@@ -147,14 +147,14 @@ const MySubmits = () => {
               submit.result === "JUDGING_IN_PROGRESS") &&
               `( ${submit.progress.toFixed()}% )`}
           </p>
-          <p className="flex-1 px-4 text-center">
+          <p className="w-16 text-center">
             {submit.language ? languageParser(submit.language) : ""}
           </p>
-          <p className="flex-1 px-4 text-center">
+          <p className="w-16 text-center">
             {submit.memoryUsage || ""}
             {submit.memoryUsage && "KB"}
           </p>
-          <p className="flex-1 px-4 text-center">
+          <p className="w-16 text-center">
             {submit.timeUsage || ""}
             {submit.timeUsage && "ms"}
           </p>

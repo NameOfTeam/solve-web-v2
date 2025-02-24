@@ -20,13 +20,13 @@ const ProblemList = ({
 
   return (
     <>
-      <div className="w-full h-full border border-bg-border bg-container rounded-lg">
-        <div className="w-full h-16 border-b border-bg-border flex items-center text-lg font-[600] px-6 text-main-container">
-          <p className="flex-[0.5] px-4 text-center">랭크</p>
-          <p className="flex-[0.5] px-4 text-center">#</p>
-          <p className="flex-[8] px-4">제목</p>
-          <p className="flex-[1] px-4 text-center">푼 사람 수</p>
-          <p className="flex-[1] px-4 text-center">정답률</p>
+      <div className="w-full h-full bg-container rounded-lg">
+        <div className="w-full h-14 border-b border-bg-border flex items-center text-base font-[600] px-6 text-main-container">
+          <p className="w-16 text-center whitespace-nowrap flex-shrink-0">랭크</p>
+          <p className="w-14 text-center flex-shrink-0">#</p>
+          <p className="flex-[1] px-4 whitespace-nowrap flex-shrink-0">제목</p>
+          <p className="w-28 text-center whitespace-nowrap max-sm:hidden flex-shrink-0">푼 사람 수</p>
+          <p className="w-20 text-center whitespace-nowrap flex-shrink-0">정답률</p>
         </div>
         <div>
           {problems && problems.content.length > 0 ? (
@@ -38,17 +38,17 @@ const ProblemList = ({
                 } border-bg-border flex items-center text-base font-[400] px-6 text-main-container`}
                 key={item.id}
               >
-                <p className="flex-[0.5] px-4 flex justify-center items-center">
+                <p className="w-8 h-8 m-4 flex justify-center relative flex-shrink-0">
                   <Image
                     src={`/tiers/${item.tier.toLowerCase()}.svg`}
                     alt=""
-                    width={32}
-                    height={32}
+  
+                    fill={true}
                   />
                 </p>
-                <p className="flex-[0.5] px-4 text-center">{item.id}</p>
+                <p className="w-14 text-center flex-shrink-0">{item.id}</p>
                 <p
-                  className={`flex-[8] px-4 ${
+                  className={`flex-1 pl-4 whitespace-nowrap text-ellipsis overflow-hidden ${
                     item.state === "ACCEPTED"
                       ? "text-secondary-500"
                       : item.state === "JUDGING_IN_PROGRESS" ||
@@ -61,10 +61,10 @@ const ProblemList = ({
                 >
                   {item.title}
                 </p>
-                <p className="flex-[1] px-4 text-center">
+                <p className="w-28 text-center max-sm:hidden flex-shrink-0">
                   {item.solvedCount || 0}
                 </p>
-                <p className="flex-[1] px-4 text-center">{item.correctRate}%</p>
+                <p className="w-20 text-center flex-shrink-0">{item.correctRate}%</p>
               </Link>
             ))
           ) : (

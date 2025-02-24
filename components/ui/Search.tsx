@@ -27,13 +27,13 @@ const Search = ({ route }: { route: string }) => {
 
   return (
     <form
-      className="w-full font-[600] text-sm px-3 rounded-lg border border-bg-border bg-container flex items-center"
+      className="w-full font-[600] text-sm px-3 rounded-lg bg-container flex items-center sm:w-[460]"
       onSubmit={handleSubmit(search)}
     >
       <input
         type="text"
         className="bg-transparent outline-none py-3 text-main-container flex-1"
-        placeholder="문제를 검색하세요."
+        placeholder='검색어를 입력해주세요.'
         {...register("query")}
       />
       <Link className="cursor-pointer w-6 h-6" href={`/${route}`}>

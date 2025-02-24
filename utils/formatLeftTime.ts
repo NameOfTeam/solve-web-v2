@@ -15,5 +15,5 @@ export const formatLeftTime = (start: string) => {
   const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-  return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+  return `${days}일 ${hours}:${minutes}:${seconds}`;
 };

@@ -55,25 +55,25 @@ input:-webkit-autofill:focus {
 
 @layer base {
   :root {
-    --bg: #fafafa;
-    --bg-border: #cccccc;
+    --bg: #f5f6f8;
+    --bg-border: #dddddd;
     --container: #ffffff;
-    --container-border: #dddddd;
+    --container-border: #e5e5e5;
     --main-container: #1b1b1b;
   }
 
   html[theme="purple"] {
-    --bg: #423f4a;
-    --bg-border: #726e81;
-    --container: #5a5766;
+    --bg: #423F4A;
+    --bg-border: #605C6B;
+    --container: #474552;
     --container-border: #8c899a;
     --main-container: #f5f5f5;
   }
 
   html[theme="dark"] {
-    --bg: #2b2b2b;
+    --bg: #262626;
     --bg-border: #5f5f5f;
-    --container: #373737;
+    --container: #2b2b2b;
     --container-border: #7a7a7a;
     --main-container: #f5f5f5;
   }
