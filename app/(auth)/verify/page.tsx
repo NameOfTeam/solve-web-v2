@@ -42,8 +42,8 @@ const Verify = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-container-border px-40">
-      <div className="w-full pl-4 py-4 flex bg-bg items-center rounded-2xl shadow-lg relative animate-fade-in">
+    <div className="w-full h-screen flex justify-center items-center bg-container-border px-4">
+      <div className="w-full max-w-[1200px] pl-4 py-4 flex bg-bg items-center rounded-2xl shadow-lg relative animate-fade-in">
         <div className="flex-1 h-[700px]">
           <Image
             src={GIF}

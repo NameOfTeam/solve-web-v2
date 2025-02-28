@@ -53,9 +53,9 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-container-border px-40">
+    <div className="w-full h-screen flex justify-center items-center bg-container-border px-4">
       <div
-        className={`w-full pr-4 py-4 flex bg-bg items-center rounded-2xl shadow-lg ${
+        className={`w-full max-w-[1200px] pr-4 py-4 flex bg-bg items-center rounded-2xl shadow-lg ${
           fadeIn ? "animate-scale-up" : "animate-scale-down"
         } relative`}
       >

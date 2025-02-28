@@ -3,7 +3,7 @@ import React from "react";
 
 const HeaderExtension = () => {
   return (
-    <div className="header-extension hidden w-[72vw] bg-container border border-t-2 border-t-primary-700 absolute top-[72px] z-[999999] hover:flex justify-between">
+    <div className="header-extension hidden w-[72vw] bg-container border border-t-2 border-bg-border border-t-primary-700 absolute top-[72px] z-[999999] hover:flex justify-between">
       <div className="flex flex-col gap-y-3 flex-1 border-r border-bg-border px-3 py-4 text-main-container">
         <h3 className="mb-2 text-base font-medium">문제들</h3>
         <Link href="/problems" className="hover:text-bg-border text-sm">
