@@ -1,0 +1,1 @@
+export type Language = "PYTHON" | "NODE_JS" | "C" | "JAVA" | "KOTLIN" | "CPP" | "CSHARP" | "SWIFT";

@@ -8,5 +8,13 @@ export const languageParser = (language: string) => {
       return "Node.js";
     case "JAVA":
       return "Java";
+    case "KOTLIN":
+      return "Kotlin";
+    case "CPP":
+      return "C++";
+    case "CSHARP":
+      return "C#";
+    case "SWIFT":
+      return "Swift";
   }
 };

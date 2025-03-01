@@ -1,9 +1,8 @@
 import { ProblemSubmitState } from "./problem";
 
 export interface SubmitData {
+  id: number;
   result: ProblemSubmitState;
-  progress: number;
-  submitId: string;
   language?: string;
   memoryUsage?: string;
   timeUsage?: string;

@@ -7,6 +7,7 @@ import { Tier } from "@/types/tier/tier";
 import { useCategoryStore } from "@/stores/board/useCategoryStore";
 import { useLanguageStore } from "@/stores/problem/useLanguageStore";
 import { useVisibilityStore } from "@/stores/problem/useVisibilityStore";
+import {Language} from "@/types/problem/language";
 
 const DROPDOWN_TOGGLE_EVENT = "dropdownToggle";
 
@@ -143,7 +144,7 @@ const Dropdown = ({
       />
       {opened && (
         <div
-          className={`dropdown absolute top-10 left-[-1px] bg-container border border-bg-border rounded-lg px-3 py-3 flex flex-col gap-y-3 flex-wrap max-h-52 ${
+          className={`dropdown absolute top-10 left-[-1px] bg-container border border-bg-border rounded-lg px-3 py-3 flex flex-col gap-y-3 flex-wrap max-h-72 ${
             data.length > 10 ? "w-96" : type === "STATE" && "w-40"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -176,7 +177,7 @@ const Dropdown = ({
                       : type === "LANGUAGE"
                       ? () =>
                           setLanguage(
-                            item.value as "PYTHON" | "NODE_JS" | "C" | "JAVA"
+                            item.value as Language
                           )
                       : type === "VISIBILITY"
                       ? () => setVisibility(item.value as "PUBLIC" | "PRIVATE")

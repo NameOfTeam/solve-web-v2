@@ -1,4 +1,6 @@
+import {Language} from "@/types/problem/language";
+
 export interface LanguageState {
-  language: "PYTHON" | "NODE_JS" | "C" | "JAVA";
-  setLanguage: (language: "PYTHON" | "NODE_JS" | "C" | "JAVA") => void;
+  language: Language;
+  setLanguage: (language: Language) => void;
 }

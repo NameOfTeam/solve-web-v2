@@ -1,95 +1,93 @@
 "use client";
 
 import { useUserStore } from "@/stores/user/useUserStore";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const BoardFilter = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const { user } = useUserStore();
-
-  useEffect(()=>{
-    router.prefetch("/boards/free");
-    router.prefetch("/boards/information");
-    router.prefetch("/boards/question");
-    router.prefetch("/boards/suggestion");
-    router.prefetch("/boards/notice");
-  },[router]);
-
+  
   return (
     <div className="flex font-[400] text-base text-main-container overflow-scroll">
-      <div
+      <Link
+        href="/boards"
         className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname === "/boards"
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/boards")}
+        replace
       >
         전체
-      </div>
-      <div
+      </Link>
+      <Link
+        href="/boards/free"
         className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname.includes("/boards/free")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/boards/free")}
+        replace
       >
         자유
-      </div>
-      <div
+      </Link>
+      <Link
+        href="/boards/information"
         className={`h-8 flex items-center justify-center whitespace-nowrap border-b cursor-pointer box-content px-4 ${
           pathname.includes("/boards/information")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/boards/information")}
+        replace
       >
         정보
-      </div>
-      <div
+      </Link>
+      <Link
+        href="/boards/question"
         className={`h-8 flex items-center justify-center whitespace-nowrap border-b cursor-pointer box-content px-4 ${
           pathname.includes("/boards/question")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/boards/question")}
+        replace
       >
         질문
-      </div>
-      <div
+      </Link>
+      <Link
+        href="/boards/suggestion"
         className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname.includes("/boards/suggestion")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/boards/suggestion")}
+        replace
       >
         수정 제안
-      </div>
-      <div
+      </Link>
+      <Link
+        href="/boards/notice"
         className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
           pathname.includes("/boards/notice")
             ? "border-secondary-700 border-b-[2px] font-[600]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/boards/notice")}
+        replace
       >
         공지사항
-      </div>
+      </Link>
       {user?.id && (
-        <div
+        <Link
+          href="/boards/write"
           className={`h-8 flex items-center justify-center whitespace-nowrap cursor-pointer box-content px-4 ${
             pathname.includes("/boards/write")
               ? "border-secondary-700 border-b-[2px] font-[600]"
               : "border-bg-border border-b"
           }`}
-          onClick={() => router.replace("/boards/write")}
+          replace
         >
           글쓰기
-        </div>
+        </Link>
       )}
     </div>
   );

@@ -1,7 +1,8 @@
 import { LanguageState } from "@/types/zustand/languageState";
 import { create } from "zustand";
+import {Language} from "@/types/problem/language";
 
 export const useLanguageStore = create<LanguageState>((set) => ({
-  language: "PYTHON" as "PYTHON" | "NODE_JS" | "C" | "JAVA",
+  language: "PYTHON" as Language,
   setLanguage: (language) => set({ language }),
 }));

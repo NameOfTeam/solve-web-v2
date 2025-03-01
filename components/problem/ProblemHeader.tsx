@@ -13,6 +13,8 @@ import { useSubmitSocketIdStore } from "@/stores/socket/useSubmitSocketIdStore";
 import { useSubmittingStore } from "@/stores/socket/useSubmittingStore";
 import { saveCode } from "@/api/problem/saveCode";
 import { useVisibilityStore } from "@/stores/problem/useVisibilityStore";
+import {startProgress} from "next-nprogress-bar";
+import {useSubmittedStore} from "@/stores/problem/useSubmittedStore";
 
 const ProblemHeader = () => {
   const router = useRouter();
@@ -25,6 +27,7 @@ const ProblemHeader = () => {
   const { submitting, setSubmitting } = useSubmittingStore();
   const { visibility } = useVisibilityStore();
   const [saving, setSaving] = useState(false);
+  const { setSubmitted } = useSubmittedStore();
 
   const run = async () => {
     const socketId = await runCode(code, language);
@@ -46,6 +49,7 @@ const ProblemHeader = () => {
           visibility
         );
         setSubmitId(data.id);
+        setSubmitted(data);
         setTimeout(() => {
           router.replace(`/solve/${problemId}/my-submits`);
         }, 100);
@@ -67,7 +71,7 @@ const ProblemHeader = () => {
 
   return (
     <div className="w-full h-[72px] flex items-center gap-x-4 px-10 border-b border-bg-border bg-container justify-between">
-      <div onClick={router.back} className="cursor-pointer flex items-center gap-1 font-[600]">
+      <div onClick={() => {startProgress(); router.back();}} className="cursor-pointer flex items-center gap-1 font-[600]">
         <ThemedIcon
           icon="arrow-left-back"
           width={36}

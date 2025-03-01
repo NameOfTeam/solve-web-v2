@@ -1,17 +1,18 @@
 import solveAxios from "@/libs/axios/solveAxios";
 import { BaseResponse } from "@/types/response/base";
+import {Language} from "@/types/problem/language";
 
 export const getSavedCode = async (
   problemId: string,
-  language: "PYTHON" | "C" | "NODE_JS" | "JAVA"
+  language: Language
 ) => {
   try {
     const { data } = await solveAxios.get<
       BaseResponse<{
         code: string;
-        language: "PYTHON" | "C" | "NODE_JS" | "JAVA";
+        language: Language
       }>
-    >(`/problems/${problemId}/code/${language}`);
+    >(`/problems/${problemId}/code?language=${language}`);
     return data.data;
   } catch {
     return {

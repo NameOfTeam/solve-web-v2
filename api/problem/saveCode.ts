@@ -7,9 +7,10 @@ export const saveCode = async (
 ) => {
   try {
     await solveAxios.post(
-      `/problems/${problemId}/code`,
-      {},
-      { params: { code, language } }
+      `/problems/${problemId}/code?language=${language}`,
+      {
+        code
+      }
     );
     return true;
   } catch {

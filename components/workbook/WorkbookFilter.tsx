@@ -1,52 +1,50 @@
 "use client";
 
 import { useUserStore } from "@/stores/user/useUserStore";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const WorkbookFilter = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const { user } = useUserStore();
-
-  useEffect(()=>{
-    router.prefetch("/workbooks/popular");
-    router.prefetch("/workbooks/bookmarked");
-  },[router]);
-
+  
+  
   return (
     <div className="flex font-[400] text-base text-main-container">
-      <div
-        className={`w-16 h-8 flex items-center justify-center  cursor-pointer box-content ${
+      <Link
+        href="/workbooks"
+        className={`w-16 h-8 flex items-center justify-center cursor-pointer box-content ${
           pathname === "/workbooks"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/workbooks")}
+        replace
       >
         전체
-      </div>
-      <div
+      </Link>
+      <Link
+        href="/workbooks/popular"
         className={`w-16 h-8 flex items-center justify-center cursor-pointer box-content ${
           pathname === "/workbooks/popular"
             ? "border-secondary-700 border-b-[2px]"
             : "border-bg-border border-b"
         }`}
-        onClick={() => router.replace("/workbooks/popular")}
+        replace
       >
         인기순
-      </div>
+      </Link>
       {user?.id && (
-        <div
+        <Link
+          href="/workbooks/bookmarked"
           className={`w-16 h-8 flex items-center justify-center border-b cursor-pointer box-content ${
             pathname === "/workbooks/bookmarked"
               ? "border-secondary-700 border-b-[2px]"
               : "border-bg-border border-b"
           }`}
-          onClick={() => router.replace("/workbooks/bookmarked")}
+          replace
         >
           북마크
-        </div>
+        </Link>
       )}
     </div>
   );

@@ -1,6 +1,5 @@
 "use client";
 
-import { getMySubmits } from "@/api/problem/getMySubmits";
 import { WS_URL } from "@/constants/api";
 import { useSubmitSocketIdStore } from "@/stores/socket/useSubmitSocketIdStore";
 import { useSubmittingStore } from "@/stores/socket/useSubmittingStore";
@@ -10,26 +9,21 @@ import { languageParser } from "@/utils/languageParser";
 import { submitStatusParser } from "@/utils/submitStatusParser";
 import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import useGetMySubmitList from "@/hooks/problem/useGetMySubmitList";
+import {SubmitSocket} from "@/types/problem/submitSocket";
+import {useSubmittedStore} from "@/stores/problem/useSubmittedStore";
 
 const MySubmits = () => {
   const { id, setId } = useSubmitSocketIdStore();
   const socketClient = useRef<WebSocket | null>(null);
   const hasConnected = useRef(false);
   const { setSubmitting } = useSubmittingStore();
-  const [newSubmit, setNewSubmit] = useState<SubmitData | null>(null);
+  const [newSubmit, setNewSubmit] = useState<SubmitSocket | null>(null);
   const [submits, setSubmits] = useState<SubmitData[]>([]);
   const { problemId } = useParams();
-
-  const fetchData = async () => {
-    if(problemId) {
-      const data = await getMySubmits(problemId as string);
-      setSubmits(data);
-    }
-  } 
-
-  useEffect(()=>{
-    fetchData();
-  },[problemId]);
+  const { ref, data } = useGetMySubmitList(problemId as string);
+  const { submitted } = useSubmittedStore();
+  
 
   useEffect(() => {
     if (id === 0) {
@@ -45,13 +39,13 @@ const MySubmits = () => {
 
     socketClient.current.onmessage = (e) => {
       try {
-        const data: SubmitData = JSON.parse(e.data);
+        const data: SubmitSocket = JSON.parse(e.data);
         if (
           data.result !== "JUDGING" &&
           data.result !== "PENDING" &&
           data.result !== "JUDGING_IN_PROGRESS"
         ) {
-          setSubmits((prev) => [data, ...prev]);
+          if(submitted) setSubmits((prev) => [submitted, ...prev]);
           setNewSubmit(null);
           setId(0);
         } else {
@@ -115,21 +109,21 @@ const MySubmits = () => {
               `( ${newSubmit.progress.toFixed()}% )`}
           </p>
           <p className="flex-1 px-4 text-center">
-            {newSubmit.language ? languageParser(newSubmit.language) : ""}
+            {submitted?.language ? languageParser(submitted.language) : ""}
           </p>
           <p className="flex-1 px-4 text-center">
-            {newSubmit?.memoryUsage || ""}
-            {newSubmit.memoryUsage && "KB"}
+            {submitted?.memoryUsage || ""}
+            {submitted?.memoryUsage && "KB"}
           </p>
           <p className="flex-1 px-4 text-center">
-            {newSubmit?.timeUsage || ""}
-            {newSubmit.timeUsage && "ms"}
+            {submitted?.timeUsage || ""}
+            {submitted?.timeUsage && "ms"}
           </p>
         </div>
       )}
 
       {submits.map((submit) => (
-        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border whitespace-nowrap" key={submit.submitId}>
+        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border whitespace-nowrap" key={submit.id}>
           <p
             className={`flex-[8] px-4 overflow-hidden text-ellipsis ${
               submit.result === "PENDING" ||
@@ -142,10 +136,7 @@ const MySubmits = () => {
             }`}
           >
             {submitStatusParser(submit.result)}
-            {(submit.result === "PENDING" ||
-              submit.result === "JUDGING" ||
-              submit.result === "JUDGING_IN_PROGRESS") &&
-              `( ${submit.progress.toFixed()}% )`}
+            ( 100% )
           </p>
           <p className="w-16 text-center">
             {submit.language ? languageParser(submit.language) : ""}
@@ -160,6 +151,7 @@ const MySubmits = () => {
           </p>
         </div>
       ))}
+      <div ref={ref} className="h-2" />
     </div>
   );
 };

@@ -23,9 +23,6 @@ const useGetContestList = (
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchData = async () => {
-    if (loading) {
-      return;
-    }
     setLoading(true);
     try {
       const response = await getContestSearch(

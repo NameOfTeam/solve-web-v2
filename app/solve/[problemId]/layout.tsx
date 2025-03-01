@@ -9,13 +9,15 @@ import ProgressProvider from "@/components/provider/ProgressProvider";
 import Dropdown from "@/components/ui/Dropdown";
 import { useCodeStore } from "@/stores/problem/useCodeStore";
 import { useLanguageStore } from "@/stores/problem/useLanguageStore";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import React, {
   PropsWithChildren,
   useState,
   useEffect,
   useCallback,
 } from "react";
+import {getLanguageTemplate} from "@/api/problem/getLanguageTemplate";
+import {startProgress, stopProgress} from "next-nprogress-bar";
 
 const SolveLayout = ({ children }: PropsWithChildren) => {
   const [isResizing, setIsResizing] = useState(false);
@@ -23,28 +25,26 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
   const { setCode } = useCodeStore();
   const { language, setLanguage } = useLanguageStore();
 
-  const router = useRouter();
   const { problemId } = useParams();
 
   const getSave = async () => {
+    startProgress()
     if (problemId) {
       const save = await getSavedCode(problemId as string, language);
       if (save.code && save.language) {
         setCode(save.code);
         setLanguage(save.language);
+      } else {
+        const template = await getLanguageTemplate(language);
+        setCode(template);
       }
     }
+    stopProgress()
   };
 
   useEffect(() => {
     getSave();
   }, [language]);
-
-  useEffect(() => {
-    router.prefetch(`/solve/${problemId}/my-submits`);
-    router.prefetch(`/solve/${problemId}/status`);
-    router.prefetch(`/solve/${problemId}/boards`);
-  }, [router]);
 
   const startResizing = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -119,6 +119,10 @@ const SolveLayout = ({ children }: PropsWithChildren) => {
                     { name: "Java", value: "JAVA" },
                     { name: "C", value: "C" },
                     { name: "Node.js", value: "NODE_JS" },
+                    { name: "Kotlin", value: "KOTLIN" },
+                    { name: "C++", value: "CPP" },
+                    { name: "C#", value: "CSHARP" },
+                    { name: "Swift", value: "SWIFT" },
                   ]}
                   defaultValue={language}
                   type="LANGUAGE"

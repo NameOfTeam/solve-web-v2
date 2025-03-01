@@ -21,9 +21,6 @@ const useGetBoardList = (
   const [data, setData] = useState<PageResponse<Board>>(initialData);
 
   const fetchData = async () => {
-    if (loading) {
-      return;
-    }
     setLoading(true);
     try {
       const response = await getBoardSearch(

@@ -4,6 +4,7 @@ import { PageResponse } from "@/types/response/page";
 import { Problem } from "@/types/problem/problem";
 import { useEffect, useState } from "react";
 import { defaultPageResponse } from "@/utils/defaultPageResponse";
+import {startProgress, stopProgress} from "next-nprogress-bar";
 
 const useGetProblemList = (
   {
@@ -24,10 +25,8 @@ const useGetProblemList = (
   );
 
   const fetchData = async () => {
-    if (loading) {
-      return;
-    }
     setLoading(true);
+    startProgress();
     try {
       const response = await getProblemSerch(
         page,
@@ -42,6 +41,7 @@ const useGetProblemList = (
       setData(defaultPageResponse() as PageResponse<Problem>);
     } finally {
       setLoading(false);
+      stopProgress();
     }
   };
 
