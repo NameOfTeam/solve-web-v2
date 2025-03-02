@@ -9,7 +9,7 @@ import {startProgress, stopProgress} from "next-nprogress-bar";
 const useGetProblemList = (
   {
     page = 0,
-    size = 10,
+    size = 15,
     query,
   }: {
     page?: number;
