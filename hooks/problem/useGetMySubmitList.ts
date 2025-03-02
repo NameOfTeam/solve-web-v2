@@ -14,7 +14,7 @@ const useGetMySubmitList = (problemId?: string) => {
     if (loading || !problemId) return;
     setLoading(true);
     const newData = await getMySubmits(problemId, data[data.length - 1]?.id || 0);
-    if(newData.length > 0) setData(prev=>([...prev, ...newData]));
+    if(newData.length > 0) setData(prev=>([...newData, ...prev]));
     setLoading(false);
   }
   
@@ -28,6 +28,7 @@ const useGetMySubmitList = (problemId?: string) => {
     data,
     ref,
     loading,
+    refetch: fetchData,
   }
 }
 

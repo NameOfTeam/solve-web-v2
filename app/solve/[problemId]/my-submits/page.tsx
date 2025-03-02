@@ -3,7 +3,6 @@
 import { WS_URL } from "@/constants/api";
 import { useSubmitSocketIdStore } from "@/stores/socket/useSubmitSocketIdStore";
 import { useSubmittingStore } from "@/stores/socket/useSubmittingStore";
-import { SubmitData } from "@/types/problem/submit";
 import { isWrongAnswer } from "@/utils/isWrongAnswer";
 import { languageParser } from "@/utils/languageParser";
 import { submitStatusParser } from "@/utils/submitStatusParser";
@@ -19,9 +18,8 @@ const MySubmits = () => {
   const hasConnected = useRef(false);
   const { setSubmitting } = useSubmittingStore();
   const [newSubmit, setNewSubmit] = useState<SubmitSocket | null>(null);
-  const [submits, setSubmits] = useState<SubmitData[]>([]);
   const { problemId } = useParams();
-  const { ref, data } = useGetMySubmitList(problemId as string);
+  const { ref, data, refetch } = useGetMySubmitList(problemId as string);
   const { submitted } = useSubmittedStore();
   
 
@@ -45,7 +43,7 @@ const MySubmits = () => {
           data.result !== "PENDING" &&
           data.result !== "JUDGING_IN_PROGRESS"
         ) {
-          if(submitted) setSubmits((prev) => [submitted, ...prev]);
+          if(submitted) refetch();
           setNewSubmit(null);
           setId(0);
         } else {
@@ -77,9 +75,9 @@ const MySubmits = () => {
     <div className="flex-1 bg-container rounded-lg px-4 py-6 overflow-y-scroll">
       <div className="w-full px-4 pb-2 flex justify-between text-sm border-b border-bg-border">
         <p className="font-[400] text-bg-border">
-          {`${submits.length + (newSubmit ? 1 : 0)}개의 제출`}
+          {`${data.length + (newSubmit ? 1 : 0)}개의 제출`}
         </p>
-        <p className="font-[600] cursor-pointer">새로고침</p>
+        <p className="font-[600] cursor-pointer" onClick={refetch}>새로고침</p>
       </div>
 
       <div className="w-full h-9 flex items-center text-sm font-[600] border-b border-bg-border whitespace-nowrap">
@@ -90,9 +88,9 @@ const MySubmits = () => {
       </div>
 
       {newSubmit && (
-        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border">
+        <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border whitespace-nowrap">
           <p
-            className={`flex-[8] pl-4 pr-2 ${
+            className={`flex-[8] px-4 overflow-hidden text-ellipsis ${
               newSubmit.result === "PENDING" ||
               newSubmit.result === "JUDGING" ||
               newSubmit.result === "JUDGING_IN_PROGRESS"
@@ -108,21 +106,21 @@ const MySubmits = () => {
               newSubmit.result === "JUDGING_IN_PROGRESS") &&
               `( ${newSubmit.progress.toFixed()}% )`}
           </p>
-          <p className="flex-1 px-4 text-center">
+          <p className="w-16 text-center">
             {submitted?.language ? languageParser(submitted.language) : ""}
           </p>
-          <p className="flex-1 px-4 text-center">
+          <p className="w-16 text-cente">
             {submitted?.memoryUsage || ""}
             {submitted?.memoryUsage && "KB"}
           </p>
-          <p className="flex-1 px-4 text-center">
+          <p className="w-16 text-cente">
             {submitted?.timeUsage || ""}
             {submitted?.timeUsage && "ms"}
           </p>
         </div>
       )}
 
-      {submits.map((submit) => (
+      {data.map((submit) => (
         <div className="w-full h-9 flex items-center text-sm font-[400] border-b border-bg-border whitespace-nowrap" key={submit.id}>
           <p
             className={`flex-[8] px-4 overflow-hidden text-ellipsis ${
