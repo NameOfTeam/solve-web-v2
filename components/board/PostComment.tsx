@@ -11,6 +11,7 @@ import { useInView } from "react-intersection-observer";
 
 const PostComment = ({ postId }: { postId: number }) => {
   const [comments, setComments] = useState<Comment[]>([]);
+  const [cursorId, setCursorId] = useState<number | undefined>(undefined);
 
   const {
     register,
@@ -21,11 +22,13 @@ const PostComment = ({ postId }: { postId: number }) => {
   const { user } = useUserStore();
   const { inView, ref } = useInView();
 
+  // 댓글 가져오기
   const fetchData = async () => {
-    const data = await getComments(postId);
-    setComments(data?.content || []);
+    const data = await getComments(postId, cursorId);
+    setComments(data);
   };
 
+  // 댓글 쓰기
   const onSubmit = async (e: { content: string }) => {
     const data = await createComment(e, postId);
 
@@ -37,7 +40,8 @@ const PostComment = ({ postId }: { postId: number }) => {
 
   useEffect(() => {
     fetchData();
-  }, [postId]);
+    console.log(comments[comments.length - 1]);
+  }, [inView]);
 
   return (
     <div className="w-full flex flex-col gap-y-4">
@@ -66,10 +70,14 @@ const PostComment = ({ postId }: { postId: number }) => {
           </form>
         )}
         <div className="w-full">
-          {comments.length > 0 ? comments.map((comment) => (
-            <CommentItem comment={comment} key={comment.id} />
-          )) : (
-            <div className="w-full h-40 flex items-center justify-center text-bg-border text-xl">댓글이 없습니다.</div>
+          {comments.length > 0 ? (
+            comments.map((comment) => (
+              <CommentItem comment={comment} key={comment.id} />
+            ))
+          ) : (
+            <div className="w-full h-40 flex items-center justify-center text-bg-border text-xl">
+              댓글이 없습니다.
+            </div>
           )}
           <div ref={ref} />
         </div>

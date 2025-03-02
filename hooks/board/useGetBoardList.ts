@@ -23,13 +23,8 @@ const useGetBoardList = (
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await getBoardSearch(
-        page,
-        size,
-        state as "FREE" | "NOTICE" | "QUESTION" | "SUGGESTION" | "INFORMATION" | null,
-        query
-      );
-      setData(response as PageResponse<Board>);
+      const response = await getBoardSearch(page, size, state, query);
+      setData(response);
     } catch {
       setData(defaultPageResponse() as PageResponse<Board>);
     } finally {
