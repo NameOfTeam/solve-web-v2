@@ -1,7 +1,7 @@
 import BoardFilter from "@/components/board/BoardFilter";
 import Banner from "@/components/ui/Banner";
 import Search from "@/components/ui/Search";
-import React, { PropsWithChildren, Suspense } from "react";
+import React, { PropsWithChildren } from "react";
 
 const BoardLayout = ({ children }: PropsWithChildren) => {
   return (

@@ -1,7 +1,7 @@
 import Banner from "@/components/ui/Banner";
 import Search from "@/components/ui/Search";
 import WorkbookFilter from "@/components/workbook/WorkbookFilter";
-import React, { PropsWithChildren, Suspense } from "react";
+import React, { PropsWithChildren } from "react";
 
 const WorkbookLayout = ({ children }: PropsWithChildren) => {
   return (

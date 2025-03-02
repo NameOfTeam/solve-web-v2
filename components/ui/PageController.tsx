@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import ThemedIcon from "./ThemedIcon";
 import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";

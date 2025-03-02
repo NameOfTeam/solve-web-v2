@@ -1,7 +1,4 @@
 import { getWorkbookSearch } from "@/api/workbook/getWorkbookSearch";
-import Banner from "@/components/ui/Banner";
-import Search from "@/components/ui/Search";
-import WorkbookFilter from "@/components/workbook/WorkbookFilter";
 import WorkbookList from "@/components/workbook/WorkbookList";
 import { PageResponse } from "@/types/response/page";
 import { Workbook } from "@/types/workbook/workbook";

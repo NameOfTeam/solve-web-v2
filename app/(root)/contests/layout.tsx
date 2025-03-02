@@ -1,8 +1,9 @@
 import Banner from "@/components/ui/Banner";
 import ContestFilter from "@/components/contest/ContestFilter";
 import Search from "@/components/ui/Search";
-import React, { PropsWithChildren, Suspense } from "react";
+import React, { PropsWithChildren } from "react";
 import ProgressProvider from "@/components/provider/ProgressProvider";
+
 const ContestsLayout = async ({ children }: PropsWithChildren) => {
   return (
     <ProgressProvider>
