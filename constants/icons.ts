@@ -20,6 +20,9 @@ import Pen from "@/assets/pen.svg";
 import ChatBubble from "@/assets/chat_bubble.svg";
 import Close from "@/assets/close.svg";
 import Add from "@/assets/add.svg";
+import Birth from "@/assets/birth.svg";
+import Link from "@/assets/link.svg";
+import Gender from "@/assets/gender.svg";
 
 export const ICONS = {
   flag: Flag,
@@ -43,6 +46,9 @@ export const ICONS = {
   "chat-bubble": ChatBubble,
   close: Close,
   add: Add,
+  birth: Birth,
+  link: Link,
+  gender: Gender,
 } satisfies Record<string, IconType>;
 
 export type IconName = keyof typeof ICONS;

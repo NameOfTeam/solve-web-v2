@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const ContestFilter = () => {
+const ContestTabs = () => {
   const pathname = usePathname();
   
   return (
@@ -56,4 +56,4 @@ const ContestFilter = () => {
   );
 };
 
-export default ContestFilter;
+export default ContestTabs;

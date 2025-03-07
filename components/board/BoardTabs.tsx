@@ -4,7 +4,7 @@ import { useUserStore } from "@/stores/user/useUserStore";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const BoardFilter = () => {
+const BoardTabs = () => {
   const pathname = usePathname();
   const { user } = useUserStore();
   
@@ -93,4 +93,4 @@ const BoardFilter = () => {
   );
 };
 
-export default BoardFilter;
+export default BoardTabs;

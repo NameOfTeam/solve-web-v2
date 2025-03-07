@@ -1,4 +1,4 @@
-import BoardFilter from "@/components/board/BoardFilter";
+import BoardFilter from "@/components/board/BoardTabs";
 import Banner from "@/components/ui/Banner";
 import Search from "@/components/ui/Search";
 import React, { PropsWithChildren } from "react";

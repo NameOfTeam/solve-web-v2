@@ -1,5 +1,5 @@
 import Banner from "@/components/ui/Banner";
-import ContestFilter from "@/components/contest/ContestFilter";
+import ContestFilter from "@/components/contest/ContestTabs";
 import Search from "@/components/ui/Search";
 import React, { PropsWithChildren } from "react";
 import ProgressProvider from "@/components/provider/ProgressProvider";
