@@ -33,6 +33,7 @@ const Header = () => {
             <Link href="/contests">대회</Link>
             <Link href="/boards">게시판</Link>
             <Link href="/store">상점</Link>
+            <Link href="/rankings">랭킹</Link>
           </div>
 
           <HeaderExtension />

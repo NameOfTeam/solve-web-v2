@@ -5,6 +5,7 @@ import { Workbook } from "@/types/workbook/workbook";
 import { Problem } from "@/types/problem/problem";
 import { Contest } from "@/types/contest/contest";
 import { Board } from "@/types/board/board";
+import { User } from "@/types/user/user";
 
 const PageController = ({
   page,
@@ -13,7 +14,7 @@ const PageController = ({
 }: {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
-  data: PageResponse<Workbook | Problem | Contest | Board>;
+  data: PageResponse<Workbook | Problem | Contest | Board | User>;
 }) => {
   const totalPages = data.totalPages || 0;
   let startPage = Math.max(0, page - 4);

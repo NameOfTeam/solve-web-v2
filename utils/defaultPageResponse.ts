@@ -2,9 +2,10 @@ import { Board } from "@/types/board/board";
 import { Contest } from "@/types/contest/contest";
 import { Problem } from "@/types/problem/problem";
 import { PageResponse } from "@/types/response/page"
+import { User } from "@/types/user/user";
 import { Workbook } from "@/types/workbook/workbook";
 
-export const defaultPageResponse = () : PageResponse<Workbook | Problem | Contest | Board> => {
+export const defaultPageResponse = () : PageResponse<Workbook | Problem | Contest | Board | User> => {
   return {
     content: [],
     pageable: {
