@@ -1,4 +1,4 @@
-x"use client";
+"use client";
 
 import useGetProblemList from "@/hooks/problem/useGetProblemList";
 import Image from "next/image";
